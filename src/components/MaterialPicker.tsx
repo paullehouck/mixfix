@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import type { Material } from "../types/materials";
 
 export interface MaterialPickerProps {
@@ -16,12 +17,34 @@ function getAccentBgClass(accentHex: string): string {
   return ACCENT_BG_MAP[accentHex] ?? "bg-[var(--accent)]";
 }
 
+function getMaterialAnimation(id: string): string {
+  switch (id) {
+    case "silicone":
+      return "animate-drip";
+    case "jesmonite":
+      return "animate-puff";
+    case "concrete":
+      return "animate-thud";
+    default:
+      return "";
+  }
+}
+
 export function MaterialPicker({
   materials,
   selectedId,
   onSelect,
 }: MaterialPickerProps) {
   const hasSelection = selectedId !== null;
+  const [activeAnimation, setActiveAnimation] = useState<string>("");
+
+  useEffect(() => {
+    if (selectedId) {
+      setActiveAnimation(getMaterialAnimation(selectedId));
+    } else {
+      setActiveAnimation("");
+    }
+  }, [selectedId]);
 
   return (
     <section aria-label="Material picker" className="w-full">
@@ -30,7 +53,7 @@ export function MaterialPicker({
           hasSelection ? "mb-0 max-h-0 opacity-0" : "mb-4 max-h-16 opacity-100"
         }`}
       >
-        <h2 className="text-2xl font-bold tracking-tight text-stone-900">
+        <h2 className="font-display text-2xl font-black tracking-tight text-stone-900">
           What are we mixing?
         </h2>
       </div>
@@ -45,14 +68,15 @@ export function MaterialPicker({
             return (
               <div
                 key={material.id}
-                className="flex h-22 items-center justify-between rounded-2xl bg-[var(--accent)] px-4 text-stone-950 shadow-sm transition-all duration-300 ease-in-out"
+                className="flex min-h-[88px] items-center justify-between rounded-2xl border-l-4 border-l-[var(--accent)] bg-[var(--accent)]/15 px-4 text-stone-950 shadow-sm transition-all duration-300 ease-in-out"
               >
                 <div className="flex items-center gap-4">
                   <div
                     aria-hidden="true"
-                    className={`h-12 w-12 shrink-0 rounded-xl border border-black/15 bg-white/30 ${accentBgClass}`}
+                    onAnimationEnd={() => setActiveAnimation("")}
+                    className={`h-16 w-16 shrink-0 rounded-[12px] shadow-xs ${accentBgClass} ${activeAnimation}`}
                   />
-                  <span className="text-xl font-extrabold tracking-tight text-stone-950">
+                  <span className="font-display text-xl font-bold tracking-tight text-stone-950">
                     {material.name}
                   </span>
                 </div>
@@ -60,7 +84,7 @@ export function MaterialPicker({
                 <button
                   type="button"
                   onClick={() => onSelect(null)}
-                  className="rounded-xl bg-black/15 px-3.5 py-2 text-sm font-semibold text-stone-950 hover:bg-black/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-950"
+                  className="rounded-lg bg-black/20 bg-white/30 px-3 py-1 text-sm font-semibold text-white shadow-xs [text-shadow:_0_1px_2px_rgba(0,0,0,0.5)] hover:bg-black/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-950 transition-colors"
                 >
                   Change
                 </button>
@@ -75,21 +99,21 @@ export function MaterialPicker({
               className={`overflow-hidden transition-all duration-300 ease-in-out ${
                 isHidden
                   ? "pointer-events-none mb-0 max-h-0 opacity-0"
-                  : "mb-3 max-h-24 opacity-100 last:mb-0"
+                  : "mb-3 max-h-28 opacity-100 last:mb-0"
               }`}
             >
               <button
                 type="button"
                 tabIndex={isHidden ? -1 : 0}
                 onClick={() => onSelect(material.id)}
-                className="flex h-22 w-full items-center justify-between rounded-2xl border border-stone-200 bg-white px-4 text-left shadow-xs hover:border-stone-300 hover:bg-stone-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-900"
+                className="flex min-h-[88px] w-full items-center justify-between rounded-2xl border border-stone-200 bg-white px-4 text-left shadow-sm hover:border-stone-300 hover:bg-stone-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-900"
               >
                 <div className="flex items-center gap-4">
                   <div
                     aria-hidden="true"
-                    className={`h-14 w-14 shrink-0 rounded-xl ${accentBgClass}`}
+                    className={`h-14 w-14 shrink-0 rounded-[12px] shadow-xs ${accentBgClass}`}
                   />
-                  <span className="text-xl font-extrabold tracking-tight text-stone-900">
+                  <span className="font-display text-xl font-bold tracking-tight text-stone-900">
                     {material.name}
                   </span>
                 </div>
@@ -110,4 +134,3 @@ export function MaterialPicker({
 }
 
 export default MaterialPicker;
-

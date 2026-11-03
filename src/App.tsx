@@ -192,10 +192,10 @@ export function App() {
   return (
     <div
       style={rootStyle}
-      className="min-h-screen bg-stone-100 text-stone-900 antialiased"
+      className="min-h-screen bg-[#F5F4F1] text-gray-900 antialiased"
     >
-      {/* Fixed Header */}
-      <header className="fixed inset-x-0 top-0 z-20 border-b border-stone-200 bg-stone-100/95 backdrop-blur-xs">
+      {/* Sticky Header */}
+      <header className="sticky top-0 z-50 border-b border-gray-200 bg-[#F5F4F1]/95 backdrop-blur-xs">
         <div className="mx-auto flex h-16 max-w-[560px] items-center justify-between px-4">
           <a
             href="#"
@@ -203,7 +203,7 @@ export function App() {
               e.preventDefault();
               closeAbout();
             }}
-            className="text-2xl font-black tracking-tight text-stone-950"
+            className="font-display font-black text-xl tracking-tight text-gray-950"
           >
             Mixfix
           </a>
@@ -212,7 +212,7 @@ export function App() {
             type="button"
             aria-label="About Mixfix"
             onClick={openAbout}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-stone-300 bg-white text-base font-bold text-stone-800 shadow-2xs hover:bg-stone-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-900"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 bg-white text-base font-bold text-gray-700 hover:border-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
           >
             ?
           </button>
@@ -220,7 +220,7 @@ export function App() {
       </header>
 
       {/* Main Centred Column */}
-      <main className="mx-auto flex max-w-[560px] flex-col gap-5 px-4 pt-22 pb-16">
+      <main className="mx-auto flex max-w-[560px] flex-col gap-5 px-4 pt-6 pb-16">
         <MaterialPicker
           materials={materials}
           selectedId={selectedMaterialId}
@@ -256,63 +256,65 @@ export function App() {
         )}
       </main>
 
-      {/* Full-screen About Sheet (#about) */}
+      {/* About Sheet Dialog (#about) */}
       {isAboutOpen && (
         <div
           role="dialog"
           aria-modal="true"
           aria-labelledby="about-title"
-          className="fixed inset-0 z-40 overflow-y-auto bg-stone-100"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) closeAbout();
+          }}
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-sm p-0 sm:p-4"
         >
-          <div className="mx-auto flex min-h-screen max-w-[560px] flex-col justify-between px-4 py-6">
-            <div className="flex flex-col gap-6">
-              <div className="flex items-center justify-between border-b border-stone-200 pb-4">
-                <h2
-                  id="about-title"
-                  className="text-2xl font-black tracking-tight text-stone-950"
+          <div className="animate-slide-up w-full max-w-[560px] max-h-[85vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-white p-6 shadow-xl flex flex-col gap-5">
+            <div className="flex items-center justify-between border-b border-gray-200 pb-3">
+              <h2
+                id="about-title"
+                className="font-display text-2xl font-black tracking-tight text-gray-950"
+              >
+                What is Mixfix?
+              </h2>
+              <button
+                type="button"
+                aria-label="Close about dialog"
+                onClick={closeAbout}
+                className="flex h-11 w-11 items-center justify-center rounded-full text-2xl font-light text-gray-500 hover:bg-gray-100 hover:text-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <p className="text-base leading-relaxed text-gray-700">
+                Mixfix is here to fix your mix, so bench math never gets in the way of making.
+                Pick your material, enter your mould&apos;s volume, and get exact grams in seconds. No spreadsheets, no guesswork, and no sticky buckets of uncured regret.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2 rounded-2xl border border-gray-200 bg-gray-50/70 p-4">
+              <h3 className="text-sm font-bold tracking-tight text-gray-900">
+                Where do the numbers come from?
+              </h3>
+              <p className="text-sm leading-relaxed text-gray-600">
+                Every ratio comes straight from official datasheets or bench-tested workshop recipes (look for the Paul’s recipes). Mixfix handles the math, but workshop safety is on you: check your material’s datasheet, wear gloves, and use a dust mask with dry powders.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2 rounded-2xl border border-gray-200 bg-gray-50/70 p-4">
+              <h3 className="text-sm font-bold tracking-tight text-gray-900">
+                Got feedback or a recipe to add?
+              </h3>
+              <p className="text-sm leading-relaxed text-gray-600">
+                Email{" "}
+                <a
+                  href="mailto:suggestions@mixfix.com"
+                  className="font-medium text-gray-900 underline decoration-gray-400 underline-offset-4 hover:decoration-gray-900"
                 >
-                  What is Mixfix?
-                </h2>
-                <button
-                  type="button"
-                  onClick={closeAbout}
-                  className="rounded-xl border border-stone-300 bg-white px-3.5 py-2 text-sm font-bold text-stone-800 hover:bg-stone-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-900"
-                >
-                  Close
-                </button>
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <p className="text-base leading-relaxed text-stone-700">
-                  Mixfix is here to fix your mix, so bench math never gets in the way of making.
-                  Pick your material, enter your mould&apos;s volume, and get exact grams in seconds. No spreadsheets, no guesswork, and no sticky buckets of uncured regret.
-                </p>
-              </div>
-
-              <div className="flex flex-col gap-2 rounded-2xl border border-stone-200 bg-white p-4">
-                <h3 className="text-sm font-bold tracking-tight text-stone-900">
-                  Where do the numbers come from?
-                </h3>
-                <p className="text-sm leading-relaxed text-stone-600">
-                  Every ratio comes straight from official datasheets or bench-tested workshop recipes (look for the Paul’s recipes). Mixfix handles the math, but workshop safety is on you: check your material’s datasheet, wear gloves, and use a dust mask with dry powders.
-                </p>
-              </div>
-
-              <div className="flex flex-col gap-2 rounded-2xl border border-stone-200 bg-white p-4">
-                <h3 className="text-sm font-bold tracking-tight text-stone-900">
-                  Got feedback or a recipe to add?
-                </h3>
-                <p className="text-sm leading-relaxed text-stone-600">
-                  Email{" "}
-                  <a
-                    href="mailto:suggestions@mixfix.com"
-                    className="font-medium text-stone-900 underline decoration-stone-400 underline-offset-4 hover:decoration-stone-900"
-                  >
-                    suggestions@mixfix.com
-                  </a>
-                  .
-                </p>
-              </div>
+                  suggestions@mixfix.com
+                </a>
+                .
+              </p>
             </div>
           </div>
         </div>

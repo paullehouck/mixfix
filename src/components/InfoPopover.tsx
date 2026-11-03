@@ -62,7 +62,7 @@ export function InfoPopover({ text, label = "More information" }: InfoPopoverPro
             return next;
           });
         }}
-        className="inline-flex h-11 w-11 items-center justify-center rounded-full text-base text-stone-500 hover:bg-stone-200/60 hover:text-stone-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent,#1c1917)]"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-full text-base text-gray-400 hover:text-gray-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent,#1c1917)]"
       >
         <span aria-hidden="true">ⓘ</span>
       </button>

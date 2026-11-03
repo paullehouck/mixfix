@@ -163,10 +163,10 @@ export function ResultCard({
     }
 
     if (potLifeText) {
-      lines.push(`Pot life: ${potLifeText}`);
+      lines.push(`⏱ Pot life: ${potLifeText}`);
     }
     if (variant.demouldTime) {
-      lines.push(`Demould time: ${variant.demouldTime}`);
+      lines.push(`⏳ Demould: ${variant.demouldTime}`);
     }
 
     const text = lines.join("\n");
@@ -195,17 +195,17 @@ export function ResultCard({
   return (
     <section
       aria-label="Mix result"
-      className="flex flex-col gap-4 rounded-2xl border-2 border-[var(--accent)] bg-white p-5 shadow-sm"
+      className="animate-fade-up flex flex-col gap-4 rounded-2xl border-l-4 border-l-[var(--accent)] bg-white p-5 shadow-md"
     >
       {/* Header & Source Badge */}
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-lg font-bold tracking-tight text-stone-900">
+        <h3 className="font-display text-xl font-bold tracking-tight text-gray-900">
           Your mix
         </h3>
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--accent)]/25 px-3 py-1 text-xs font-semibold text-stone-900">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--accent)]/10 px-3 py-1 text-xs font-medium text-[var(--accent)]">
           <span>{badgeText}</span>
           {result.exampleName && (
-            <span className="border-l border-stone-400/40 pl-1.5 font-medium text-stone-700">
+            <span className="border-l border-[var(--accent)]/30 pl-1.5 font-medium">
               {result.exampleName}
             </span>
           )}
@@ -213,35 +213,35 @@ export function ResultCard({
       </div>
 
       {/* Component Rows */}
-      <div className="flex flex-col gap-2.5">
+      <div className="flex flex-col gap-3">
         {result.components.map((comp) => (
           <div
             key={comp.id}
-            className="flex items-baseline justify-between gap-4 text-base"
+            className="flex items-baseline justify-between gap-4 text-sm"
           >
-            <span className="font-medium text-stone-700">{comp.name}</span>
-            <span className="text-right text-xl font-extrabold tabular-nums text-stone-950">
+            <span className="font-normal text-gray-500">{comp.name}</span>
+            <span className="font-display text-right text-2xl font-bold tabular-nums text-gray-900">
               {comp.grams} g
             </span>
           </div>
         ))}
 
         {result.water && (
-          <div className="flex items-start justify-between gap-4 text-base">
+          <div className="flex items-start justify-between gap-4 text-sm">
             <div>
-              <span className="font-medium text-stone-700">
+              <span className="font-normal text-gray-500">
                 Water
                 {result.water.adjusted && (
-                  <span className="ml-1.5 rounded-md bg-stone-100 px-1.5 py-0.5 text-xs font-semibold text-stone-600">
+                  <span className="ml-1.5 rounded-md bg-gray-100 px-1.5 py-0.5 text-xs font-medium text-gray-600">
                     Adjusted
                   </span>
                 )}
               </span>
-              <p className="text-xs text-stone-500">
+              <p className="text-xs text-gray-400">
                 add gradually to the dry mix
               </p>
             </div>
-            <span className="text-right text-xl font-extrabold tabular-nums text-stone-950">
+            <span className="font-display text-right text-2xl font-bold tabular-nums text-gray-900">
               {result.water.grams} g
             </span>
           </div>
@@ -249,28 +249,28 @@ export function ResultCard({
       </div>
 
       {/* Divider Line */}
-      <hr className="border-stone-200" />
+      <hr className="border-gray-200" />
 
-      {/* Total Grams */}
+      {/* Total Row */}
       <div className="flex items-baseline justify-between gap-4">
-        <span className="text-base font-bold text-stone-900">Total mix</span>
-        <span className="text-right text-2xl font-black tabular-nums text-stone-950">
+        <span className="font-semibold text-gray-900">Total mix</span>
+        <span className="font-display text-right text-3xl font-black tabular-nums text-gray-900">
           {result.totalGrams} g
         </span>
       </div>
 
       {/* Pot life and Demould time */}
       {(potLifeText || variant.demouldTime) && (
-        <div className="flex flex-col gap-1.5 rounded-xl bg-stone-50 p-3 text-xs text-stone-600">
+        <div className="flex flex-col gap-1.5 rounded-xl bg-gray-50 p-3 text-sm text-gray-500">
           {potLifeText && (
             <div>
-              <span className="font-semibold text-stone-800">Pot life: </span>
+              <span className="font-medium text-gray-700">⏱ Pot life: </span>
               <span>{potLifeText}</span>
             </div>
           )}
           {variant.demouldTime && (
             <div>
-              <span className="font-semibold text-stone-800">Demould: </span>
+              <span className="font-medium text-gray-700">⏳ Demould: </span>
               <span>{variant.demouldTime}</span>
             </div>
           )}
@@ -291,7 +291,7 @@ export function ResultCard({
                   key={additive.id}
                   type="button"
                   onClick={() => handleExpandAdditive(additive)}
-                  className="flex h-10 w-full items-center justify-between rounded-xl border border-dashed border-stone-300 px-3.5 text-left text-sm font-semibold text-stone-700 hover:border-stone-400 hover:bg-stone-50"
+                  className="flex min-h-[44px] w-full items-center justify-between rounded-xl border border-dashed border-gray-300 px-3.5 text-left text-sm font-medium text-gray-700 hover:border-gray-400 hover:bg-gray-50 transition-colors"
                 >
                   <span>+ Add {additive.name}</span>
                 </button>
@@ -309,20 +309,20 @@ export function ResultCard({
             return (
               <div
                 key={additive.id}
-                className="flex flex-col gap-2 rounded-xl border border-stone-200 bg-stone-50 p-3.5"
+                className="flex flex-col gap-2 rounded-xl border border-dashed border-[var(--accent)]/40 bg-[var(--accent)]/5 p-3.5 transition-colors"
               >
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-sm font-bold text-stone-900">
+                    <span className="text-sm font-semibold text-gray-900">
                       {additive.name}
                     </span>
-                    <span className="text-xs font-semibold text-stone-500">
+                    <span className="text-xs font-medium text-gray-500">
                       ({activeEntry.value} {unit})
                     </span>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="text-base font-extrabold tabular-nums text-stone-950">
+                    <span className="font-display text-base font-bold tabular-nums text-gray-900">
                       {additive.type === "reducesWater"
                         ? `−${activeEntry.value}% water`
                         : `${grams} g`}
@@ -331,7 +331,7 @@ export function ResultCard({
                       type="button"
                       aria-label={`Remove ${additive.name}`}
                       onClick={() => handleCollapseAdditive(additive.id)}
-                      className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-base font-bold text-stone-500 hover:bg-stone-200 hover:text-stone-900"
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-lg font-bold text-gray-400 hover:bg-black/5 hover:text-gray-700"
                     >
                       ×
                     </button>
@@ -339,7 +339,7 @@ export function ResultCard({
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <span className="text-xs tabular-nums text-stone-500">
+                  <span className="text-xs tabular-nums text-gray-500">
                     {additive.min}
                     {unit}
                   </span>
@@ -358,13 +358,13 @@ export function ResultCard({
                     }
                     className="h-2 flex-1 cursor-pointer accent-[var(--accent)]"
                   />
-                  <span className="text-xs tabular-nums text-stone-500">
+                  <span className="text-xs tabular-nums text-gray-500">
                     {additive.max}
                     {unit}
                   </span>
                 </div>
 
-                <p className="text-xs leading-relaxed text-stone-600">
+                <p className="text-xs leading-relaxed text-gray-600">
                   {additive.note}
                 </p>
               </div>
@@ -374,11 +374,11 @@ export function ResultCard({
       )}
 
       {/* Action Buttons */}
-      <div className="mt-1 grid grid-cols-2 gap-2.5">
+      <div className="mt-2 flex flex-col sm:flex-row gap-2.5">
         <button
           type="button"
           onClick={handleCopyRecipe}
-          className="h-11 rounded-xl bg-[var(--accent)] px-4 text-sm font-bold text-stone-950 shadow-xs hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-950"
+          className="flex min-h-[44px] w-full items-center justify-center rounded-xl bg-[var(--accent)] px-6 py-3 font-semibold text-white shadow-xs hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 transition-opacity"
         >
           {copied ? "Copied!" : "Copy recipe"}
         </button>
@@ -386,7 +386,7 @@ export function ResultCard({
         <button
           type="button"
           onClick={onReset}
-          className="h-11 rounded-xl bg-[var(--accent)] px-4 text-sm font-bold text-stone-950 shadow-xs hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-950"
+          className="flex min-h-[44px] w-full items-center justify-center rounded-xl border border-[var(--accent)] px-6 py-3 font-semibold text-[var(--accent)] hover:bg-[var(--accent)]/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 transition-colors"
         >
           Mix again
         </button>
@@ -396,4 +396,3 @@ export function ResultCard({
 }
 
 export default ResultCard;
-

@@ -132,13 +132,13 @@ export function CalculatorForm({
     <form
       onSubmit={(e) => e.preventDefault()}
       aria-label="Calculator inputs"
-      className="flex flex-col gap-5 rounded-2xl border border-stone-200 bg-white p-5 shadow-xs"
+      className="flex flex-col gap-5 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
     >
       {/* Field 1: Type / use */}
       <div className="flex flex-col gap-1.5">
         <label
           htmlFor="variant-select"
-          className="text-sm font-semibold text-stone-800"
+          className="text-xs font-semibold uppercase tracking-wide text-gray-700"
         >
           Type / use
         </label>
@@ -146,7 +146,7 @@ export function CalculatorForm({
           id="variant-select"
           value={selectedVariant?.id ?? ""}
           onChange={(e) => handleVariantChange(e.target.value)}
-          className="h-12 w-full rounded-xl border border-stone-300 bg-stone-50 px-3.5 text-base font-medium text-stone-900 focus:border-stone-900 focus:bg-white focus:outline-none"
+          className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 focus:border-[var(--accent)] focus:outline-none"
         >
           {liveVariants.map((variant) => (
             <option key={variant.id} value={variant.id}>
@@ -155,7 +155,7 @@ export function CalculatorForm({
           ))}
         </select>
         {selectedVariant?.useCase && (
-          <p className="text-xs text-stone-500">{selectedVariant.useCase}</p>
+          <p className="text-xs text-gray-500">{selectedVariant.useCase}</p>
         )}
       </div>
 
@@ -164,7 +164,7 @@ export function CalculatorForm({
         <div className="flex flex-col gap-1.5">
           <label
             htmlFor="example-select"
-            className="text-sm font-semibold text-stone-800"
+            className="text-xs font-semibold uppercase tracking-wide text-gray-700"
           >
             Your product (optional)
           </label>
@@ -176,7 +176,7 @@ export function CalculatorForm({
                 selectedExampleId: e.target.value ? e.target.value : null,
               })
             }
-            className="h-12 w-full rounded-xl border border-stone-300 bg-stone-50 px-3.5 text-base font-medium text-stone-900 focus:border-stone-900 focus:bg-white focus:outline-none"
+            className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 focus:border-[var(--accent)] focus:outline-none"
           >
             <option value="">
               Generic ({selectedVariant.densityGPerMl} g/ml)
@@ -192,13 +192,13 @@ export function CalculatorForm({
 
       {/* Custom datasheet inputs when sourceType === "user" */}
       {selectedVariant && isCustomDatasheet && (
-        <div className="grid grid-cols-3 gap-3 rounded-xl border border-stone-200 bg-stone-50 p-3.5">
+        <div className="grid grid-cols-3 gap-3 rounded-xl border border-gray-200 bg-gray-50 p-3.5">
           <div className="flex flex-col gap-1">
             <label
               htmlFor="user-part-a"
-              className="text-xs font-semibold text-stone-700"
+              className="text-xs font-semibold uppercase tracking-wide text-gray-700"
             >
-              Part A weight
+              Part A wt
             </label>
             <input
               id="user-part-a"
@@ -212,15 +212,15 @@ export function CalculatorForm({
                   userRatioPartA: parseFloat(e.target.value) || 0,
                 })
               }
-              className="h-10 rounded-lg border border-stone-300 bg-white px-2.5 text-base text-stone-900"
+              className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-base text-gray-900 focus:border-[var(--accent)] focus:outline-none"
             />
           </div>
           <div className="flex flex-col gap-1">
             <label
               htmlFor="user-part-b"
-              className="text-xs font-semibold text-stone-700"
+              className="text-xs font-semibold uppercase tracking-wide text-gray-700"
             >
-              Part B weight
+              Part B wt
             </label>
             <input
               id="user-part-b"
@@ -234,15 +234,15 @@ export function CalculatorForm({
                   userRatioPartB: parseFloat(e.target.value) || 0,
                 })
               }
-              className="h-10 rounded-lg border border-stone-300 bg-white px-2.5 text-base text-stone-900"
+              className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-base text-gray-900 focus:border-[var(--accent)] focus:outline-none"
             />
           </div>
           <div className="flex flex-col gap-1">
             <label
               htmlFor="user-density"
-              className="text-xs font-semibold text-stone-700"
+              className="text-xs font-semibold uppercase tracking-wide text-gray-700"
             >
-              Density (g/ml)
+              Density
             </label>
             <input
               id="user-density"
@@ -259,7 +259,7 @@ export function CalculatorForm({
                     : undefined,
                 })
               }
-              className="h-10 rounded-lg border border-stone-300 bg-white px-2.5 text-base text-stone-900"
+              className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-base text-gray-900 focus:border-[var(--accent)] focus:outline-none"
             />
           </div>
         </div>
@@ -268,13 +268,13 @@ export function CalculatorForm({
       {/* Concrete only: W/C ratio segmented control */}
       {selectedVariant && isConcrete && (
         <div className="flex flex-col gap-1.5">
-          <span className="text-sm font-semibold text-stone-800">
+          <span className="text-xs font-semibold uppercase tracking-wide text-gray-700">
             Mix consistency (water-to-cement)
           </span>
           <div
             role="group"
             aria-label="Mix consistency"
-            className="grid grid-cols-3 gap-1.5 rounded-xl bg-stone-100 p-1"
+            className="grid grid-cols-3 rounded-xl overflow-hidden border border-gray-200 divide-x divide-gray-200"
           >
             {WC_OPTIONS.map((opt) => {
               const active = formState.wcRatioKey === opt.key;
@@ -284,10 +284,10 @@ export function CalculatorForm({
                   type="button"
                   aria-pressed={active}
                   onClick={() => updateState({ wcRatioKey: opt.key })}
-                  className={`h-10 rounded-lg text-sm font-semibold transition-colors ${
+                  className={`min-h-[44px] py-2.5 px-2 text-sm font-semibold transition-colors ${
                     active
-                      ? "bg-[var(--accent)] text-stone-950 shadow-xs"
-                      : "text-stone-600 hover:text-stone-900"
+                      ? "bg-[var(--accent)] text-white"
+                      : "bg-white text-gray-600 hover:text-gray-900"
                   }`}
                 >
                   {opt.label}
@@ -296,7 +296,7 @@ export function CalculatorForm({
             })}
           </div>
           {selectedVariant.wcRatioOptions?.[formState.wcRatioKey]?.note && (
-            <p className="text-xs text-stone-500">
+            <p className="text-xs text-gray-500">
               {selectedVariant.wcRatioOptions[formState.wcRatioKey]?.note}
             </p>
           )}
@@ -309,7 +309,7 @@ export function CalculatorForm({
           <div className="flex items-center justify-between">
             <label
               htmlFor="volume-input"
-              className="text-sm font-semibold text-stone-800"
+              className="text-xs font-semibold uppercase tracking-wide text-gray-700"
             >
               Mould volume
             </label>
@@ -329,7 +329,7 @@ export function CalculatorForm({
               placeholder="e.g. 500"
               value={formState.volumeInput}
               onChange={(e) => updateState({ volumeInput: e.target.value })}
-              className="h-12 min-w-0 flex-1 rounded-xl border border-stone-300 bg-stone-50 px-3.5 text-base font-medium text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:bg-white focus:outline-none"
+              className="min-w-0 flex-1 rounded-xl border border-gray-200 bg-white px-4 py-3 text-lg font-medium text-gray-900 placeholder:text-gray-400 focus:border-[var(--accent)] focus:outline-none"
             />
 
             <select
@@ -338,7 +338,7 @@ export function CalculatorForm({
               onChange={(e) =>
                 updateState({ volumeUnit: e.target.value as VolumeUnit })
               }
-              className="h-12 w-auto max-w-[160px] shrink-0 rounded-xl border border-stone-300 bg-stone-50 px-3 text-sm font-semibold text-stone-900 focus:border-stone-900 focus:bg-white focus:outline-none"
+              className="shrink-0 rounded-xl border border-gray-200 bg-white px-3 py-3 text-base font-medium text-gray-900 focus:border-[var(--accent)] focus:outline-none"
             >
               {VOLUME_UNITS.map((unit) => (
                 <option key={unit.value} value={unit.value}>
@@ -353,14 +353,14 @@ export function CalculatorForm({
       {/* Field 3: Waste preset (hidden for silicone, which always uses 15%) */}
       {selectedVariant && !isSilicone && (
         <div className="flex flex-col gap-1.5">
-          <span className="text-sm font-semibold text-stone-800">
+          <span className="text-xs font-semibold uppercase tracking-wide text-gray-700">
             Extra for waste
           </span>
 
           <div
             role="group"
             aria-label="Waste preset"
-            className="grid grid-cols-3 gap-1.5 rounded-xl bg-stone-100 p-1"
+            className="grid grid-cols-3 rounded-xl overflow-hidden border border-gray-200 divide-x divide-gray-200"
           >
             {wasteButtons.map((preset) => {
               const active = formState.wastePct === preset.pct;
@@ -370,10 +370,10 @@ export function CalculatorForm({
                   type="button"
                   aria-pressed={active}
                   onClick={() => updateState({ wastePct: preset.pct })}
-                  className={`h-10 rounded-lg text-sm font-semibold transition-colors ${
+                  className={`min-h-[44px] py-2.5 px-1.5 text-xs sm:text-sm font-semibold transition-colors ${
                     active
-                      ? "bg-[var(--accent)] text-stone-950 shadow-xs"
-                      : "text-stone-600 hover:text-stone-900"
+                      ? "bg-[var(--accent)] text-white"
+                      : "bg-white text-gray-600 hover:text-gray-900"
                   }`}
                 >
                   {preset.label} ({preset.pct}%)
@@ -389,7 +389,7 @@ export function CalculatorForm({
               ? WASTE_EXPLANATIONS[selectedPreset.id]
               : undefined;
             return explanation ? (
-              <p className="text-xs text-stone-500">{explanation}</p>
+              <p className="text-xs text-gray-500">{explanation}</p>
             ) : null;
           })()}
         </div>
@@ -399,4 +399,3 @@ export function CalculatorForm({
 }
 
 export default CalculatorForm;
-
