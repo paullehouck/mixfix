@@ -15,7 +15,7 @@ import {
   type VolumeUnit,
 } from "./utils/calculate";
 
-const DEFAULT_ACCENT = "#E9967A";
+const DEFAULT_ACCENT = "#6B7280";
 
 export function App() {
   const [selectedMaterialId, setSelectedMaterialId] = useState<string | null>(
@@ -147,6 +147,8 @@ export function App() {
       ? convertVolumeToMl(parsedVolume, volumeUnit)
       : 0;
 
+  const isSilicone = selectedMaterial?.id === "silicone";
+  const effectiveWastePct = isSilicone ? 15 : wastePct;
   const isCustomDatasheet = selectedVariant?.sourceType === "user";
   const hasValidDensity = isCustomDatasheet
     ? Boolean(userDensityGPerMl && userDensityGPerMl > 0)
@@ -160,9 +162,11 @@ export function App() {
       ? calculateMix({
           variant: selectedVariant,
           volumeMl,
-          wastePct,
+          wastePct: effectiveWastePct,
           selectedExampleDensity:
             selectedExample?.densityGPerMl ?? undefined,
+          selectedExampleName:
+            selectedExample?.name ?? undefined,
           wcRatioKey,
           additives: activeAdditives,
           userDensityGPerMl,

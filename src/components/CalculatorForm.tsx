@@ -45,16 +45,11 @@ const WC_OPTIONS: { key: WcRatioKey; label: string }[] = [
   { key: "stiff", label: "Stiff" },
 ];
 
-const FALLBACK_WASTE_PRESETS = [
-  { id: "simple", label: "Simple", pct: 5 },
-  { id: "standard", label: "Standard", pct: 10 },
-  { id: "fiddly", label: "Fiddly", pct: 15 },
-];
-
 export function createInitialFormState(material: Material): CalculatorFormState {
   const liveVariants = material.variants.filter((v) => v.status === "live");
   const defaultVariant = liveVariants[0] ?? material.variants[0];
   const isSilicone = material.id === "silicone";
+  const defaultStandardWaste = defaultVariant?.wastePresets?.[1]?.pct ?? 10;
 
   return {
     selectedVariantId: defaultVariant?.id ?? "",
@@ -62,7 +57,7 @@ export function createInitialFormState(material: Material): CalculatorFormState 
     wcRatioKey: defaultVariant?.wcRatioDefault ?? "balanced",
     volumeInput: "",
     volumeUnit: "ml",
-    wastePct: isSilicone ? 15 : (defaultVariant?.wastePctDefault ?? 10),
+    wastePct: isSilicone ? 15 : (defaultVariant?.wastePctDefault ?? defaultStandardWaste),
     userDensityGPerMl: undefined,
     userRatioPartA: 100,
     userRatioPartB: 10,
@@ -111,28 +106,24 @@ export function CalculatorForm({
     (ex) => ex.densityGPerMl !== null
   );
 
-  const wasteButtons = selectedVariant?.wastePresets?.length
-    ? selectedVariant.wastePresets.map((preset) => ({
-        id: preset.id,
-        label:
-          preset.id === "simple"
-            ? "Simple"
-            : preset.id === "standard"
-              ? "Standard"
-              : preset.id === "fiddly"
-                ? "Fiddly"
-                : preset.name,
-        pct: preset.pct,
-      }))
-    : FALLBACK_WASTE_PRESETS;
+  const simplePct = selectedVariant?.wastePresets?.[0]?.pct ?? 5;
+  const standardPct = selectedVariant?.wastePresets?.[1]?.pct ?? 10;
+  const fiddlyPct = selectedVariant?.wastePresets?.[2]?.pct ?? 15;
+
+  const wasteButtons = [
+    { id: "simple", label: "Simple", pct: simplePct },
+    { id: "standard", label: "Standard", pct: standardPct },
+    { id: "fiddly", label: "Fiddly", pct: fiddlyPct },
+  ];
 
   function handleVariantChange(newVariantId: string) {
     const nextVariant = liveVariants.find((v) => v.id === newVariantId);
+    const nextStandardPct = nextVariant?.wastePresets?.[1]?.pct ?? 10;
     updateState({
       selectedVariantId: newVariantId,
       selectedExampleId: null,
       wcRatioKey: nextVariant?.wcRatioDefault ?? "balanced",
-      wastePct: isSilicone ? 15 : (nextVariant?.wastePctDefault ?? 10),
+      wastePct: isSilicone ? 15 : (nextVariant?.wastePctDefault ?? nextStandardPct),
     });
   }
 

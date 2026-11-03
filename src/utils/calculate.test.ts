@@ -182,13 +182,14 @@ describe("calculateMix", () => {
   });
 
   describe("user-entered datasheet and example density overrides", () => {
-    it("overrides variant density when selectedExampleDensity is provided", () => {
+    it("overrides variant density when selectedExampleDensity is provided and updates source to official", () => {
       const variant = getVariant("silicone", "platinum-1to1-weight");
       const result = calculateMix({
         variant,
         volumeMl: 500,
         wastePct: 15,
         selectedExampleDensity: 1.08, // Dragon Skin 30
+        selectedExampleName: "Smooth-On Dragon Skin 30",
         additives: [],
       });
 
@@ -196,6 +197,8 @@ describe("calculateMix", () => {
       expect(result.totalGrams).toBe(621);
       expect(result.components[0].grams).toBe(311);
       expect(result.components[1].grams).toBe(311);
+      expect(result.sourceType).toBe("official");
+      expect(result.exampleName).toBe("Smooth-On Dragon Skin 30");
     });
 
     it("calculates custom datasheet values (sourceType === 'user')", () => {

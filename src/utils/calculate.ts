@@ -39,6 +39,7 @@ export interface CalculateParams {
   volumeMl: number;
   wastePct: number;
   selectedExampleDensity?: number;
+  selectedExampleName?: string;
   wcRatioKey?: WcRatioKey;
   additives: AdditiveInput[];
   userDensityGPerMl?: number;
@@ -70,6 +71,7 @@ export interface CalculateResult {
   totalGrams: number;
   mixBasis: MixBasis;
   sourceType: string;
+  exampleName?: string;
 }
 
 export function calculateMix(params: CalculateParams): CalculateResult {
@@ -78,6 +80,7 @@ export function calculateMix(params: CalculateParams): CalculateResult {
     volumeMl,
     wastePct,
     selectedExampleDensity,
+    selectedExampleName,
     wcRatioKey,
     additives,
     userDensityGPerMl,
@@ -142,11 +145,11 @@ export function calculateMix(params: CalculateParams): CalculateResult {
     let waterAdjusted = false;
 
     for (const activeAdd of additives) {
-      if (activeAdd.value <= 0) continue;
+      if (activeAdd.value < 0) continue;
       const def = variant.additives.find((a) => a.id === activeAdd.id);
       if (def && def.type === "reducesWater") {
         rawWaterGrams = rawWaterGrams * (1 - activeAdd.value / 100);
-        waterAdjusted = true;
+        waterAdjusted = activeAdd.value > 0;
       }
     }
 
@@ -184,7 +187,7 @@ export function calculateMix(params: CalculateParams): CalculateResult {
   const calculatedAdditives: CalculatedAdditive[] = [];
 
   for (const activeAdd of additives) {
-    if (activeAdd.value <= 0) continue;
+    if (activeAdd.value < 0) continue;
     const def = variant.additives.find((a) => a.id === activeAdd.id);
     if (!def) continue;
 
@@ -218,12 +221,17 @@ export function calculateMix(params: CalculateParams): CalculateResult {
     });
   }
 
+  const isExample = Boolean(
+    selectedExampleDensity !== undefined && selectedExampleDensity > 0
+  );
+
   const result: CalculateResult = {
     components,
     additives: calculatedAdditives,
     totalGrams: Math.round(totalMass),
     mixBasis: variant.mixBasis,
-    sourceType: variant.sourceType,
+    sourceType: isExample ? "official" : variant.sourceType,
+    exampleName: isExample ? selectedExampleName : undefined,
   };
 
   if (water !== undefined) {

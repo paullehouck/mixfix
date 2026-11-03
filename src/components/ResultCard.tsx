@@ -118,18 +118,24 @@ export function ResultCard({
   }
 
   const potLifeText = formatPotLife(variant.potLifeMin);
-  const badgeText = getSourceBadgeText(result.sourceType);
+  const badgeText = result.exampleName
+    ? "By the book"
+    : getSourceBadgeText(result.sourceType);
 
   async function handleCopyRecipe() {
+    const headerTitle = result.exampleName
+      ? `${variant.name} · ${result.exampleName} (By the book)`
+      : `${variant.name} (${badgeText})`;
+
     const lines: string[] = [
-      `${variant.name} (${badgeText})`,
+      headerTitle,
       "------------------------------",
       ...result.components.map((c) => `${c.name}: ${c.grams} g`),
     ];
 
     if (result.water) {
       lines.push(
-        `Water${result.water.adjusted ? " (adjusted)" : ""}: ${result.water.grams} g`
+        `Water${result.water.adjusted ? " (adjusted)" : ""}: ${result.water.grams} g (add gradually to the dry mix)`
       );
     }
 
@@ -143,7 +149,11 @@ export function ResultCard({
         const def = variant.additives.find((a) => a.id === active.id);
         if (!def) continue;
         const unit = formatDoseUnit(def);
-        const grams = computeFallbackAdditiveGrams(def, active.value);
+        const calcAdd = result.additives.find((a) => a.id === active.id);
+        const grams =
+          calcAdd !== undefined
+            ? calcAdd.grams
+            : computeFallbackAdditiveGrams(def, active.value);
         if (def.type === "reducesWater") {
           lines.push(`- ${def.name}: ${active.value}${unit} water reduction`);
         } else {
@@ -161,11 +171,22 @@ export function ResultCard({
 
     const text = lines.join("\n");
     try {
-      await navigator.clipboard.writeText(text);
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+      }
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback for environments without clipboard permission
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
@@ -181,8 +202,13 @@ export function ResultCard({
         <h3 className="text-lg font-bold tracking-tight text-stone-900">
           Your mix
         </h3>
-        <span className="inline-flex items-center rounded-full bg-[var(--accent)]/25 px-3 py-1 text-xs font-semibold text-stone-900">
-          {badgeText}
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--accent)]/25 px-3 py-1 text-xs font-semibold text-stone-900">
+          <span>{badgeText}</span>
+          {result.exampleName && (
+            <span className="border-l border-stone-400/40 pl-1.5 font-medium text-stone-700">
+              {result.exampleName}
+            </span>
+          )}
         </span>
       </div>
 
@@ -201,15 +227,20 @@ export function ResultCard({
         ))}
 
         {result.water && (
-          <div className="flex items-baseline justify-between gap-4 text-base">
-            <span className="font-medium text-stone-700">
-              Water
-              {result.water.adjusted && (
-                <span className="ml-1.5 rounded-md bg-stone-100 px-1.5 py-0.5 text-xs font-semibold text-stone-600">
-                  Adjusted
-                </span>
-              )}
-            </span>
+          <div className="flex items-start justify-between gap-4 text-base">
+            <div>
+              <span className="font-medium text-stone-700">
+                Water
+                {result.water.adjusted && (
+                  <span className="ml-1.5 rounded-md bg-stone-100 px-1.5 py-0.5 text-xs font-semibold text-stone-600">
+                    Adjusted
+                  </span>
+                )}
+              </span>
+              <p className="text-xs text-stone-500">
+                add gradually to the dry mix
+              </p>
+            </div>
             <span className="text-right text-xl font-extrabold tabular-nums text-stone-950">
               {result.water.grams} g
             </span>
@@ -267,10 +298,11 @@ export function ResultCard({
               );
             }
 
-            const grams = computeFallbackAdditiveGrams(
-              additive,
-              activeEntry.value
-            );
+            const calcAdd = result.additives.find((a) => a.id === additive.id);
+            const grams =
+              calcAdd !== undefined
+                ? calcAdd.grams
+                : computeFallbackAdditiveGrams(additive, activeEntry.value);
             const unit = formatDoseUnit(additive);
             const step = additive.max <= 5 ? 0.5 : 1;
 
@@ -332,7 +364,7 @@ export function ResultCard({
                   </span>
                 </div>
 
-                <p className="truncate text-xs text-stone-600" title={additive.note}>
+                <p className="text-xs leading-relaxed text-stone-600">
                   {additive.note}
                 </p>
               </div>
@@ -354,7 +386,7 @@ export function ResultCard({
         <button
           type="button"
           onClick={onReset}
-          className="h-11 rounded-xl border border-stone-300 bg-white px-4 text-sm font-bold text-stone-800 hover:bg-stone-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-900"
+          className="h-11 rounded-xl bg-[var(--accent)] px-4 text-sm font-bold text-stone-950 shadow-xs hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-950"
         >
           Mix again
         </button>
