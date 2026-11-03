@@ -191,7 +191,7 @@ export function MaterialPicker({
               >
                 <div className="flex items-center gap-4 min-w-0">
                   <div
-                    className={`w-16 h-16 rounded-xl brutal-border brutal-shadow bg-white flex items-center justify-center shrink-0 overflow-hidden ${activeAnimation}`}
+                    className={`w-16 h-16 rounded-xl brutal-border bg-white flex items-center justify-center shrink-0 overflow-hidden ${activeAnimation}`}
                     onAnimationEnd={() => setActiveAnimation("")}
                   >
                     {renderMaterialSvg(material.id)}
@@ -223,10 +223,10 @@ export function MaterialPicker({
             <div
               key={material.id}
               aria-hidden={isHidden}
-              className={`overflow-hidden transition-all duration-300 ease-in-out ${
+              className={`transition-all duration-300 ease-in-out ${
                 isHidden
-                  ? "pointer-events-none mb-0 max-h-0 opacity-0"
-                  : "mb-3 max-h-32 opacity-100 last:mb-0"
+                  ? "pointer-events-none mb-0 max-h-0 opacity-0 overflow-hidden"
+                  : "mb-3 max-h-32 opacity-100 overflow-visible last:mb-0"
               }`}
             >
               <button
@@ -236,7 +236,7 @@ export function MaterialPicker({
                 className="w-full bg-white brutal-border brutal-shadow rounded-2xl p-4 flex items-center justify-between gap-4 cursor-pointer text-left hover:bg-gray-50 active:translate-x-0.5 active:translate-y-0.5 transition-all"
               >
                 <div className="flex items-center gap-4 min-w-0">
-                  <div className="w-16 h-16 rounded-xl brutal-border brutal-shadow bg-white flex items-center justify-center shrink-0 overflow-hidden">
+                  <div className="w-16 h-16 rounded-xl brutal-border bg-white flex items-center justify-center shrink-0 overflow-hidden">
                     {renderMaterialSvg(material.id)}
                   </div>
                   <div className="min-w-0">
@@ -253,7 +253,7 @@ export function MaterialPicker({
 
                 <div
                   aria-hidden="true"
-                  className="w-9 h-9 rounded-full brutal-border flex items-center justify-center shrink-0 font-display text-base text-[#1E1E24] bg-white shadow-2xs"
+                  className="w-9 h-9 rounded-full brutal-border flex items-center justify-center shrink-0 font-display text-sm text-[#1E1E24] bg-white"
                 >
                   →
                 </div>

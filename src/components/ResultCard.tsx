@@ -195,14 +195,14 @@ export function ResultCard({
   return (
     <section
       aria-label="Mix result"
-      className="bg-white brutal-border brutal-shadow-lg rounded-2xl p-5 animate-fade-up border-l-4 border-l-[var(--accent)] flex flex-col gap-4"
+      className="bg-[var(--accent-surface)] brutal-border brutal-shadow-lg rounded-2xl p-5 animate-fade-up border-l-4 border-l-[var(--accent)] flex flex-col gap-4"
     >
       {/* Header & Source Badge */}
       <div className="flex items-center justify-between gap-2">
         <h3 className="font-display text-lg text-[#1E1E24]">
           Your mix
         </h3>
-        <span className="inline-flex items-center gap-1.5 brutal-border rounded-full px-3 py-1 text-xs font-display bg-[var(--accent-surface)] text-[var(--accent)]">
+        <span className="inline-flex items-center gap-1.5 brutal-border rounded-full px-3 py-1 text-xs font-display bg-white text-[#1E1E24]">
           <span>{badgeText}</span>
           {result.exampleName && (
             <span className="border-l-2 border-[#1E1E24] pl-1.5">
@@ -219,7 +219,7 @@ export function ResultCard({
             key={comp.id}
             className="flex items-baseline justify-between gap-4"
           >
-            <span className="font-body text-sm text-gray-500">{comp.name}</span>
+            <span className="font-body text-sm text-gray-700">{comp.name}</span>
             <span className="font-display text-right text-2xl text-[#1E1E24] tabular-nums">
               {comp.grams} g
             </span>
@@ -229,15 +229,15 @@ export function ResultCard({
         {result.water && (
           <div className="flex items-start justify-between gap-4">
             <div>
-              <span className="font-body text-sm text-gray-500">
+              <span className="font-body text-sm text-gray-700">
                 Water
                 {result.water.adjusted && (
-                  <span className="ml-1.5 brutal-border rounded-md bg-gray-100 px-1.5 py-0.5 text-xs font-body font-semibold text-gray-600">
+                  <span className="ml-1.5 brutal-border rounded-md bg-white px-1.5 py-0.5 text-xs font-body font-semibold text-gray-700">
                     Adjusted
                   </span>
                 )}
               </span>
-              <p className="font-body text-xs text-gray-400">
+              <p className="font-body text-xs text-gray-500">
                 add gradually to the dry mix
               </p>
             </div>
@@ -261,7 +261,7 @@ export function ResultCard({
 
       {/* Pot life and Demould time */}
       {(potLifeText || variant.demouldTime) && (
-        <div className="flex flex-col gap-1.5 rounded-xl bg-gray-50 p-3 font-body text-sm text-gray-500">
+        <div className="flex flex-col gap-1.5 rounded-xl bg-white brutal-border p-3 font-body text-sm text-gray-700">
           {potLifeText && (
             <div>
               <span className="font-semibold text-gray-700">⏱ Pot life: </span>
@@ -310,7 +310,7 @@ export function ResultCard({
             return (
               <div
                 key={additive.id}
-                className="brutal-border rounded-xl p-3 mb-2 bg-[var(--accent-surface)] flex flex-col gap-2 transition-colors"
+                className="brutal-border rounded-xl p-3 mb-2 bg-white flex flex-col gap-2 transition-colors"
               >
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-baseline gap-2">
