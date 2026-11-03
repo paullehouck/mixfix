@@ -46,7 +46,7 @@ export function InfoPopover({ text, label = "More information" }: InfoPopoverPro
   }, [open]);
 
   return (
-    <div className="relative inline-flex items-center">
+    <div className="relative inline-flex items-center justify-center min-h-[44px] min-w-[44px]">
       <button
         ref={triggerRef}
         type="button"
@@ -62,7 +62,7 @@ export function InfoPopover({ text, label = "More information" }: InfoPopoverPro
             return next;
           });
         }}
-        className="inline-flex h-11 w-11 items-center justify-center rounded-full text-base text-gray-400 hover:text-gray-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent,#1c1917)]"
+        className="w-8 h-8 rounded-full brutal-border bg-white font-display text-xs flex items-center justify-center text-[#1E1E24] hover:bg-gray-50 active:translate-x-0.5 active:translate-y-0.5 transition-all focus-visible:outline-none"
       >
         <span aria-hidden="true">ⓘ</span>
       </button>
@@ -73,7 +73,7 @@ export function InfoPopover({ text, label = "More information" }: InfoPopoverPro
           id={popoverId}
           role="dialog"
           aria-label={label}
-          className="absolute top-full left-0 z-30 mt-1 w-64 max-w-[calc(100vw-2rem)] rounded-xl border border-stone-200 bg-white p-3.5 text-sm leading-relaxed text-stone-700 shadow-lg sm:left-auto sm:right-0"
+          className="absolute top-full right-0 z-30 mt-2 w-72 max-w-[calc(100vw-2rem)] bg-white brutal-border brutal-shadow rounded-xl p-4 text-sm font-body max-w-[280px] text-[#1E1E24]"
         >
           {text}
         </div>

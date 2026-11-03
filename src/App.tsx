@@ -15,7 +15,8 @@ import {
   type VolumeUnit,
 } from "./utils/calculate";
 
-const DEFAULT_ACCENT = "#6B7280";
+const DEFAULT_ACCENT = "#1FB5A6";
+const DEFAULT_ACCENT_SURFACE = "#E8F8F7";
 
 export function App() {
   const [selectedMaterialId, setSelectedMaterialId] = useState<string | null>(
@@ -52,10 +53,22 @@ export function App() {
     materials.find((m) => m.id === selectedMaterialId) ?? null;
 
   const accentColor = selectedMaterial?.theme.accent ?? DEFAULT_ACCENT;
+  const accentSurfaceColor =
+    selectedMaterial?.id === "silicone"
+      ? "#E8F8F7"
+      : selectedMaterial?.id === "jesmonite"
+        ? "#EFE3C8"
+        : selectedMaterial?.id === "concrete"
+          ? "#E8E8E6"
+          : (selectedMaterial?.theme.surface ?? DEFAULT_ACCENT_SURFACE);
 
   useEffect(() => {
     document.documentElement.style.setProperty("--accent", accentColor);
-  }, [accentColor]);
+    document.documentElement.style.setProperty(
+      "--accent-surface",
+      accentSurfaceColor
+    );
+  }, [accentColor, accentSurfaceColor]);
 
   function openAbout() {
     window.location.hash = "about";
@@ -187,15 +200,18 @@ export function App() {
         })
       : null;
 
-  const rootStyle = { "--accent": accentColor } as CSSProperties;
+  const rootStyle = {
+    "--accent": accentColor,
+    "--accent-surface": accentSurfaceColor,
+  } as CSSProperties;
 
   return (
     <div
       style={rootStyle}
-      className="min-h-screen bg-[#F5F4F1] text-gray-900 antialiased"
+      className="min-h-screen text-[#1E1E24] antialiased"
     >
-      {/* Sticky Header */}
-      <header className="sticky top-0 z-50 border-b border-gray-200 bg-[#F5F4F1]/95 backdrop-blur-xs">
+      {/* Neo-brutalist Header */}
+      <header className="sticky top-0 z-50 border-b-[2.5px] border-[#1E1E24] bg-[#F7F7F5]">
         <div className="mx-auto flex h-16 max-w-[560px] items-center justify-between px-4">
           <a
             href="#"
@@ -203,16 +219,17 @@ export function App() {
               e.preventDefault();
               closeAbout();
             }}
-            className="font-display font-black text-xl tracking-tight text-gray-950"
+            className="font-display text-2xl tracking-tight"
           >
-            Mixfix
+            <span className="text-[#1E1E24]">MIX</span>
+            <span className="text-[var(--accent)]">FIX</span>
           </a>
 
           <button
             type="button"
             aria-label="About Mixfix"
             onClick={openAbout}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 bg-white text-base font-bold text-gray-700 hover:border-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+            className="brutal-border brutal-shadow rounded-full w-11 h-11 bg-white font-display font-bold flex items-center justify-center text-[#1E1E24] active:translate-x-0.5 active:translate-y-0.5 transition-transform"
           >
             ?
           </button>
@@ -265,13 +282,13 @@ export function App() {
           onClick={(e) => {
             if (e.target === e.currentTarget) closeAbout();
           }}
-          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-sm p-0 sm:p-4"
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 p-0 sm:p-4"
         >
-          <div className="animate-slide-up w-full max-w-[560px] max-h-[85vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-white p-6 shadow-xl flex flex-col gap-5">
-            <div className="flex items-center justify-between border-b border-gray-200 pb-3">
+          <div className="animate-slide-up w-full max-w-[560px] max-h-[85vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl bg-white p-6 brutal-border border-t-[3px] border-[#1E1E24] flex flex-col gap-5">
+            <div className="flex items-center justify-between border-b-2 border-[#1E1E24] pb-3">
               <h2
                 id="about-title"
-                className="font-display text-2xl font-black tracking-tight text-gray-950"
+                className="font-display text-2xl text-[#1E1E24]"
               >
                 What is Mixfix?
               </h2>
@@ -279,21 +296,21 @@ export function App() {
                 type="button"
                 aria-label="Close about dialog"
                 onClick={closeAbout}
-                className="flex h-11 w-11 items-center justify-center rounded-full text-2xl font-light text-gray-500 hover:bg-gray-100 hover:text-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+                className="brutal-border brutal-shadow rounded-full w-11 h-11 font-display text-xl text-[#1E1E24] bg-white flex items-center justify-center active:translate-x-0.5 active:translate-y-0.5"
               >
                 ×
               </button>
             </div>
 
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 font-body">
               <p className="text-base leading-relaxed text-gray-700">
                 Mixfix is here to fix your mix, so bench math never gets in the way of making.
                 Pick your material, enter your mould&apos;s volume, and get exact grams in seconds. No spreadsheets, no guesswork, and no sticky buckets of uncured regret.
               </p>
             </div>
 
-            <div className="flex flex-col gap-2 rounded-2xl border border-gray-200 bg-gray-50/70 p-4">
-              <h3 className="text-sm font-bold tracking-tight text-gray-900">
+            <div className="flex flex-col gap-2 rounded-xl brutal-border bg-gray-50/70 p-4 font-body">
+              <h3 className="font-display text-sm uppercase tracking-wider text-gray-900">
                 Where do the numbers come from?
               </h3>
               <p className="text-sm leading-relaxed text-gray-600">
@@ -301,15 +318,15 @@ export function App() {
               </p>
             </div>
 
-            <div className="flex flex-col gap-2 rounded-2xl border border-gray-200 bg-gray-50/70 p-4">
-              <h3 className="text-sm font-bold tracking-tight text-gray-900">
+            <div className="flex flex-col gap-2 rounded-xl brutal-border bg-gray-50/70 p-4 font-body">
+              <h3 className="font-display text-sm uppercase tracking-wider text-gray-900">
                 Got feedback or a recipe to add?
               </h3>
               <p className="text-sm leading-relaxed text-gray-600">
                 Email{" "}
                 <a
                   href="mailto:suggestions@mixfix.com"
-                  className="font-medium text-gray-900 underline decoration-gray-400 underline-offset-4 hover:decoration-gray-900"
+                  className="font-semibold text-gray-900 underline decoration-[#1E1E24] underline-offset-4 hover:text-[var(--accent)]"
                 >
                   suggestions@mixfix.com
                 </a>
