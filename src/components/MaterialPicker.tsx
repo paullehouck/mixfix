@@ -253,9 +253,24 @@ export function MaterialPicker({
 
                 <div
                   aria-hidden="true"
-                  className="w-9 h-9 rounded-full brutal-border flex items-center justify-center shrink-0 font-display text-sm text-[#1E1E24] bg-white"
+                  className="w-9 h-9 rounded-full brutal-border flex items-center justify-center shrink-0 text-[#1E1E24] bg-white"
                 >
-                  →
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-4 h-4"
+                  >
+                    <path
+                      d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5"
+                      stroke="#1E1E24"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </div>
               </button>
             </div>
