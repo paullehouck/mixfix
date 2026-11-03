@@ -1,0 +1,169 @@
+{
+  "id": "silicone",
+  "name": "Silicone (moulds)",
+  "theme": {
+    "accent": "#1FB5A6",
+    "surface": "#D4F0ED",
+    "blockIllustration": "silicone-block",
+    "selectAnimation": "drip"
+  },
+  "volumeHint": "Put your master in the mould box, fill around it with water and weigh the water. Its grams are the silicone volume in ml.",
+  "variants": [
+    {
+      "id": "platinum-1to1-weight",
+      "status": "live",
+      "name": "Platinum-cure, 1:1 by weight",
+      "sourceType": "estimate",
+      "sourceNote": "Typical density for popular platinum-cure mould silicones (published values about 1.10 to 1.18). Rounded to the middle of the range.",
+      "sourceUrls": ["https://www.smooth-on.com/charts/"],
+      "mixBasis": "weight",
+      "components": [
+        { "id": "a", "name": "Part A", "parts": 1 },
+        { "id": "b", "name": "Part B", "parts": 1 }
+      ],
+      "densityGPerMl": 1.15,
+      "wastePctDefault": 15,
+      "additives": [],
+      "examples": [
+        { "id": "silicreate-soft-15a", "name": "SiliCreate Soft 15A", "densityGPerMl": 1.1, "sourceNote": "SiliCreate product page: cured density 1.1 g/cm³, 1:1 by weight." },
+        { "id": "silicreate-medium-30a", "name": "SiliCreate Medium 30A", "densityGPerMl": 1.12, "sourceNote": "SiliCreate product page: cured density 1.12 g/cm³, 1:1 by weight." },
+        { "id": "silicreate-medfirm-45a", "name": "SiliCreate Med-Firm 45A", "densityGPerMl": 1.14, "sourceNote": "SiliCreate product page: cured density 1.14 g/cm³, 1:1 by weight." },
+        { "id": "smooth-on-mold-star-30", "name": "Smooth-On Mold Star 30", "densityGPerMl": 1.12, "sourceNote": "Smooth-On technical overview: specific gravity 1.12." },
+        { "id": "smooth-on-mold-star-15-slow", "name": "Smooth-On Mold Star 15 SLOW", "densityGPerMl": 1.18, "sourceNote": "Smooth-On technical overview: specific gravity 1.18." },
+        { "id": "smooth-on-mold-star-16-fast", "name": "Smooth-On Mold Star 16 FAST", "densityGPerMl": 1.18, "sourceNote": "Smooth-On technical overview: specific gravity 1.18." },
+        { "id": "smooth-on-dragon-skin-30", "name": "Smooth-On Dragon Skin 30", "densityGPerMl": 1.08, "sourceNote": "Smooth-On technical overview: specific gravity 1.08." }
+      ],
+      "potLifeMin": null,
+      "demouldTime": "Varies by product — check your datasheet",
+      "tips": [
+        "Weigh Part A and Part B separately before combining",
+        "Mix slowly and thoroughly for at least 3 minutes, scraping the sides and bottom",
+        "Pour in a thin stream from a height to help break up bubbles",
+        "Tap the mould firmly on the bench to bring air bubbles to the surface",
+        "A vacuum chamber removes bubbles entirely if you have access to one"
+      ],
+      "safety": [
+        "Wear gloves — platinum-cure silicone can be inhibited by sulphur-containing materials (latex, some clays, certain tapes)",
+        "Test cure inhibition on your master before a full pour"
+      ]
+    },
+    {
+      "id": "tin-10to1-weight",
+      "status": "live",
+      "name": "Tin-cure, 10:1 by weight",
+      "sourceType": "estimate",
+      "sourceNote": "Typical density for 10:1 tin-cure mould silicones (published values about 1.12 to 1.22). Based on Smooth-On Mold Max series technical bulletin.",
+      "sourceUrls": ["https://smooth-on.com/tb/files/Mold_Max_Series_TB.pdf"],
+      "mixBasis": "weight",
+      "components": [
+        { "id": "a", "name": "Part A (base)", "parts": 10 },
+        { "id": "b", "name": "Part B (catalyst)", "parts": 1 }
+      ],
+      "densityGPerMl": 1.18,
+      "wastePctDefault": 15,
+      "additives": [],
+      "examples": [
+        { "id": "smooth-on-mold-max-10", "name": "Smooth-On Mold Max 10", "densityGPerMl": 1.15, "sourceNote": "Smooth-On Mold Max series technical bulletin: 100A:10B by weight, specific gravity 1.15." },
+        { "id": "smooth-on-mold-max-30", "name": "Smooth-On Mold Max 30", "densityGPerMl": 1.18, "sourceNote": "Smooth-On Mold Max series technical bulletin: 100A:10B by weight, specific gravity 1.18." },
+        { "id": "smooth-on-mold-max-xlsii", "name": "Smooth-On Mold Max XLS II", "densityGPerMl": 1.22, "sourceNote": "Smooth-On technical overview: 100A:10B by weight, specific gravity 1.22." }
+      ],
+      "potLifeMin": null,
+      "demouldTime": "Varies by product — check your datasheet",
+      "tips": [
+        "Weigh base and catalyst separately — the small catalyst amount is easy to over-pour",
+        "Mix thoroughly, scraping sides and bottom",
+        "Tin-cure silicone can be inhibited by moisture — store components with lids on",
+        "Pour slowly in a thin stream to minimise bubbles"
+      ],
+      "safety": [
+        "Wear gloves",
+        "Ensure good ventilation — tin-cure releases acetic acid (vinegar smell) as it cures"
+      ]
+    },
+    {
+      "id": "tin-20to1-weight",
+      "status": "live",
+      "name": "Tin-cure, 20:1 by weight (100:5)",
+      "sourceType": "estimate",
+      "sourceNote": "Based on Smooth-On Mold Max 25: 100A:5B by weight, specific gravity 1.18. Check that your pack states the same ratio before using this preset.",
+      "sourceUrls": ["https://smooth-on.com/tb/files/Mold_Max_Series_TB.pdf"],
+      "mixBasis": "weight",
+      "components": [
+        { "id": "a", "name": "Part A (base)", "parts": 20 },
+        { "id": "b", "name": "Part B (catalyst)", "parts": 1 }
+      ],
+      "densityGPerMl": 1.18,
+      "wastePctDefault": 15,
+      "additives": [],
+      "examples": [
+        { "id": "smooth-on-mold-max-25", "name": "Smooth-On Mold Max 25", "densityGPerMl": 1.18, "sourceNote": "Smooth-On Mold Max series technical bulletin: 100A:5B by weight, specific gravity 1.18." }
+      ],
+      "potLifeMin": null,
+      "demouldTime": "Varies by product — check your datasheet",
+      "tips": [
+        "The catalyst amount is very small — weigh carefully on a scale that reads to 0.1 g",
+        "Mix thoroughly for at least 3 minutes"
+      ],
+      "safety": [
+        "Wear gloves",
+        "Good ventilation recommended"
+      ]
+    },
+    {
+      "id": "tin-1to1-volume-pack",
+      "status": "live",
+      "name": "Tin-cure, 1:1 by volume pack (about 100:130 by weight)",
+      "sourceType": "estimate",
+      "sourceNote": "Based on Smooth-On OOMOO 25 and 30 datasheets: 100A:130B by weight, specific gravity 1.34. These packs are sold as 1:1 by volume but the weight ratio differs. Check your pack states the same weight ratio.",
+      "sourceUrls": ["https://www.smooth-on.com/charts/"],
+      "mixBasis": "weight",
+      "components": [
+        { "id": "a", "name": "Part A", "parts": 1 },
+        { "id": "b", "name": "Part B", "parts": 1.3 }
+      ],
+      "densityGPerMl": 1.34,
+      "wastePctDefault": 15,
+      "additives": [],
+      "examples": [
+        { "id": "smooth-on-oomoo-25", "name": "Smooth-On OOMOO 25", "densityGPerMl": 1.34, "sourceNote": "Smooth-On OOMOO 25 technical overview: 100A:130B by weight, specific gravity 1.34." },
+        { "id": "smooth-on-oomoo-30", "name": "Smooth-On OOMOO 30", "densityGPerMl": 1.34, "sourceNote": "Smooth-On OOMOO 30 technical overview: 100A:130B by weight, specific gravity 1.34." }
+      ],
+      "potLifeMin": null,
+      "demouldTime": "Varies by product — check your datasheet",
+      "tips": [
+        "These packs look like equal parts by volume but Part B is heavier — always weigh, never measure by volume",
+        "Mix slowly to avoid trapping air — OOMOO is thinner than most silicones and bubbles easily"
+      ],
+      "safety": [
+        "Wear gloves",
+        "Good ventilation recommended"
+      ]
+    },
+    {
+      "id": "custom-datasheet",
+      "status": "live",
+      "name": "My datasheet values",
+      "sourceType": "user",
+      "sourceNote": "User-entered values from their product datasheet.",
+      "mixBasis": "weight",
+      "userInputs": ["ratio", "density"],
+      "components": [],
+      "densityGPerMl": null,
+      "wastePctDefault": 15,
+      "additives": [],
+      "examples": [
+        { "id": "note-tc-series", "name": "SiliCreate TC20 and TC40 (100:3 by weight, density unconfirmed)", "densityGPerMl": null, "sourceNote": "SiliCreate product page: 100:3 by weight. No density published — use this option and enter your datasheet values." }
+      ],
+      "potLifeMin": null,
+      "demouldTime": null,
+      "tips": [
+        "Enter the by-weight ratio from your datasheet — not the by-volume ratio",
+        "Specific gravity on the datasheet equals density in g/ml",
+        "If the datasheet lists specific volume in cu. in./lb, convert with: density = 27.68 ÷ specific volume"
+      ],
+      "safety": [
+        "Follow the safety instructions on your product's datasheet"
+      ]
+    }
+  ]
+}

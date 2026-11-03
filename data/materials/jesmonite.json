@@ -1,0 +1,335 @@
+{
+  "id": "jesmonite",
+  "name": "Jesmonite",
+  "theme": {
+    "accent": "#E9967A",
+    "surface": "#EFE3C8",
+    "blockIllustration": "jesmonite-slab",
+    "selectAnimation": "powder-puff"
+  },
+  "variants": [
+    {
+      "id": "ac100-standard",
+      "status": "live",
+      "name": "AC100",
+      "useCase": "Fine detail casts, homewares, decorative pieces (gypsum-based)",
+      "sourceType": "official",
+      "sourceNote": "Jesmonite AC100 technical data sheet (mix ratio) and Jesmonite FAQs (1,750 g of mixed AC100 per 1,000 ml of mould volume, pigment limit, set time). Waste guidance from the official Jesmonite calculator article. Retarder dose from Jesmonite's own guidance (2-8 g per kg of mix).",
+      "sourceUrls": [
+        "https://cdn.shopify.com/s/files/1/0011/0831/2108/files/AC100_TDS.pdf",
+        "https://jesmonite.com/faqs/",
+        "https://jesmonite.com/news/the-official-jesmonite-calculator/",
+        "https://jesmonite.com/news/why-is-my-jesmonite-setting-too-fast/"
+      ],
+      "mixBasis": "weight",
+      "components": [
+        {
+          "id": "liquid",
+          "name": "AC100 Liquid",
+          "parts": 1
+        },
+        {
+          "id": "base",
+          "name": "AC100 Base (powder)",
+          "parts": 2.5
+        }
+      ],
+      "densityGPerMl": 1.75,
+      "wastePctDefault": 10,
+      "wastePresets": [
+        {
+          "id": "simple",
+          "name": "Simple mould",
+          "pct": 5
+        },
+        {
+          "id": "standard",
+          "name": "Standard",
+          "pct": 10
+        },
+        {
+          "id": "fiddly",
+          "name": "Fiddly or large mould",
+          "pct": 15
+        }
+      ],
+      "additives": [
+        {
+          "id": "pigment",
+          "name": "Liquid pigment",
+          "type": "percentOfTotal",
+          "min": 0,
+          "max": 2,
+          "default": 0,
+          "addTo": "liquid",
+          "note": "Maximum 2% of total mix weight. Add to the liquid before the base."
+        },
+        {
+          "id": "retarder",
+          "name": "Retarder (AC100 and AC300)",
+          "type": "gPerKg",
+          "min": 2,
+          "max": 8,
+          "default": 2,
+          "enabledByDefault": false,
+          "addTo": "liquid",
+          "note": "Slows the set. Use the retarder made for AC100 and AC300 (gypsum types), not the other one. Start at the minimum and test first. Hotter rooms may need more."
+        }
+      ],
+      "potLifeMin": [
+        5,
+        10
+      ],
+      "demouldTime": "Roughly 30 min to 2 h, depending on room temperature",
+      "tips": [
+        "Weigh liquid and base separately, then add the base slowly to the liquid while mixing",
+        "Stir pigment and retarder into the liquid first, then add the base",
+        "Brush a 1-2 mm first layer into the mould to avoid air bubbles, then pour the rest",
+        "Tap or vibrate the mould to bring bubbles to the surface",
+        "Leave 24 h after demoulding before sanding or sealing",
+        "Liquid pigments are not fully UV stable, so they suit indoor pieces"
+      ],
+      "safety": [
+        "Wear gloves as a minimum",
+        "Not tested for food safety",
+        "Do not put in a kiln or above 80 C"
+      ]
+    },
+    {
+      "id": "ac730-standard",
+      "status": "live",
+      "name": "AC730",
+      "useCase": "Stone and concrete look casts, outdoor pieces, planters (cement-based)",
+      "sourceType": "official",
+      "sourceNote": "Jesmonite AC730 technical data sheet and user guide (mix ratio), Jesmonite FAQs (1,850 g of mixed AC730 per 1,000 ml of mould volume, pigment limit). Waste guidance from the official Jesmonite calculator article. Retarder dose from Jesmonite's own guidance (2-8 g per kg of mix). Super plasticiser dose (8-12 g per kg of mix) from the official AC830 guide and reseller listings for AC730.",
+      "sourceUrls": [
+        "https://cdn.shopify.com/s/files/1/0011/0831/2108/files/AC730_TDS.pdf",
+        "https://jesmonite.com/wp-content/uploads/2025/01/AC730-User-Guide.pdf",
+        "https://jesmonite.com/faqs/",
+        "https://jesmonite.com/news/the-official-jesmonite-calculator/",
+        "https://jesmonite.com/news/why-is-my-jesmonite-setting-too-fast/",
+        "https://jesmonite.com/wp-content/uploads/2023/05/2023-AC830-User-Guide.pdf"
+      ],
+      "mixBasis": "weight",
+      "components": [
+        {
+          "id": "liquid",
+          "name": "AC730 Liquid",
+          "parts": 1
+        },
+        {
+          "id": "base",
+          "name": "AC730 Base (powder)",
+          "parts": 5
+        }
+      ],
+      "densityGPerMl": 1.85,
+      "wastePctDefault": 10,
+      "wastePresets": [
+        {
+          "id": "simple",
+          "name": "Simple mould",
+          "pct": 5
+        },
+        {
+          "id": "standard",
+          "name": "Standard",
+          "pct": 10
+        },
+        {
+          "id": "fiddly",
+          "name": "Fiddly or large mould",
+          "pct": 15
+        }
+      ],
+      "additives": [
+        {
+          "id": "pigment",
+          "name": "Liquid pigment",
+          "type": "percentOfTotal",
+          "min": 0,
+          "max": 2,
+          "default": 0,
+          "addTo": "liquid",
+          "note": "Maximum 2% of total mix weight. Add to the liquid before the base. AC730 base already contains stone-effect pigments."
+        },
+        {
+          "id": "retarder",
+          "name": "Retarder (AC730 and AC84)",
+          "type": "gPerKg",
+          "min": 2,
+          "max": 8,
+          "default": 2,
+          "enabledByDefault": false,
+          "addTo": "liquid",
+          "note": "Slows the set. Use the retarder made for AC730 and AC84 (cement types), not the other one. Start at the minimum and test first. Hotter rooms may need more."
+        },
+        {
+          "id": "plasticiser",
+          "name": "Super plasticiser",
+          "type": "gPerKg",
+          "min": 8,
+          "max": 12,
+          "default": 8,
+          "enabledByDefault": false,
+          "addTo": "unspecified",
+          "note": "Improves the flow of thick cement-based mixes without adding liquid. Dose from the official AC830 guide, and resellers list it for AC630, AC730, AC830 and AC930. The datasheet does not say exactly when to add it, so check the pack."
+        }
+      ],
+      "potLifeMin": null,
+      "demouldTime": "Official guide: 2.5-3.5 h in the mould for laminates, so treat as indicative for solid casts",
+      "tips": [
+        "Weigh liquid and base separately and use a high-shear mixing blade on a drill",
+        "Stir pigment and retarder into the liquid first, then add the base",
+        "Add the base slowly to the liquid at low speed, then mix about 60 seconds faster until smooth",
+        "Pour a little into the mould first and coat the surface to avoid bubbles, then pour the rest slowly",
+        "Solid casts should be no thicker than about 25-30 mm, because the heat from the fast reaction can crack thick pieces",
+        "Reaches over 90% of final strength in 24 h",
+        "Acid etching reveals the stone aggregate, and needs at least 24 h of curing first",
+        "AC730 is a dry, thick mix. A little super plasticiser improves flow without adding extra liquid"
+      ],
+      "safety": [
+        "Wear gloves, and follow the current safety data sheet",
+        "Not tested for food safety"
+      ]
+    },
+    {
+      "id": "ac730-gel-coat",
+      "status": "draft",
+      "name": "AC730 gel coat",
+      "useCase": "Brushed or sprayed face coat for laminates (needs a different volume input than a poured cast)",
+      "sourceType": "official",
+      "sourceNote": "Jesmonite AC730 user guide: 5.25:1 for a gel or mist coat.",
+      "sourceUrls": [
+        "https://jesmonite.com/wp-content/uploads/2025/01/AC730-User-Guide.pdf"
+      ],
+      "mixBasis": "weight",
+      "components": [
+        {
+          "id": "liquid",
+          "name": "AC730 Liquid",
+          "parts": 1
+        },
+        {
+          "id": "base",
+          "name": "AC730 Base (powder)",
+          "parts": 5.25
+        }
+      ],
+      "densityGPerMl": null,
+      "wastePctDefault": 10,
+      "additives": [],
+      "potLifeMin": null,
+      "demouldTime": null,
+      "tips": [],
+      "safety": []
+    },
+    {
+      "id": "ac730-chopped-strand-premix",
+      "status": "draft",
+      "name": "AC730 with chopped strands",
+      "useCase": "Stronger thin casts using 13 mm alkali-resistant chopped strands",
+      "sourceType": "official",
+      "sourceNote": "Jesmonite AC730 user guide: 4.5:1 when adding coarse chopped strands for a premix.",
+      "sourceUrls": [
+        "https://jesmonite.com/wp-content/uploads/2025/01/AC730-User-Guide.pdf"
+      ],
+      "mixBasis": "weight",
+      "components": [
+        {
+          "id": "liquid",
+          "name": "AC730 Liquid",
+          "parts": 1
+        },
+        {
+          "id": "base",
+          "name": "AC730 Base (powder)",
+          "parts": 4.5
+        }
+      ],
+      "densityGPerMl": null,
+      "wastePctDefault": 10,
+      "additives": [],
+      "potLifeMin": null,
+      "demouldTime": null,
+      "tips": [],
+      "safety": []
+    },
+    {
+      "id": "ac630-standard",
+      "status": "draft",
+      "name": "AC630",
+      "useCase": "Smooth concrete or stone finish (cement-based)",
+      "sourceType": "official",
+      "sourceNote": "Jesmonite AC630 technical data sheet and user guide: 5:1. Datasheet lists wet density 2000 kg/m3 and dry density 1920 kg/m3. No official per-1,000-ml figure found, so density is left empty until decided.",
+      "sourceUrls": [
+        "https://jesmonite.com/wp-content/uploads/2023/05/AC630-Technical-Data-Sheet-2023.pdf",
+        "https://jesmonite.com/wp-content/uploads/2023/05/2023-AC630-User-Guide.pdf"
+      ],
+      "mixBasis": "weight",
+      "components": [
+        {
+          "id": "liquid",
+          "name": "AC630 Liquid",
+          "parts": 1
+        },
+        {
+          "id": "base",
+          "name": "AC630 Base (powder)",
+          "parts": 5
+        }
+      ],
+      "densityGPerMl": null,
+      "wastePctDefault": 10,
+      "additives": [],
+      "potLifeMin": null,
+      "demouldTime": null,
+      "tips": [],
+      "safety": []
+    },
+    {
+      "id": "ac830-standard",
+      "status": "draft",
+      "name": "AC830",
+      "useCase": "Thicker solid casts (cement-based)",
+      "sourceType": "official",
+      "sourceNote": "Jesmonite AC830 technical data sheet and user guide: 7:1, with super plasticiser at 8-12 g per kg of mix. Datasheet lists wet density 2050 kg/m3 and dry density 1950 kg/m3. No official per-1,000-ml figure found, so density is left empty until decided.",
+      "sourceUrls": [
+        "https://jesmonite.com/wp-content/uploads/2023/05/AC830-Technical-Data-Sheet-2023.pdf",
+        "https://jesmonite.com/wp-content/uploads/2023/05/2023-AC830-User-Guide.pdf"
+      ],
+      "mixBasis": "weight",
+      "components": [
+        {
+          "id": "liquid",
+          "name": "AC830 Liquid",
+          "parts": 1
+        },
+        {
+          "id": "base",
+          "name": "AC830 Base (powder)",
+          "parts": 7
+        }
+      ],
+      "densityGPerMl": null,
+      "wastePctDefault": 10,
+      "additives": [
+        {
+          "id": "plasticiser",
+          "name": "Super plasticiser",
+          "type": "gPerKg",
+          "min": 8,
+          "max": 12,
+          "default": 8,
+          "enabledByDefault": false,
+          "addTo": "unspecified",
+          "note": "Improves the flow of thick cement-based mixes without adding liquid. Dose from the official AC830 guide, and resellers list it for AC630, AC730, AC830 and AC930. The datasheet does not say exactly when to add it, so check the pack."
+        }
+      ],
+      "potLifeMin": null,
+      "demouldTime": null,
+      "tips": [],
+      "safety": []
+    }
+  ]
+}
