@@ -167,13 +167,22 @@ export function MaterialPicker({
   return (
     <section aria-label="Material picker" className="w-full">
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          hasSelection ? "mb-0 max-h-0 opacity-0" : "mb-4 max-h-16 opacity-100"
+        className={`grid transition-[grid-template-rows,opacity,margin-bottom] duration-300 ease-in-out ${
+          hasSelection
+            ? "grid-rows-[0fr] opacity-0 mb-0 pointer-events-none"
+            : "grid-rows-[1fr] opacity-100 mb-4"
         }`}
+        style={{
+          transitionDuration: "280ms",
+          transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+          transitionDelay: hasSelection ? "0ms" : "90ms",
+        }}
       >
-        <h2 className="font-display text-2xl text-[#1E1E24] mb-4">
-          What are we mixing?
-        </h2>
+        <div className="overflow-hidden min-h-0">
+          <h2 className="font-display text-2xl text-[#1E1E24]">
+            What are we mixing?
+          </h2>
+        </div>
       </div>
 
       <div className="flex flex-col">
@@ -182,97 +191,109 @@ export function MaterialPicker({
           const isHidden = hasSelection && !isSelected;
           const subtitle = getMaterialSubtitle(material);
 
-          if (isSelected) {
-            return (
-              <div
-                key={material.id}
-                style={{ boxShadow: "4px 4px 0px var(--accent)" }}
-                className="bg-[var(--accent-surface)] brutal-border border-l-4 border-l-[var(--accent)] rounded-2xl p-4 flex items-center justify-between gap-4 transition-all duration-300 mb-4"
-              >
-                <div className="flex items-center gap-4 min-w-0">
-                  <div
-                    className={`w-16 h-16 rounded-xl brutal-border bg-white flex items-center justify-center shrink-0 overflow-hidden ${activeAnimation}`}
-                    onAnimationEnd={() => setActiveAnimation("")}
-                  >
-                    {renderMaterialSvg(material.id)}
-                  </div>
-                  <div className="min-w-0">
-                    <span className="font-display text-xl text-[#1E1E24] block truncate">
-                      {material.name}
-                    </span>
-                    {subtitle && (
-                      <span className="text-sm font-body text-gray-500 block truncate">
-                        {subtitle}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => onSelect(null)}
-                  className="bg-white brutal-border text-[#1E1E24] font-display text-sm px-3 py-1 rounded-xl brutal-shadow shrink-0 active:translate-x-0.5 active:translate-y-0.5 transition-transform"
-                >
-                  Change
-                </button>
-              </div>
-            );
-          }
-
           return (
             <div
               key={material.id}
               aria-hidden={isHidden}
-              className={`transition-all duration-300 ease-in-out ${
+              className={`grid transition-[grid-template-rows,opacity,margin-bottom] duration-300 ease-in-out ${
                 isHidden
-                  ? "pointer-events-none mb-0 max-h-0 opacity-0 overflow-hidden"
-                  : "mb-3 max-h-32 opacity-100 overflow-visible last:mb-0"
+                  ? "grid-rows-[0fr] opacity-0 mb-0 pointer-events-none"
+                  : isSelected
+                    ? "grid-rows-[1fr] opacity-100 mb-4"
+                    : "grid-rows-[1fr] opacity-100 mb-3"
               }`}
+              style={{
+                transitionDuration: "280ms",
+                transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+                transitionDelay: isHidden ? "0ms" : isSelected ? "0ms" : "90ms",
+              }}
             >
-              <button
-                type="button"
-                tabIndex={isHidden ? -1 : 0}
-                onClick={() => onSelect(material.id)}
-                className="w-full bg-white brutal-border brutal-shadow rounded-2xl p-4 flex items-center justify-between gap-4 cursor-pointer text-left hover:bg-gray-50 active:translate-x-0.5 active:translate-y-0.5 transition-all"
-              >
-                <div className="flex items-center gap-4 min-w-0">
-                  <div className="w-16 h-16 rounded-xl brutal-border bg-white flex items-center justify-center shrink-0 overflow-hidden">
-                    {renderMaterialSvg(material.id)}
-                  </div>
-                  <div className="min-w-0">
-                    <span className="font-display text-xl text-[#1E1E24] block truncate">
-                      {material.name}
-                    </span>
-                    {subtitle && (
-                      <span className="text-sm font-body text-gray-500 block truncate">
-                        {subtitle}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <div
-                  aria-hidden="true"
-                  className="w-9 h-9 rounded-full brutal-border flex items-center justify-center shrink-0 text-[#1E1E24] bg-white"
-                >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-4 h-4"
+              <div className="min-h-0 overflow-hidden pt-1 pl-1 pr-1.5 pb-1.5 -mt-1 -ml-1 -mr-1.5 -mb-1.5">
+                {isSelected ? (
+                  <div
+                    key={`selected-${material.id}`}
+                    style={{ boxShadow: "4px 4px 0px var(--accent)" }}
+                    className="w-full bg-[var(--accent-surface)] brutal-border border-l-4 border-l-[var(--accent)] rounded-2xl p-4 flex items-center justify-between gap-4"
                   >
-                    <path
-                      d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5"
-                      stroke="#1E1E24"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </button>
+                    <div className="flex items-center gap-4 min-w-0">
+                      <div
+                        className={`w-16 h-16 rounded-xl brutal-border bg-white flex items-center justify-center shrink-0 overflow-hidden ${activeAnimation}`}
+                        onAnimationEnd={() => setActiveAnimation("")}
+                      >
+                        {renderMaterialSvg(material.id)}
+                      </div>
+                      <div className="min-w-0">
+                        <span className="font-display text-xl text-[#1E1E24] block truncate">
+                          {material.name}
+                        </span>
+                        {subtitle && (
+                          <span className="text-sm font-body text-gray-500 block truncate">
+                            {subtitle}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => onSelect(null)}
+                      className="bg-white brutal-border text-[#1E1E24] font-display text-sm px-3 py-1 rounded-xl brutal-shadow shrink-0 active:translate-x-0.5 active:translate-y-0.5 transition-transform cursor-pointer"
+                    >
+                      Change
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    key={`unselected-${material.id}`}
+                    type="button"
+                    tabIndex={isHidden ? -1 : 0}
+                    onClick={() => onSelect(material.id)}
+                    className={`w-full bg-white rounded-2xl p-4 flex items-center justify-between gap-4 cursor-pointer text-left hover:bg-gray-50 active:translate-x-0.5 active:translate-y-0.5 transition-all duration-150 ${
+                      isHidden
+                        ? "border-2 border-transparent shadow-none"
+                        : "brutal-border brutal-shadow"
+                    }`}
+                  >
+                    <div className="flex items-center gap-4 min-w-0">
+                      <div className="w-16 h-16 rounded-xl brutal-border bg-white flex items-center justify-center shrink-0 overflow-hidden">
+                        {renderMaterialSvg(material.id)}
+                      </div>
+                      <div className="min-w-0">
+                        <span className="font-display text-xl text-[#1E1E24] block truncate">
+                          {material.name}
+                        </span>
+                        {subtitle && (
+                          <span className="text-sm font-body text-gray-500 block truncate">
+                            {subtitle}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    <div
+                      aria-hidden="true"
+                      className="w-9 h-9 rounded-full brutal-border flex items-center justify-center shrink-0 text-[#1E1E24] bg-white"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-4 h-4"
+                      >
+                        <path
+                          d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5"
+                          stroke="#1E1E24"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </button>
+                )}
+              </div>
             </div>
           );
         })}
