@@ -26,10 +26,18 @@ export interface CalculatorFormProps {
 const DEFAULT_VOLUME_HINT =
   "Fill your mould with water and weigh it on digital scales. 1 gram of water equals 1 ml of volume.";
 
-const WASTE_HINT =
-  "Simple = basic open-face mould 5%; Standard = typical hobby mould 10%; Fiddly = complex shapes or large mould 15%.";
+const WASTE_EXPLANATIONS: Record<string, string> = {
+  simple: "Basic open-face mould with minimal detail or waste.",
+  standard: "Typical hobby mould with everyday spillage and cup cling.",
+  fiddly: "Complex shapes, deep undercuts, or large moulds.",
+};
 
-const VOLUME_UNITS: DisplayVolumeUnit[] = ["ml", "L", "cm³", "mm³"];
+const VOLUME_UNITS: { value: DisplayVolumeUnit; label: string }[] = [
+  { value: "ml", label: "ml / g of water" },
+  { value: "L", label: "L" },
+  { value: "cm³", label: "cm³" },
+  { value: "mm³", label: "mm³" },
+];
 
 const WC_OPTIONS: { key: WcRatioKey; label: string }[] = [
   { key: "pourable", label: "Pourable" },
@@ -338,11 +346,11 @@ export function CalculatorForm({
               onChange={(e) =>
                 updateState({ volumeUnit: e.target.value as VolumeUnit })
               }
-              className="h-12 w-24 shrink-0 rounded-xl border border-stone-300 bg-stone-50 px-3 text-base font-semibold text-stone-900 focus:border-stone-900 focus:bg-white focus:outline-none"
+              className="h-12 w-auto max-w-[160px] shrink-0 rounded-xl border border-stone-300 bg-stone-50 px-3 text-sm font-semibold text-stone-900 focus:border-stone-900 focus:bg-white focus:outline-none"
             >
               {VOLUME_UNITS.map((unit) => (
-                <option key={unit} value={unit}>
-                  {unit}
+                <option key={unit.value} value={unit.value}>
+                  {unit.label}
                 </option>
               ))}
             </select>
@@ -353,12 +361,9 @@ export function CalculatorForm({
       {/* Field 3: Waste preset (hidden for silicone, which always uses 15%) */}
       {selectedVariant && !isSilicone && (
         <div className="flex flex-col gap-1.5">
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-semibold text-stone-800">
-              Extra for waste
-            </span>
-            <InfoPopover label="About waste presets" text={WASTE_HINT} />
-          </div>
+          <span className="text-sm font-semibold text-stone-800">
+            Extra for waste
+          </span>
 
           <div
             role="group"
@@ -384,6 +389,17 @@ export function CalculatorForm({
               );
             })}
           </div>
+          {(() => {
+            const selectedPreset = wasteButtons.find(
+              (p) => p.pct === formState.wastePct
+            );
+            const explanation = selectedPreset?.id
+              ? WASTE_EXPLANATIONS[selectedPreset.id]
+              : undefined;
+            return explanation ? (
+              <p className="text-xs text-stone-500">{explanation}</p>
+            ) : null;
+          })()}
         </div>
       )}
     </form>

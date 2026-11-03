@@ -310,16 +310,6 @@ export function App() {
                 </p>
               </div>
             </div>
-
-            <div className="pt-8">
-              <button
-                type="button"
-                onClick={closeAbout}
-                className="h-12 w-full rounded-xl bg-[var(--accent)] text-base font-bold text-stone-950 shadow-xs hover:opacity-90"
-              >
-                Back to calculator
-              </button>
-            </div>
           </div>
         </div>
       )}
