@@ -1,18 +1,27 @@
 import type { MaterialVariant, MixBasis, WcRatioKey } from "../types/materials";
 
-export type VolumeUnit = "ml" | "L" | "l" | "cm³" | "cm3" | "mm³" | "mm3";
+export type VolumeUnit =
+  | "ml"
+  | "L"
+  | "l"
+  | "cm³"
+  | "cm3"
+  | "mm³"
+  | "mm3"
+  | "g of water";
 
 export const MAX_RECOMMENDED_VOLUME_ML = 20000;
 
 /**
  * Converts a volume value in the given unit to millilitres (ml).
- * 1 L = 1000 ml, 1 cm³ = 1 ml, 1 mm³ = 0.001 ml
+ * 1 L = 1000 ml, 1 cm³ = 1 ml, 1 mm³ = 0.001 ml, 1 g of water = 1 ml
  */
 export function convertVolumeToMl(value: number, unit: VolumeUnit): number {
   switch (unit) {
     case "ml":
     case "cm³":
     case "cm3":
+    case "g of water":
       return value;
     case "L":
     case "l":

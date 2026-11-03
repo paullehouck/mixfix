@@ -104,7 +104,7 @@ describe("calculateMix", () => {
   });
 
   describe("volume unit conversion", () => {
-    it("converts L, cm³, and mm³ to ml accurately", () => {
+    it("converts L, cm³, mm³, and g of water to ml accurately", () => {
       expect(convertVolumeToMl(1, "L")).toBe(1000);
       expect(convertVolumeToMl(1, "l")).toBe(1000);
       expect(convertVolumeToMl(1, "cm³")).toBe(1);
@@ -112,6 +112,7 @@ describe("calculateMix", () => {
       expect(convertVolumeToMl(1, "mm³")).toBe(0.001);
       expect(convertVolumeToMl(1, "mm3")).toBe(0.001);
       expect(convertVolumeToMl(500, "ml")).toBe(500);
+      expect(convertVolumeToMl(500, "g of water")).toBe(500);
     });
   });
 
@@ -220,6 +221,36 @@ describe("calculateMix", () => {
       expect(result.totalGrams).toBe(660);
       expect(result.components[0].grams).toBe(641);
       expect(result.components[1].grams).toBe(19);
+    });
+
+    it("verifies source badge types for AC100 (official) and silicone presets (estimate)", () => {
+      const ac100 = getVariant("jesmonite", "ac100-standard");
+      const ac100Result = calculateMix({
+        variant: ac100,
+        volumeMl: 500,
+        wastePct: 10,
+        additives: [],
+      });
+      expect(ac100Result.sourceType).toBe("official");
+
+      const silicone = getVariant("silicone", "platinum-1to1-weight");
+      const siliconeResult = calculateMix({
+        variant: silicone,
+        volumeMl: 500,
+        wastePct: 15,
+        additives: [],
+      });
+      expect(siliconeResult.sourceType).toBe("estimate");
+      expect(siliconeResult.exampleName).toBeUndefined();
+
+      const tinSilicone = getVariant("silicone", "tin-10to1-weight");
+      const tinResult = calculateMix({
+        variant: tinSilicone,
+        volumeMl: 500,
+        wastePct: 15,
+        additives: [],
+      });
+      expect(tinResult.sourceType).toBe("estimate");
     });
   });
 

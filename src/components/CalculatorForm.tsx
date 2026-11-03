@@ -3,7 +3,7 @@ import type { Material, WcRatioKey } from "../types/materials";
 import type { VolumeUnit } from "../utils/calculate";
 import { InfoPopover } from "./InfoPopover";
 
-export type DisplayVolumeUnit = "ml" | "L" | "cm³" | "mm³";
+export type DisplayVolumeUnit = "ml" | "L" | "cm³" | "mm³" | "g of water";
 
 export interface CalculatorFormState {
   selectedVariantId: string;
@@ -33,10 +33,11 @@ const WASTE_EXPLANATIONS: Record<string, string> = {
 };
 
 const VOLUME_UNITS: { value: DisplayVolumeUnit; label: string }[] = [
-  { value: "ml", label: "ml / g of water" },
+  { value: "ml", label: "ml" },
   { value: "L", label: "L" },
   { value: "cm³", label: "cm³" },
   { value: "mm³", label: "mm³" },
+  { value: "g of water", label: "g of water" },
 ];
 
 const WC_OPTIONS: { key: WcRatioKey; label: string }[] = [
@@ -113,7 +114,7 @@ export function CalculatorForm({
   const wasteButtons = [
     { id: "simple", label: "Simple", pct: simplePct },
     { id: "standard", label: "Standard", pct: standardPct },
-    { id: "fiddly", label: "Fiddly", pct: fiddlyPct },
+    { id: "fiddly", label: "Fiddly or large", pct: fiddlyPct },
   ];
 
   function handleVariantChange(newVariantId: string) {
