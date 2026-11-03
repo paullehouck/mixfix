@@ -142,18 +142,38 @@ export function CalculatorForm({
         >
           Type / use
         </label>
-        <select
-          id="variant-select"
-          value={selectedVariant?.id ?? ""}
-          onChange={(e) => handleVariantChange(e.target.value)}
-          className="w-full brutal-border rounded-xl px-4 py-3 font-body text-base bg-white text-[#1E1E24] focus:outline-none"
-        >
-          {liveVariants.map((variant) => (
-            <option key={variant.id} value={variant.id}>
-              {variant.name}
-            </option>
-          ))}
-        </select>
+        <div className="relative">
+          <select
+            id="variant-select"
+            value={selectedVariant?.id ?? ""}
+            onChange={(e) => handleVariantChange(e.target.value)}
+            className="w-full appearance-none brutal-border rounded-xl pl-4 pr-10 py-3 font-body text-base bg-white text-[#1E1E24] focus:outline-none cursor-pointer"
+          >
+            {liveVariants.map((variant) => (
+              <option key={variant.id} value={variant.id}>
+                {variant.name}
+              </option>
+            ))}
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-[#1E1E24]">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-3.5 h-3.5"
+            >
+              <path
+                d="M3.5 6L8 10.5L12.5 6"
+                stroke="#1E1E24"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
         {selectedVariant?.useCase && (
           <p className="mt-1.5 font-body text-xs text-gray-500">{selectedVariant.useCase}</p>
         )}
@@ -168,25 +188,45 @@ export function CalculatorForm({
           >
             Your product (optional)
           </label>
-          <select
-            id="example-select"
-            value={formState.selectedExampleId ?? ""}
-            onChange={(e) =>
-              updateState({
-                selectedExampleId: e.target.value ? e.target.value : null,
-              })
-            }
-            className="w-full brutal-border rounded-xl px-4 py-3 font-body text-base bg-white text-[#1E1E24] focus:outline-none"
-          >
-            <option value="">
-              Generic ({selectedVariant.densityGPerMl} g/ml)
-            </option>
-            {availableExamples.map((ex) => (
-              <option key={ex.id} value={ex.id}>
-                {ex.name} ({ex.densityGPerMl} g/ml)
+          <div className="relative">
+            <select
+              id="example-select"
+              value={formState.selectedExampleId ?? ""}
+              onChange={(e) =>
+                updateState({
+                  selectedExampleId: e.target.value ? e.target.value : null,
+                })
+              }
+              className="w-full appearance-none brutal-border rounded-xl pl-4 pr-10 py-3 font-body text-base bg-white text-[#1E1E24] focus:outline-none cursor-pointer"
+            >
+              <option value="">
+                Generic ({selectedVariant.densityGPerMl} g/ml)
               </option>
-            ))}
-          </select>
+              {availableExamples.map((ex) => (
+                <option key={ex.id} value={ex.id}>
+                  {ex.name} ({ex.densityGPerMl} g/ml)
+                </option>
+              ))}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-[#1E1E24]">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-3.5 h-3.5"
+              >
+                <path
+                  d="M3.5 6L8 10.5L12.5 6"
+                  stroke="#1E1E24"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
       )}
 
@@ -332,20 +372,40 @@ export function CalculatorForm({
               className="min-w-0 flex-1 brutal-border rounded-xl px-4 py-3 font-body text-lg text-[#1E1E24] placeholder:text-gray-400 focus:outline-none"
             />
 
-            <select
-              aria-label="Volume unit"
-              value={formState.volumeUnit}
-              onChange={(e) =>
-                updateState({ volumeUnit: e.target.value as VolumeUnit })
-              }
-              className="shrink-0 brutal-border rounded-xl px-3 py-3 font-body text-base text-[#1E1E24] focus:outline-none"
-            >
-              {VOLUME_UNITS.map((unit) => (
-                <option key={unit.value} value={unit.value}>
-                  {unit.label}
-                </option>
-              ))}
-            </select>
+            <div className="relative shrink-0">
+              <select
+                aria-label="Volume unit"
+                value={formState.volumeUnit}
+                onChange={(e) =>
+                  updateState({ volumeUnit: e.target.value as VolumeUnit })
+                }
+                className="appearance-none brutal-border rounded-xl pl-3 pr-8 py-3 font-body text-base text-[#1E1E24] bg-white focus:outline-none cursor-pointer"
+              >
+                {VOLUME_UNITS.map((unit) => (
+                  <option key={unit.value} value={unit.value}>
+                    {unit.label}
+                  </option>
+                ))}
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2.5 text-[#1E1E24]">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-3 h-3"
+                >
+                  <path
+                    d="M3.5 6L8 10.5L12.5 6"
+                    stroke="#1E1E24"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
       )}

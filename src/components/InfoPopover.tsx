@@ -62,9 +62,9 @@ export function InfoPopover({ text, label = "More information" }: InfoPopoverPro
             return next;
           });
         }}
-        className="w-8 h-8 rounded-full brutal-border bg-white font-display text-xs flex items-center justify-center text-[#1E1E24] hover:bg-gray-50 active:translate-x-0.5 active:translate-y-0.5 transition-all focus-visible:outline-none"
+        className="w-8 h-8 rounded-full brutal-border bg-white font-display text-sm font-bold flex items-center justify-center text-[#1E1E24] hover:bg-gray-50 active:translate-x-0.5 active:translate-y-0.5 transition-all focus-visible:outline-none"
       >
-        <span aria-hidden="true">ⓘ</span>
+        <span aria-hidden="true" className="leading-none select-none">i</span>
       </button>
 
       {open && (
