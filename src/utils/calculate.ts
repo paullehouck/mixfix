@@ -216,16 +216,28 @@ export function calculateMix(params: CalculateParams): CalculateResult {
       case "gPerKg":
         rawAdditiveGrams = (totalMass / 1000) * activeAdd.value;
         break;
+      case "gPerKgOfComponent": {
+        const compMass = def.componentId
+          ? (rawComponentMassById.get(def.componentId) ?? 0)
+          : 0;
+        rawAdditiveGrams = (compMass / 1000) * activeAdd.value;
+        break;
+      }
       case "reducesWater":
         // Does NOT add mass; adjusts water directly above
         rawAdditiveGrams = 0;
         break;
     }
 
+    const grams =
+      rawAdditiveGrams >= 10
+        ? Math.round(rawAdditiveGrams)
+        : Math.round(rawAdditiveGrams * 100) / 100;
+
     calculatedAdditives.push({
       id: def.id,
       name: def.name,
-      grams: Math.round(rawAdditiveGrams),
+      grams,
       instruction: def.note,
     });
   }

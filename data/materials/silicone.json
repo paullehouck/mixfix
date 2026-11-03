@@ -14,14 +14,14 @@
       "status": "live",
       "name": "Platinum-cure, 1:1 by weight",
       "sourceType": "estimate",
-      "sourceNote": "Typical density for popular platinum-cure mould silicones (published values about 1.10 to 1.18). Rounded to the middle of the range.",
+      "sourceNote": "Average of 16 platinum-cure products (range 1.07–1.18); Smooth-On Ecoflex 00-30 at 1.07, Dragon Skin at 1.07–1.08, Mold Star 30 at 1.12, Mold Star 15/16 at 1.18. Source: Smooth-On Technical Data Charts and Polytek datasheets. Unweighted mean of products listed in vendor TDS, dominated by Smooth-On catalogue. See research report for full product table.",
       "sourceUrls": ["https://www.smooth-on.com/charts/"],
       "mixBasis": "weight",
       "components": [
         { "id": "a", "name": "Part A", "parts": 1 },
         { "id": "b", "name": "Part B", "parts": 1 }
       ],
-      "densityGPerMl": 1.15,
+      "densityGPerMl": 1.11,
       "wastePctDefault": 15,
       "additives": [],
       "examples": [
@@ -52,14 +52,14 @@
       "status": "live",
       "name": "Tin-cure, 10:1 by weight",
       "sourceType": "estimate",
-      "sourceNote": "Typical density for 10:1 tin-cure mould silicones (published values about 1.12 to 1.22). Based on Smooth-On Mold Max series technical bulletin.",
+      "sourceNote": "Average of 14 tin-cure 10:1 products (range 1.08–1.22); Mold Max 10 at 1.15, Mold Max 30 at 1.18, Mold Max XLS II at 1.22. Source: Smooth-On Mold Max series technical bulletin. Unweighted mean of products listed in vendor TDS, dominated by Smooth-On catalogue. See research report for full product table.",
       "sourceUrls": ["https://smooth-on.com/tb/files/Mold_Max_Series_TB.pdf"],
       "mixBasis": "weight",
       "components": [
         { "id": "a", "name": "Part A (base)", "parts": 10 },
         { "id": "b", "name": "Part B (catalyst)", "parts": 1 }
       ],
-      "densityGPerMl": 1.18,
+      "densityGPerMl": 1.15,
       "wastePctDefault": 15,
       "additives": [],
       "examples": [
@@ -85,14 +85,14 @@
       "status": "live",
       "name": "Tin-cure, 20:1 by weight (100:5)",
       "sourceType": "estimate",
-      "sourceNote": "Based on Smooth-On Mold Max 25: 100A:5B by weight, specific gravity 1.18. Check that your pack states the same ratio before using this preset.",
+      "sourceNote": "Average of 4 tin-cure 20:1 products (range 1.09–1.21); Mold Max 25 at 1.18, Silastic RTV-3481 at 1.21, Silastic RTV-3483 at 1.16, Easy Composites CS25 at 1.09. Source: vendor TDS. Unweighted mean of products listed in vendor TDS, dominated by Smooth-On catalogue. See research report for full product table.",
       "sourceUrls": ["https://smooth-on.com/tb/files/Mold_Max_Series_TB.pdf"],
       "mixBasis": "weight",
       "components": [
         { "id": "a", "name": "Part A (base)", "parts": 20 },
         { "id": "b", "name": "Part B (catalyst)", "parts": 1 }
       ],
-      "densityGPerMl": 1.18,
+      "densityGPerMl": 1.16,
       "wastePctDefault": 15,
       "additives": [],
       "examples": [

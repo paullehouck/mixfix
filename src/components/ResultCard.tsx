@@ -40,6 +40,7 @@ function formatDoseUnit(additive: Additive): string {
     case "reducesWater":
       return "%";
     case "gPerKg":
+    case "gPerKgOfComponent":
       return "g/kg";
   }
 }
@@ -112,6 +113,11 @@ export function ResultCard({
       }
       case "gPerKg":
         return Math.round((result.totalGrams / 1000) * dose);
+      case "gPerKgOfComponent": {
+        const comp = result.components.find((c) => c.id === additive.componentId);
+        const val = ((comp?.grams ?? 0) / 1000) * dose;
+        return val >= 10 ? Math.round(val) : Math.round(val * 100) / 100;
+      }
       case "reducesWater":
         return 0;
     }

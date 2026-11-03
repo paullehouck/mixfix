@@ -16,7 +16,7 @@ function getVariant(materialId: string, variantId: string): MaterialVariant {
 }
 
 describe("calculateMix", () => {
-  it("calculates Jesmonite AC100 (500ml, 10% waste → liquid 275g, base 688g, total 963g)", () => {
+  it("calculates Jesmonite AC100 (500ml, 10% waste → liquid 290g, base 725g, total 1015g)", () => {
     const variant = getVariant("jesmonite", "ac100-standard");
     const result = calculateMix({
       variant,
@@ -26,15 +26,15 @@ describe("calculateMix", () => {
     });
 
     expect(result.components).toEqual([
-      { id: "liquid", name: "AC100 Liquid", grams: 275 },
-      { id: "base", name: "AC100 Base (powder)", grams: 688 },
+      { id: "liquid", name: "AC100 Liquid", grams: 290 },
+      { id: "base", name: "AC100 Base (powder)", grams: 725 },
     ]);
-    expect(result.totalGrams).toBe(963);
+    expect(result.totalGrams).toBe(1015);
     expect(result.mixBasis).toBe("weight");
     expect(result.sourceType).toBe("official");
   });
 
-  it("calculates Jesmonite AC730 (500ml, 10% waste → liquid 170g, base 848g, total 1018g)", () => {
+  it("calculates Jesmonite AC730 (500ml, 10% waste → liquid 179g, base 894g, total 1073g)", () => {
     const variant = getVariant("jesmonite", "ac730-standard");
     const result = calculateMix({
       variant,
@@ -44,13 +44,13 @@ describe("calculateMix", () => {
     });
 
     expect(result.components).toEqual([
-      { id: "liquid", name: "AC730 Liquid", grams: 170 },
-      { id: "base", name: "AC730 Base (powder)", grams: 848 },
+      { id: "liquid", name: "AC730 Liquid", grams: 179 },
+      { id: "base", name: "AC730 Base (powder)", grams: 894 },
     ]);
-    expect(result.totalGrams).toBe(1018);
+    expect(result.totalGrams).toBe(1073);
   });
 
-  it("calculates Concrete fine craft, balanced W/C 0.45 (500ml, 15% waste → cement 737g, sand 246g, water 110g, total 1092g)", () => {
+  it("calculates Concrete fine craft, 1:2 cement:sand, balanced W/C 0.45 (500ml, 15% waste → cement 370g, sand 740g, water 167g, total 1277g)", () => {
     const variant = getVariant("concrete", "fine-craft");
     const result = calculateMix({
       variant,
@@ -61,14 +61,14 @@ describe("calculateMix", () => {
     });
 
     expect(result.components).toEqual([
-      { id: "cement", name: "Portland cement", grams: 737 },
-      { id: "sand", name: "Fine sand (play sand)", grams: 246 },
+      { id: "cement", name: "Portland cement", grams: 370 },
+      { id: "sand", name: "Fine sand (play sand)", grams: 740 },
     ]);
-    expect(result.water).toEqual({ grams: 110, adjusted: false });
-    expect(result.totalGrams).toBe(1092);
+    expect(result.water).toEqual({ grams: 167, adjusted: false });
+    expect(result.totalGrams).toBe(1277);
   });
 
-  it("calculates Concrete general casting, balanced (500ml, 15% waste → cement 543g, sand 271g, aggregate 271g, water 122g, total 1208g)", () => {
+  it("calculates Concrete general casting, balanced (500ml, 15% waste → cement 610g, sand 305g, aggregate 305g, water 137g, total 1357g)", () => {
     const variant = getVariant("concrete", "general-casting");
     const result = calculateMix({
       variant,
@@ -79,15 +79,15 @@ describe("calculateMix", () => {
     });
 
     expect(result.components).toEqual([
-      { id: "cement", name: "Portland cement", grams: 543 },
-      { id: "sand", name: "Fine sand", grams: 271 },
-      { id: "aggregate", name: "Pea gravel or small aggregate", grams: 271 },
+      { id: "cement", name: "Portland cement", grams: 610 },
+      { id: "sand", name: "Fine sand", grams: 305 },
+      { id: "aggregate", name: "Pea gravel or small aggregate", grams: 305 },
     ]);
-    expect(result.water).toEqual({ grams: 122, adjusted: false });
-    expect(result.totalGrams).toBe(1208);
+    expect(result.water).toEqual({ grams: 137, adjusted: false });
+    expect(result.totalGrams).toBe(1357);
   });
 
-  it("calculates Silicone platinum 1:1 (500ml, 15% waste → Part A 331g, Part B 331g, total 661g)", () => {
+  it("calculates Silicone platinum 1:1 (500ml, 15% waste → Part A 319g, Part B 319g, total 638g)", () => {
     const variant = getVariant("silicone", "platinum-1to1-weight");
     const result = calculateMix({
       variant,
@@ -97,8 +97,24 @@ describe("calculateMix", () => {
     });
 
     expect(result.components).toEqual([
-      { id: "a", name: "Part A", grams: 331 },
-      { id: "b", name: "Part B", grams: 331 },
+      { id: "a", name: "Part A", grams: 319 },
+      { id: "b", name: "Part B", grams: 319 },
+    ]);
+    expect(result.totalGrams).toBe(638);
+  });
+
+  it("calculates Silicone tin 10:1 (500ml, 15% waste → Part A 601g, Part B 60g, total 661g)", () => {
+    const variant = getVariant("silicone", "tin-10to1-weight");
+    const result = calculateMix({
+      variant,
+      volumeMl: 500,
+      wastePct: 15,
+      additives: [],
+    });
+
+    expect(result.components).toEqual([
+      { id: "a", name: "Part A (base)", grams: 601 },
+      { id: "b", name: "Part B (catalyst)", grams: 60 },
     ]);
     expect(result.totalGrams).toBe(661);
   });
@@ -117,7 +133,7 @@ describe("calculateMix", () => {
   });
 
   describe("additives", () => {
-    it("calculates percentOfTotal additive: AC100 500ml 10% waste, pigment 2% → ~19g", () => {
+    it("calculates percentOfTotal additive: AC100 500ml 10% waste, pigment 2% → ~20g", () => {
       const variant = getVariant("jesmonite", "ac100-standard");
       const result = calculateMix({
         variant,
@@ -128,7 +144,7 @@ describe("calculateMix", () => {
 
       expect(result.additives).toHaveLength(1);
       expect(result.additives[0].id).toBe("pigment");
-      expect(result.additives[0].grams).toBe(19);
+      expect(result.additives[0].grams).toBe(20);
       expect(result.additives[0].instruction).toContain("Maximum 2%");
     });
 
@@ -149,16 +165,16 @@ describe("calculateMix", () => {
         additives: [{ id: "plasticiser", value: 15 }],
       });
 
-      expect(baseline.water?.grams).toBe(110);
-      // 110.4775 * (1 - 0.15) = 93.9059 -> 94g
-      expect(withPlasticiser.water?.grams).toBe(94);
+      expect(baseline.water?.grams).toBe(167);
+      // 166.5 * (1 - 0.15) = 141.525 -> 142g
+      expect(withPlasticiser.water?.grams).toBe(142);
       expect(withPlasticiser.water?.adjusted).toBe(true);
       // Does NOT add mass to totalGrams
       expect(withPlasticiser.totalGrams).toBe(baseline.totalGrams);
       expect(withPlasticiser.additives[0].grams).toBe(0);
     });
 
-    it("calculates percentOfComponent and gPerKg additives", () => {
+    it("calculates percentOfComponent and gPerKgOfComponent additives", () => {
       const concreteVariant = getVariant("concrete", "fine-craft");
       const concreteResult = calculateMix({
         variant: concreteVariant,
@@ -167,8 +183,8 @@ describe("calculateMix", () => {
         wcRatioKey: "balanced",
         additives: [{ id: "pigment", value: 5 }],
       });
-      // 5% of cement (~736.52g) = ~36.83g -> 37g
-      expect(concreteResult.additives[0].grams).toBe(37);
+      // 5% of cement (370g) = 18.5g -> 19g
+      expect(concreteResult.additives[0].grams).toBe(19);
 
       const ac100Variant = getVariant("jesmonite", "ac100-standard");
       const ac100Result = calculateMix({
@@ -177,8 +193,8 @@ describe("calculateMix", () => {
         wastePct: 10,
         additives: [{ id: "retarder", value: 4 }],
       });
-      // 4 g/kg of 962.5g = 3.85g -> 4g
-      expect(ac100Result.additives[0].grams).toBe(4);
+      // 4 g/kg of liquid (289.93g) = 1.16g
+      expect(ac100Result.additives[0].grams).toBe(1.16);
     });
   });
 
@@ -292,11 +308,11 @@ describe("calculateMix", () => {
         additives: [],
       });
 
-      // 25000 * 1.75 * 1.1 = 48125g -> liquid 13750g, base 34375g
-      expect(result.totalGrams).toBe(48125);
+      // 25000 * 1.845 * 1.1 = 50737.5g -> liquid 14496g, base 36241g
+      expect(result.totalGrams).toBe(50738);
       expect(result.components).toEqual([
-        { id: "liquid", name: "AC100 Liquid", grams: 13750 },
-        { id: "base", name: "AC100 Base (powder)", grams: 34375 },
+        { id: "liquid", name: "AC100 Liquid", grams: 14496 },
+        { id: "base", name: "AC100 Base (powder)", grams: 36241 },
       ]);
     });
   });

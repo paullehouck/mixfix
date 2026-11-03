@@ -13,17 +13,17 @@
       "id": "fine-craft",
       "status": "live",
       "name": "Fine craft mix",
-      "useCase": "Coasters, candle vessels, small pots, detailed pieces — smooth finish, no visible aggregate",
+      "useCase": "Coasters, candle vessels, small pots, detailed pieces — smooth finish, no visible aggregate. For an even smoother surface increase cement to 1.5:1 ratio (test first).",
       "sourceType": "estimate",
-      "sourceNote": "Cement-to-sand ratio from independent craft testing (artsyprettyplants.com, 2021): 3:1 gave the smoothest surface and fewest pinholes of five ratios tested. W/C ratios from engineering references: 0.35 high strength, 0.45 approx 5000 psi at 28 days (JoVE, 2021). Density estimate of 1.9 g/ml for a fine sand mix with no coarse aggregate. These are guides — always test first.",
+      "sourceNote": "Derived from absolute-volume method: 1:2 cement:sand, w/c 0.45, quartz sand SG 2.65, Portland cement SG 3.15, ~2% air. Per 1 kg cement: 317.5 + 754.7 + 450 = 1522 cm³ ÷ 0.98 = 1553 cm³; 3450 g total → 2.22 g/ml. Source: research report cross-referencing Davis Colors, ASTM, and standard mix design. Absolute-volume method per ACI/standard mix design. Specific gravities: Portland cement 3.15, quartz sand/gravel 2.65, water 1.0. ~2% entrapped air for hand-mixed cast.",
       "sourceUrls": [
         "https://artsyprettyplants.com/cement-to-sand-ratio-concrete-crafts/",
         "https://app.jove.com/ar/v/10420"
       ],
       "mixBasis": "weight",
       "components": [
-        { "id": "cement", "name": "Portland cement", "parts": 3 },
-        { "id": "sand", "name": "Fine sand (play sand)", "parts": 1 },
+        { "id": "cement", "name": "Portland cement", "parts": 1 },
+        { "id": "sand", "name": "Fine sand (play sand)", "parts": 2 },
         { "id": "water", "name": "Water", "parts": null, "derivedFromWC": true }
       ],
       "wcRatioOptions": {
@@ -32,7 +32,7 @@
         "stiff":    { "label": "Stiff", "wc": 0.38, "note": "Stronger and denser. Needs vibration to settle. Best for simple open shapes." }
       },
       "wcRatioDefault": "balanced",
-      "densityGPerMl": 1.9,
+      "densityGPerMl": 2.22,
       "wastePctDefault": 15,
       "wastePresets": [
         { "id": "simple", "name": "Simple mould", "pct": 10 },
@@ -46,10 +46,10 @@
           "type": "percentOfComponent",
           "componentId": "cement",
           "min": 0,
-          "max": 5,
+          "max": 10,
           "default": 0,
           "addTo": "dry-mix",
-          "note": "2–5% of cement weight only, not total mix weight. Mix dry into the cement before adding water. More than 5% weakens the mix."
+          "note": "1–5% of cement weight is typical; maximum 10% of cement weight (ASTM C979, Davis Colors). Mix dry into the cement before adding other dry ingredients. More than 10% weakens the mix. Cement weight only — not total mix weight."
         },
         {
           "id": "plasticiser",
@@ -87,7 +87,7 @@
       "name": "General casting mix",
       "useCase": "Planters, tiles, outdoor pieces — more aggregate look, better strength in bulk",
       "sourceType": "estimate",
-      "sourceNote": "Cement:sand:gravel ratio of 2:1:1 from independent craft testing (artsyprettyplants.com, 2021): produced a mottled concrete appearance with almost no pinholes and good workability. W/C ratios from engineering references. Density estimate of 2.1 g/ml for a mix with fine sand and pea gravel. These are guides — always test first.",
+      "sourceNote": "Derived from absolute-volume method: 1:2:3 cement:sand:gravel, w/c 0.5, quartz SG 2.65, Portland cement SG 3.15, ~2% air. Density 2.36 g/ml. Source: research report. Absolute-volume method per ACI/standard mix design. Specific gravities: Portland cement 3.15, quartz sand/gravel 2.65, water 1.0. ~2% entrapped air for hand-mixed cast.",
       "sourceUrls": [
         "https://artsyprettyplants.com/cement-to-sand-ratio-concrete-crafts/",
         "https://app.jove.com/ar/v/10420"
@@ -105,7 +105,7 @@
         "stiff":    { "label": "Stiff", "wc": 0.38, "note": "Strongest option. Needs thorough vibration — aggregate traps more air." }
       },
       "wcRatioDefault": "balanced",
-      "densityGPerMl": 2.1,
+      "densityGPerMl": 2.36,
       "wastePctDefault": 15,
       "wastePresets": [
         { "id": "simple", "name": "Simple mould", "pct": 10 },
@@ -119,10 +119,10 @@
           "type": "percentOfComponent",
           "componentId": "cement",
           "min": 0,
-          "max": 5,
+          "max": 10,
           "default": 0,
           "addTo": "dry-mix",
-          "note": "2–5% of cement weight only. Mix dry into the cement before adding sand and aggregate. More than 5% weakens the mix."
+          "note": "1–5% of cement weight is typical; maximum 10% of cement weight (ASTM C979, Davis Colors). Mix dry into the cement before adding other dry ingredients. More than 10% weakens the mix. Cement weight only — not total mix weight."
         },
         {
           "id": "plasticiser",

@@ -2,6 +2,7 @@ export type AdditiveType =
   | "percentOfTotal"
   | "percentOfComponent"
   | "gPerKg"
+  | "gPerKgOfComponent"
   | "reducesWater";
 
 export interface Additive {

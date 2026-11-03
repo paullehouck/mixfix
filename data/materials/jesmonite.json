@@ -14,7 +14,7 @@
       "name": "AC100",
       "useCase": "Fine detail casts, homewares, decorative pieces (gypsum-based)",
       "sourceType": "official",
-      "sourceNote": "Jesmonite AC100 technical data sheet (mix ratio) and Jesmonite FAQs (1,750 g of mixed AC100 per 1,000 ml of mould volume, pigment limit, set time). Waste guidance from the official Jesmonite calculator article. Retarder dose from Jesmonite's own guidance (2-8 g per kg of mix).",
+      "sourceNote": "Jesmonite AC100 TDS (TDS-AC100-25-EW) and AC730 TDS (TDS-AC730-25-EW), jesmonite.com, 2024. Official AC100 User Guide gives initial set as 15–20 min at 18°C. Retarder dose 2–8 g per kg of liquid.",
       "sourceUrls": [
         "https://cdn.shopify.com/s/files/1/0011/0831/2108/files/AC100_TDS.pdf",
         "https://jesmonite.com/faqs/",
@@ -34,7 +34,7 @@
           "parts": 2.5
         }
       ],
-      "densityGPerMl": 1.75,
+      "densityGPerMl": 1.845,
       "wastePctDefault": 10,
       "wastePresets": [
         {
@@ -67,20 +67,21 @@
         {
           "id": "retarder",
           "name": "Retarder (AC100 and AC300)",
-          "type": "gPerKg",
+          "type": "gPerKgOfComponent",
+          "componentId": "liquid",
           "min": 2,
           "max": 8,
           "default": 2,
           "enabledByDefault": false,
           "addTo": "liquid",
-          "note": "Slows the set. Use the retarder made for AC100 and AC300 (gypsum types), not the other one. Start at the minimum and test first. Hotter rooms may need more."
+          "note": "2–8 g per kg of liquid (not total mix). Add to the liquid before the base. Use the gypsum-type retarder for AC100 and the cement-type retarder for AC730 — they are different products. Start at 2 g/kg and test first."
         }
       ],
       "potLifeMin": [
-        5,
-        10
+        15,
+        20
       ],
-      "demouldTime": "Roughly 30 min to 2 h, depending on room temperature",
+      "demouldTime": "30–40 min, then remove from mould and leave to fully dry — do not leave in the mould or it will sweat and may mark",
       "tips": [
         "Weigh liquid and base separately, then add the base slowly to the liquid while mixing",
         "Stir pigment and retarder into the liquid first, then add the base",
@@ -101,7 +102,7 @@
       "name": "AC730",
       "useCase": "Stone and concrete look casts, outdoor pieces, planters (cement-based)",
       "sourceType": "official",
-      "sourceNote": "Jesmonite AC730 technical data sheet and user guide (mix ratio), Jesmonite FAQs (1,850 g of mixed AC730 per 1,000 ml of mould volume, pigment limit). Waste guidance from the official Jesmonite calculator article. Retarder dose from Jesmonite's own guidance (2-8 g per kg of mix). Super plasticiser dose (8-12 g per kg of mix) from the official AC830 guide and reseller listings for AC730.",
+      "sourceNote": "Jesmonite AC100 TDS (TDS-AC100-25-EW) and AC730 TDS (TDS-AC730-25-EW), jesmonite.com, 2024. AC730 technical data sheet and user guide. Retarder dose 2–8 g per kg of liquid.",
       "sourceUrls": [
         "https://cdn.shopify.com/s/files/1/0011/0831/2108/files/AC730_TDS.pdf",
         "https://jesmonite.com/wp-content/uploads/2025/01/AC730-User-Guide.pdf",
@@ -123,7 +124,7 @@
           "parts": 5
         }
       ],
-      "densityGPerMl": 1.85,
+      "densityGPerMl": 1.95,
       "wastePctDefault": 10,
       "wastePresets": [
         {
@@ -156,13 +157,14 @@
         {
           "id": "retarder",
           "name": "Retarder (AC730 and AC84)",
-          "type": "gPerKg",
+          "type": "gPerKgOfComponent",
+          "componentId": "liquid",
           "min": 2,
           "max": 8,
           "default": 2,
           "enabledByDefault": false,
           "addTo": "liquid",
-          "note": "Slows the set. Use the retarder made for AC730 and AC84 (cement types), not the other one. Start at the minimum and test first. Hotter rooms may need more."
+          "note": "2–8 g per kg of liquid (not total mix). Add to the liquid before the base. Use the gypsum-type retarder for AC100 and the cement-type retarder for AC730 — they are different products. Start at 2 g/kg and test first."
         },
         {
           "id": "plasticiser",
