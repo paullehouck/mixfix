@@ -2,275 +2,202 @@ export function MakerBenchIllustration() {
   return (
     <div className="w-full shrink-0 brutal-border rounded-2xl bg-[#FBF9F3] overflow-hidden brutal-shadow">
       <svg
-        viewBox="0 0 460 145"
+        viewBox="0 0 460 140"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-auto block"
         aria-hidden="true"
       >
-        {/* Subtle pegboard / dot grid background */}
-        <pattern
-          id="dot-grid"
-          x="0"
-          y="0"
-          width="14"
-          height="14"
-          patternUnits="userSpaceOnUse"
-        >
-          <circle cx="7" cy="7" r="1" fill="#1E1E24" opacity="0.1" />
-        </pattern>
-        <rect width="460" height="145" fill="#FBF9F3" />
-        <rect width="460" height="114" fill="url(#dot-grid)" />
+        {/* Clean Warm Background */}
+        <rect width="460" height="140" fill="#FBF9F3" />
 
-        {/* Bench Table Top */}
+        {/* Bench Table Top & Slab */}
         <line
           x1="0"
-          y1="115"
+          y1="110"
           x2="460"
-          y2="115"
+          y2="110"
           stroke="#1E1E24"
           strokeWidth="2.5"
         />
-        <rect x="0" y="116" width="460" height="29" fill="#E8DFD0" />
-        {/* Bench wood grain lines */}
-        <line
-          x1="30"
-          y1="130"
-          x2="150"
-          y2="130"
-          stroke="#1E1E24"
-          strokeWidth="1.5"
-          opacity="0.25"
-          strokeLinecap="round"
-        />
-        <line
-          x1="210"
-          y1="130"
-          x2="390"
-          y2="130"
-          stroke="#1E1E24"
-          strokeWidth="1.5"
-          opacity="0.25"
-          strokeLinecap="round"
-        />
+        <rect x="0" y="111" width="460" height="29" fill="#EADDC9" />
 
-        {/* 1. Left side: Bag of dry powder (Jesmonite base / plaster / cement) */}
+        {/* 1. Left side: Bag of dry powder */}
         <g id="powder-bag">
           <ellipse
-            cx="62"
-            cy="115"
-            rx="30"
-            ry="4"
+            cx="65"
+            cy="110"
+            rx="28"
+            ry="3.5"
+            fill="#1E1E24"
+            opacity="0.12"
+          />
+          <path
+            d="M38 110 C36 78 39 48 45 36 C49 30 81 30 85 36 C91 48 94 78 92 110 Z"
+            fill="#F0EAE1"
+            stroke="#1E1E24"
+            strokeWidth="2.5"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M42 36 C42 29 49 25 65 25 C81 25 88 29 88 36 C88 41 81 44 65 44 C49 44 42 41 42 36 Z"
+            fill="#DFD3BF"
+            stroke="#1E1E24"
+            strokeWidth="2.5"
+            strokeLinejoin="round"
+          />
+          <rect
+            x="50"
+            y="56"
+            width="30"
+            height="28"
+            rx="3"
+            fill="#FFFFFF"
+            stroke="#1E1E24"
+            strokeWidth="2"
+          />
+          <rect x="56" y="65" width="18" height="3" rx="1.5" fill="#1E1E24" />
+          <rect
+            x="58"
+            y="72"
+            width="14"
+            height="2.5"
+            rx="1.2"
+            fill="#E07A5F"
+          />
+          {/* Powder mound at foot of sack */}
+          <path
+            d="M92 110 C95 104 102 103 106 106 C110 102 118 104 120 110 Z"
+            fill="#FDFBF7"
+            stroke="#1E1E24"
+            strokeWidth="2"
+            strokeLinejoin="round"
+          />
+        </g>
+
+        {/* 2. Center-Left: Digital Scale with Measuring Beaker & Stir Stick */}
+        <g id="scale-and-cup">
+          {/* Scale base shadow */}
+          <rect
+            x="146"
+            y="108"
+            width="92"
+            height="5"
+            rx="2.5"
             fill="#1E1E24"
             opacity="0.15"
           />
-          <path
-            d="M35 115 C33 78 35 48 42 34 C46 26 78 26 82 34 C89 48 91 78 89 115 Z"
-            fill="#EFE8D8"
-            stroke="#1E1E24"
-            strokeWidth="2.5"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M40 35 C40 28 47 24 62 24 C77 24 84 28 84 35 C84 40 77 43 62 43 C47 43 40 40 40 35 Z"
-            fill="#DFD2BA"
-            stroke="#1E1E24"
-            strokeWidth="2.5"
-            strokeLinejoin="round"
-          />
+          {/* Scale body */}
           <rect
-            x="46"
-            y="58"
-            width="32"
-            height="30"
-            rx="3"
-            fill="white"
-            stroke="#1E1E24"
-            strokeWidth="1.8"
-          />
-          <line
-            x1="52"
-            y1="68"
-            x2="72"
-            y2="68"
-            stroke="#1E1E24"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-          />
-          <line
-            x1="54"
-            y1="76"
-            x2="70"
-            y2="76"
-            stroke="#E07A5F"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-          />
-          <path
-            d="M41 52 Q50 60 60 48"
-            stroke="#1E1E24"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            fill="none"
-            opacity="0.4"
-          />
-          <path
-            d="M83 56 Q75 62 67 52"
-            stroke="#1E1E24"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            fill="none"
-            opacity="0.4"
-          />
-          <path
-            d="M89 115 C92 110 99 108 103 111 C108 106 117 109 119 115 Z"
-            fill="#FAF5E8"
-            stroke="#1E1E24"
-            strokeWidth="1.5"
-          />
-          <circle cx="108" cy="103" r="1.5" fill="#1E1E24" opacity="0.3" />
-          <circle cx="122" cy="108" r="1" fill="#1E1E24" opacity="0.3" />
-          <circle cx="101" cy="99" r="1.2" fill="#1E1E24" opacity="0.3" />
-        </g>
-
-        {/* 2. Center-Left: Digital Scale with Measuring Cup */}
-        <g id="scale-and-cup">
-          <rect
-            x="142"
-            y="112"
-            width="102"
-            height="6"
-            rx="3"
-            fill="#1E1E24"
-            opacity="0.2"
-          />
-          <rect
-            x="144"
-            y="100"
-            width="98"
-            height="15"
+            x="146"
+            y="96"
+            width="90"
+            height="14"
             rx="4"
             fill="#3D405B"
             stroke="#1E1E24"
             strokeWidth="2.5"
           />
-          <rect x="151" y="114" width="9" height="2" rx="1" fill="#1E1E24" />
-          <rect x="226" y="114" width="9" height="2" rx="1" fill="#1E1E24" />
+          {/* Scale feet */}
+          <rect x="154" y="109" width="8" height="2.5" rx="1" fill="#1E1E24" />
+          <rect x="220" y="109" width="8" height="2.5" rx="1" fill="#1E1E24" />
+          {/* Scale weighing platform */}
           <rect
-            x="148"
-            y="94"
-            width="90"
+            x="150"
+            y="90"
+            width="82"
             height="7"
             rx="2"
-            fill="#E0E2EC"
+            fill="#E2E4EB"
             stroke="#1E1E24"
             strokeWidth="2.2"
           />
+          {/* Scale digital display (clean, NO numbers) */}
           <rect
-            x="168"
-            y="103"
-            width="50"
-            height="9"
+            x="171"
+            y="99.5"
+            width="40"
+            height="8"
             rx="2"
             fill="#1FB5A6"
             stroke="#1E1E24"
             strokeWidth="1.5"
           />
-          <text
-            x="193"
-            y="110.5"
-            fontFamily="'Plus Jakarta Sans', monospace"
-            fontWeight="700"
-            fontSize="7.5"
-            fill="#1E1E24"
-            textAnchor="middle"
-          >
-            525.0g
-          </text>
 
-          {/* Liquid in Cup */}
-          <path d="M171 68 L174 93 L212 93 L215 68 Z" fill="#E8F8F7" />
-          {/* Cup Outline (transparent plastic beaker) */}
+          {/* Liquid in Beaker */}
+          <path d="M169 66 L172 89 L208 89 L211 66 Z" fill="#E8F8F7" />
+          {/* Beaker Body */}
           <path
-            d="M167 44 L173 94 L213 94 L219 44 Z"
-            fill="white"
+            d="M166 44 L172 90 L208 90 L214 44 Z"
+            fill="#FFFFFF"
             fillOpacity="0.45"
             stroke="#1E1E24"
             strokeWidth="2.5"
             strokeLinejoin="round"
           />
-          {/* Cup Rim lip */}
+          {/* Beaker Rim Lip */}
           <ellipse
-            cx="193"
+            cx="190"
             cy="44"
-            rx="26"
-            ry="4.5"
-            fill="white"
+            rx="24"
+            ry="4"
+            fill="#FFFFFF"
             stroke="#1E1E24"
             strokeWidth="2.5"
           />
-          {/* Liquid Surface meniscus */}
+          {/* Liquid Meniscus */}
           <ellipse
-            cx="193"
-            cy="68"
-            rx="22"
+            cx="190"
+            cy="66"
+            rx="21"
             ry="3.5"
             fill="#1FB5A6"
             stroke="#1E1E24"
-            strokeWidth="1.8"
+            strokeWidth="2"
           />
-          {/* Measurement grad marks on beaker */}
+          {/* Measurement marks on beaker */}
           <line
             x1="170"
-            y1="54"
-            x2="178"
-            y2="54"
+            y1="56"
+            x2="177"
+            y2="56"
             stroke="#1E1E24"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
           <line
             x1="171"
-            y1="64"
-            x2="180"
-            y2="64"
+            y1="66"
+            x2="179"
+            y2="66"
             stroke="#1E1E24"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
           <line
             x1="172"
-            y1="74"
-            x2="179"
-            y2="74"
-            stroke="#1E1E24"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-          />
-          <line
-            x1="173"
-            y1="84"
-            x2="180"
-            y2="84"
+            y1="76"
+            x2="178"
+            y2="76"
             stroke="#1E1E24"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
 
-          {/* Wooden Stir Stick in cup */}
-          <g transform="rotate(16 198 40)">
+          {/* Wooden Stir Stick */}
+          <g transform="rotate(18 194 40)">
             <rect
-              x="195"
-              y="4"
+              x="190"
+              y="5"
               width="8"
-              height="70"
+              height="66"
               rx="3.5"
               fill="#E8B878"
               stroke="#1E1E24"
               strokeWidth="2.2"
             />
             <path
-              d="M195 56 L195 70 C195 72.5 203 72.5 203 70 L203 56 Z"
+              d="M190 52 L190 67 C190 69.5 198 69.5 198 67 L198 52 Z"
               fill="#D96B43"
               stroke="#1E1E24"
               strokeWidth="1.8"
@@ -278,260 +205,146 @@ export function MakerBenchIllustration() {
           </g>
         </g>
 
-        {/* 3. Drips and splashes on bench */}
+        {/* 3. Splashes & Drips on Bench */}
         <g id="bench-splashes">
           <ellipse
-            cx="254"
-            cy="117"
+            cx="258"
+            cy="112"
             rx="9"
             ry="3"
             fill="#1FB5A6"
             stroke="#1E1E24"
-            strokeWidth="1.5"
+            strokeWidth="1.6"
           />
           <circle
-            cx="243"
-            cy="116"
+            cx="247"
+            cy="111"
             r="2.2"
             fill="#1FB5A6"
             stroke="#1E1E24"
-            strokeWidth="1.2"
+            strokeWidth="1.4"
           />
-          <circle cx="267" cy="118" r="1.6" fill="#1FB5A6" />
           <ellipse
-            cx="304"
-            cy="117"
-            rx="7"
+            cx="276"
+            cy="112"
+            rx="6"
             ry="2.2"
             fill="#E07A5F"
             stroke="#1E1E24"
             strokeWidth="1.5"
           />
-          <circle cx="315" cy="116" r="1.6" fill="#E07A5F" />
+          <circle cx="286" cy="111.5" r="1.5" fill="#E07A5F" />
         </g>
 
-        {/* 4. Secondary smaller mixing cup with spatula (terracotta mix) */}
-        <g id="small-cup">
+        {/* 4. Crumpled Nitrile Glove */}
+        <g id="glove">
           <ellipse
-            cx="282"
-            cy="115"
-            rx="16"
+            cx="330"
+            cy="110"
+            rx="22"
             ry="3.5"
             fill="#1E1E24"
-            opacity="0.15"
+            opacity="0.12"
           />
           <path
-            d="M268 87 L273 115 L293 115 L298 87 Z"
-            fill="#FAF6EE"
-            stroke="#1E1E24"
-            strokeWidth="2.2"
-            strokeLinejoin="round"
-          />
-          <path d="M271 99 L273 114 L293 114 L295 99 Z" fill="#E07A5F" />
-          <ellipse
-            cx="283"
-            cy="99"
-            rx="12"
-            ry="2.8"
-            fill="#D96B43"
-            stroke="#1E1E24"
-            strokeWidth="1.4"
-          />
-          <ellipse
-            cx="283"
-            cy="87"
-            rx="15"
-            ry="3.2"
-            fill="none"
-            stroke="#1E1E24"
-            strokeWidth="2.2"
-          />
-          <line
-            x1="287"
-            y1="104"
-            x2="300"
-            y2="70"
-            stroke="#1E1E24"
-            strokeWidth="5"
-            strokeLinecap="round"
-          />
-          <line
-            x1="287"
-            y1="104"
-            x2="300"
-            y2="70"
-            stroke="#DEB887"
-            strokeWidth="2.8"
-            strokeLinecap="round"
-          />
-        </g>
-
-        {/* 5. Right Center: Crumpled Nitrile Rubber Glove */}
-        <g id="gloves">
-          <ellipse
-            cx="346"
-            cy="115"
-            rx="22"
-            ry="4"
-            fill="#1E1E24"
-            opacity="0.15"
-          />
-          <path
-            d="M328 114 C326 106 333 99 341 99 C348 95 357 97 361 103 C368 100 373 105 368 112 C365 116 357 116 350 115 C343 116 335 117 328 114 Z"
+            d="M312 109 C310 101 316 94 324 94 C331 90 340 92 344 98 C351 95 356 100 351 107 C348 111 340 111 333 110 C326 111 318 112 312 109 Z"
             fill="#2A9D8F"
             stroke="#1E1E24"
-            strokeWidth="2.2"
+            strokeWidth="2.5"
             strokeLinejoin="round"
           />
           <path
-            d="M354 102 C359 97 365 96 368 101 C370 106 365 109 360 109"
+            d="M338 97 C343 92 349 92 352 97 C354 101 349 104 344 104"
             stroke="#1E1E24"
-            strokeWidth="2"
+            strokeWidth="2.2"
             fill="#2A9D8F"
           />
           <path
-            d="M361 103 C366 99 373 99 375 104 C376 109 371 112 366 112"
-            stroke="#1E1E24"
-            strokeWidth="2"
-            fill="#2A9D8F"
-          />
-          <path
-            d="M339 104 C344 107 348 111 353 110"
+            d="M324 99 C328 102 332 106 337 105"
             stroke="#1E1E24"
             strokeWidth="1.8"
             strokeLinecap="round"
             fill="none"
-            opacity="0.45"
+            opacity="0.4"
           />
           <ellipse
-            cx="332"
-            cy="111"
+            cx="316"
+            cy="106"
             rx="4.5"
-            ry="2.2"
+            ry="2.5"
             fill="#264653"
             stroke="#1E1E24"
-            strokeWidth="1.8"
+            strokeWidth="2"
           />
         </g>
 
-        {/* 6. Far Right: Dust Mask (Workshop Respirator) */}
+        {/* 5. Dust Mask (Workshop Respirator) */}
         <g id="dust-mask">
           <ellipse
-            cx="414"
-            cy="115"
-            rx="28"
-            ry="4.5"
+            cx="405"
+            cy="110"
+            rx="26"
+            ry="4"
             fill="#1E1E24"
-            opacity="0.15"
+            opacity="0.12"
           />
           <path
-            d="M386 114 C379 110 380 101 389 97"
+            d="M379 109 C372 105 373 97 381 93"
             stroke="#F4A261"
             strokeWidth="2.2"
             strokeLinecap="round"
             fill="none"
           />
           <path
-            d="M438 114 C447 108 449 99 440 92"
+            d="M429 109 C437 104 438 96 430 90"
             stroke="#F4A261"
             strokeWidth="2.2"
             strokeLinecap="round"
             fill="none"
           />
           <path
-            d="M386 113 C384 94 394 72 412 69 C429 72 440 94 438 113 C427 116 399 116 386 113 Z"
+            d="M378 108 C376 90 387 69 405 66 C422 69 433 90 431 108 C420 111 391 111 378 108 Z"
             fill="#FFFFFF"
             stroke="#1E1E24"
             strokeWidth="2.5"
             strokeLinejoin="round"
           />
           <path
-            d="M403 72 Q412 70 421 72"
+            d="M396 69 Q405 67 414 69"
             stroke="#708090"
             strokeWidth="3.5"
             strokeLinecap="round"
             fill="none"
           />
           <rect
-            x="404"
-            y="86"
+            x="397"
+            y="83"
             width="16"
-            height="14"
+            height="13"
             rx="3.5"
             fill="#3D405B"
             stroke="#1E1E24"
             strokeWidth="2"
           />
           <line
-            x1="407"
-            y1="91"
-            x2="417"
-            y2="91"
+            x1="400"
+            y1="88"
+            x2="410"
+            y2="88"
             stroke="#1FB5A6"
             strokeWidth="1.5"
             strokeLinecap="round"
           />
           <line
-            x1="407"
-            y1="95"
-            x2="417"
-            y2="95"
+            x1="400"
+            y1="92"
+            x2="410"
+            y2="92"
             stroke="#1FB5A6"
             strokeWidth="1.5"
             strokeLinecap="round"
           />
-          <path
-            d="M389 101 Q412 106 435 101"
-            stroke="#1E1E24"
-            strokeWidth="1.4"
-            strokeDasharray="2 2"
-            fill="none"
-            opacity="0.3"
-          />
         </g>
-
-        {/* 7. Bench details: Pencil & terrazzo chips */}
-        <g transform="rotate(-5 90 128)">
-          <rect
-            x="70"
-            y="125"
-            width="44"
-            height="5.5"
-            rx="1.2"
-            fill="#E9C46A"
-            stroke="#1E1E24"
-            strokeWidth="1.6"
-          />
-          <polygon
-            points="114,125 122,127.8 114,130.5"
-            fill="#D4A373"
-            stroke="#1E1E24"
-            strokeWidth="1.6"
-          />
-          <polygon
-            points="118.5,126.7 122,127.8 118.5,128.9"
-            fill="#1E1E24"
-          />
-          <rect
-            x="70"
-            y="125"
-            width="7"
-            height="5.5"
-            rx="1.2"
-            fill="#E07A5F"
-            stroke="#1E1E24"
-            strokeWidth="1.4"
-          />
-        </g>
-
-        <polygon points="226,126 230,124 228,128" fill="#E07A5F" />
-        <polygon points="320,127 324,126 322,130" fill="#1FB5A6" />
-        <polygon
-          points="380,125 384,124 383,127 379,127"
-          fill="#1E1E24"
-          opacity="0.7"
-        />
-        <polygon points="144,127 147,125 146,129" fill="#E9A84A" />
       </svg>
     </div>
   );
