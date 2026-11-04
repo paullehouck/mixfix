@@ -6,7 +6,7 @@
     "accent": "#A8B5A2",
     "surface": "#D4CFC9",
     "blockIllustration": "concrete-block",
-    "selectAnimation": "thud"
+    "selectAnimation": "drip"
   },
   "volumeHint": "Fill your mould with water and weigh it. Its grams are the volume in ml. For odd shapes, use the water-displacement method: submerge the master in a known volume of water and measure the rise.",
   "variants": [

@@ -7,17 +7,8 @@ export interface MaterialPickerProps {
   onSelect: (id: string | null) => void;
 }
 
-function getMaterialAnimation(id: string): string {
-  switch (id) {
-    case "silicone":
-      return "animate-drip";
-    case "jesmonite":
-      return "animate-puff";
-    case "concrete":
-      return "animate-thud";
-    default:
-      return "";
-  }
+function getMaterialAnimation(_id: string): string {
+  return "animate-drip";
 }
 
 const MATERIAL_SUBTITLES: Record<string, string> = {
