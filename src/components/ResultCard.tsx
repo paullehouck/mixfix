@@ -129,9 +129,7 @@ export function ResultCard({
     : getSourceBadgeText(result.sourceType);
 
   async function handleCopyRecipe() {
-    const headerTitle = result.exampleName
-      ? `${variant.name} · ${result.exampleName} (By the book)`
-      : `${variant.name} (${badgeText})`;
+    const headerTitle = `${variant.name} (${badgeText})`;
 
     const lines: string[] = [
       headerTitle,
@@ -208,13 +206,8 @@ export function ResultCard({
         <h3 className="font-display text-lg text-[#1E1E24]">
           Your mix
         </h3>
-        <span className="inline-flex items-center gap-1.5 brutal-border rounded-full px-3 py-1 text-xs font-display bg-white text-[#1E1E24]">
-          <span>{badgeText}</span>
-          {result.exampleName && (
-            <span className="border-l-2 border-[#1E1E24] pl-1.5">
-              {result.exampleName}
-            </span>
-          )}
+        <span className="brutal-border rounded-full px-3 py-1 text-xs font-display bg-white text-[#1E1E24]">
+          {badgeText}
         </span>
       </div>
 
