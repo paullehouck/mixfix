@@ -1,6 +1,7 @@
 {
   "id": "jesmonite",
   "name": "Jesmonite",
+  "subtitle": "Intricate, decorative castings",
   "theme": {
     "accent": "#E9967A",
     "surface": "#EFE3C8",

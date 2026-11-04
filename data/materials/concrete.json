@@ -1,6 +1,7 @@
 {
   "id": "concrete",
   "name": "Concrete",
+  "subtitle": "Durable, large-scale pieces",
   "theme": {
     "accent": "#A8B5A2",
     "surface": "#D4CFC9",

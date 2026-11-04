@@ -20,16 +20,14 @@ function getMaterialAnimation(id: string): string {
   }
 }
 
+const MATERIAL_SUBTITLES: Record<string, string> = {
+  silicone: "Flexible moulds and masters",
+  jesmonite: "Intricate, decorative castings",
+  concrete: "Durable, large-scale pieces",
+};
+
 function getMaterialSubtitle(material: Material): string {
-  const useCase = material.variants[0]?.useCase;
-  if (useCase) {
-    const firstSentence = useCase.split(".")[0];
-    return firstSentence ? firstSentence.trim() : useCase;
-  }
-  if (material.id === "silicone") {
-    return "Flexible moulds, masters and detail replication";
-  }
-  return "";
+  return material.subtitle || MATERIAL_SUBTITLES[material.id] || "";
 }
 
 function renderMaterialSvg(id: string) {

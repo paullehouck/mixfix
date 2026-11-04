@@ -87,6 +87,7 @@ export interface MaterialTheme {
 export interface Material {
   id: string;
   name: string;
+  subtitle?: string;
   theme: MaterialTheme;
   volumeHint?: string;
   variants: MaterialVariant[];
