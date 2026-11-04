@@ -58,7 +58,7 @@ export function App() {
     selectedMaterial?.id === "silicone"
       ? "#E8F8F7"
       : selectedMaterial?.id === "jesmonite"
-        ? "#EFE3C8"
+        ? "#F7F1E4"
         : selectedMaterial?.id === "concrete"
           ? "#E8E8E6"
           : (selectedMaterial?.theme.surface ?? DEFAULT_ACCENT_SURFACE);
