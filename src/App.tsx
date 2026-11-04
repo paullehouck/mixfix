@@ -5,6 +5,7 @@ import {
   type CalculatorFormState,
 } from "./components/CalculatorForm";
 import { MaterialPicker } from "./components/MaterialPicker";
+import { MakerBenchIllustration } from "./components/MakerBenchIllustration";
 import { ResultCard } from "./components/ResultCard";
 import { materials } from "./data/loadMaterials";
 import type { WcRatioKey } from "./types/materials";
@@ -296,34 +297,36 @@ export function App() {
                 type="button"
                 aria-label="Close about dialog"
                 onClick={closeAbout}
-                className="brutal-border brutal-shadow rounded-full w-11 h-11 font-display text-xl text-[#1E1E24] bg-white flex items-center justify-center active:translate-x-0.5 active:translate-y-0.5"
+                className="brutal-border brutal-shadow rounded-full w-11 h-11 font-display text-xl text-[#1E1E24] bg-white flex items-center justify-center active:translate-x-0.5 active:translate-y-0.5 cursor-pointer"
               >
                 ×
               </button>
             </div>
 
+            {/* Messy Maker Bench Illustration */}
+            <MakerBenchIllustration />
+
             <div className="flex flex-col gap-3 font-body">
               <p className="text-base leading-relaxed text-gray-700">
-                Mixfix is here to fix your mix, so bench math never gets in the way of making.
-                Pick your material, enter your mould&apos;s volume, and get exact grams in seconds. No spreadsheets, no guesswork, and no sticky buckets of uncured regret.
+                Mixfix is here to fix your mix, so bench math never gets in the way of making. Pick your material, enter your mould&apos;s volume, and get exact grams in seconds. No spreadsheets, no guesswork, and no sticky buckets of uncured regret.
               </p>
             </div>
 
-            <div className="flex flex-col gap-2 rounded-xl brutal-border bg-gray-50/70 p-4 font-body">
-              <h3 className="font-display text-sm uppercase tracking-wider text-gray-900">
-                Where do the numbers come from?
-              </h3>
-              <p className="text-sm leading-relaxed text-gray-600">
-                Every ratio comes straight from official datasheets or bench-tested workshop recipes (look for the Paul’s recipes). Mixfix handles the math, but workshop safety is on you: check your material’s datasheet, wear gloves, and use a dust mask with dry powders.
-              </p>
-            </div>
+            <div className="flex flex-col gap-3 rounded-xl brutal-border bg-gray-50/70 p-4 font-body">
+              <div className="flex flex-col gap-2">
+                <h3 className="font-display text-xs uppercase tracking-wider text-gray-900">
+                  Where do the numbers come from?
+                </h3>
+                <p className="text-sm leading-relaxed text-gray-600">
+                  Ratios come from official datasheets or bench-tested workshop recipes (look for the Paul’s recipes badge).
+                </p>
+                <p className="text-sm leading-relaxed text-gray-600">
+                  Mixfix does the math, but workshop safety is on you: check your material’s datasheet, wear gloves, and use a dust mask with dry powders.
+                </p>
+              </div>
 
-            <div className="flex flex-col gap-2 rounded-xl brutal-border bg-gray-50/70 p-4 font-body">
-              <h3 className="font-display text-sm uppercase tracking-wider text-gray-900">
-                Got feedback or a recipe to add?
-              </h3>
-              <p className="text-sm leading-relaxed text-gray-600">
-                Email{" "}
+              <div className="border-t border-gray-200 pt-3 text-sm leading-relaxed text-gray-600">
+                Got feedback or a recipe to add? Email{" "}
                 <a
                   href="mailto:suggestions@mixfix.com"
                   className="font-semibold text-gray-900 underline decoration-[#1E1E24] underline-offset-4 hover:text-[var(--accent)]"
@@ -331,7 +334,7 @@ export function App() {
                   suggestions@mixfix.com
                 </a>
                 .
-              </p>
+              </div>
             </div>
           </div>
         </div>
