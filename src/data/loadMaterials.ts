@@ -4,8 +4,8 @@ import concreteData from "../../data/materials/concrete.json";
 import type { Material } from "../types/materials";
 
 export const materials: Material[] = [
-  jesmoniteData as Material,
   siliconeData as Material,
+  jesmoniteData as Material,
   concreteData as Material,
 ];
 

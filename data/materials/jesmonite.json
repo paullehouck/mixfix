@@ -12,7 +12,7 @@
       "id": "ac100-standard",
       "status": "live",
       "name": "AC100",
-      "useCase": "Fine detail casts, homewares, decorative pieces (gypsum-based)",
+      "useCase": "Fine detail casts, decorative pieces",
       "sourceType": "official",
       "sourceNote": "Jesmonite AC100 TDS (TDS-AC100-25-EW) and AC730 TDS (TDS-AC730-25-EW), jesmonite.com, 2024. Official AC100 User Guide gives initial set as 15–20 min at 18°C. Retarder dose 2–8 g per kg of liquid.",
       "sourceUrls": [
