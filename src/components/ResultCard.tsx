@@ -297,10 +297,10 @@ export function ResultCard({
                   key={additive.id}
                   type="button"
                   onClick={() => handleExpandAdditive(additive)}
-                  className="brutal-border rounded-xl p-3 mb-2 bg-white flex items-center justify-between font-display text-sm text-[#1E1E24] hover:bg-gray-50 w-full text-left transition-colors cursor-pointer"
+                  className="brutal-border rounded-xl p-3 mb-2 bg-white flex items-center gap-2 font-display text-sm text-[#1E1E24] hover:bg-gray-50 w-full text-left transition-colors cursor-pointer"
                 >
-                  <span>+ Add {additive.name}</span>
                   <span className="font-display text-base leading-none">＋</span>
+                  <span>{additive.name}</span>
                 </button>
               );
             }
