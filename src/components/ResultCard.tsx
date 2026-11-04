@@ -267,17 +267,108 @@ export function ResultCard({
 
       {/* Pot life and Demould time */}
       {(potLifeText || variant.demouldTime) && (
-        <div className="flex flex-col gap-1.5 rounded-xl bg-white brutal-border p-3 font-body text-sm text-gray-700">
+        <div className="flex flex-col gap-2 rounded-xl bg-white brutal-border p-3 font-body text-sm text-gray-700">
           {potLifeText && (
-            <div>
-              <span className="font-semibold text-gray-700">⏱ Pot life: </span>
-              <span>{potLifeText}</span>
+            <div className="flex items-center gap-2">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-4 h-4 shrink-0 text-[#1E1E24]"
+                aria-hidden="true"
+              >
+                <circle cx="8" cy="9.2" r="5.2" stroke="#1E1E24" strokeWidth="1.8" />
+                <path
+                  d="M8 6.5V9.2H10.5"
+                  stroke="#1E1E24"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <line
+                  x1="8"
+                  y1="1.5"
+                  x2="8"
+                  y2="4"
+                  stroke="#1E1E24"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+                <line
+                  x1="6"
+                  y1="1.5"
+                  x2="10"
+                  y2="1.5"
+                  stroke="#1E1E24"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <span>
+                <strong className="font-semibold text-gray-700">Pot life: </strong>
+                <span>{potLifeText}</span>
+              </span>
             </div>
           )}
           {variant.demouldTime && (
-            <div>
-              <span className="font-semibold text-gray-700">⏳ Demould: </span>
-              <span>{variant.demouldTime}</span>
+            <div className="flex items-center gap-2">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-4 h-4 shrink-0 text-[#1E1E24]"
+                aria-hidden="true"
+              >
+                <line
+                  x1="3.5"
+                  y1="2"
+                  x2="12.5"
+                  y2="2"
+                  stroke="#1E1E24"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+                <line
+                  x1="3.5"
+                  y1="14"
+                  x2="12.5"
+                  y2="14"
+                  stroke="#1E1E24"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M5 2V4.8L7.4 7.6C7.6 7.8 7.6 8.2 7.4 8.4L5 11.2V14"
+                  stroke="#1E1E24"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M11 2V4.8L8.6 7.6C8.4 7.8 8.4 8.2 8.6 8.4L11 11.2V14"
+                  stroke="#1E1E24"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <line
+                  x1="6.5"
+                  y1="11.5"
+                  x2="9.5"
+                  y2="11.5"
+                  stroke="#1E1E24"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <span>
+                <strong className="font-semibold text-gray-700">Demould: </strong>
+                <span>{variant.demouldTime}</span>
+              </span>
             </div>
           )}
         </div>
