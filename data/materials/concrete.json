@@ -14,7 +14,7 @@
       "id": "fine-craft",
       "status": "live",
       "name": "Fine craft mix",
-      "useCase": "Coasters, candle vessels, small pots, detailed pieces — smooth finish, no visible aggregate. For an even smoother surface increase cement to 1.5:1 ratio (test first).",
+      "useCase": "Coasters, small pots, detailed pieces — smooth finish, no visible aggregate.",
       "sourceType": "estimate",
       "sourceNote": "Derived from absolute-volume method: 1:2 cement:sand, w/c 0.45, quartz sand SG 2.65, Portland cement SG 3.15, ~2% air. Per 1 kg cement: 317.5 + 754.7 + 450 = 1522 cm³ ÷ 0.98 = 1553 cm³; 3450 g total → 2.22 g/ml. Source: research report cross-referencing Davis Colors, ASTM, and standard mix design. Absolute-volume method per ACI/standard mix design. Specific gravities: Portland cement 3.15, quartz sand/gravel 2.65, water 1.0. ~2% entrapped air for hand-mixed cast.",
       "sourceUrls": [

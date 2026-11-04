@@ -179,14 +179,14 @@ export function CalculatorForm({
         )}
       </div>
 
-      {/* Silicone only: Your product (optional) */}
+      {/* Silicone only: Product */}
       {selectedVariant && isSilicone && availableExamples.length > 0 && (
         <div className="flex flex-col">
           <label
             htmlFor="example-select"
             className="font-display text-xs tracking-widest uppercase text-gray-500 mb-1"
           >
-            Your product (optional)
+            Product
           </label>
           <div className="relative">
             <select
