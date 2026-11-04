@@ -53,14 +53,14 @@ function renderMaterialSvg(id: string) {
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full"
         >
-          <rect width="64" height="64" rx="12" fill="#EFE3C8" />
+          <rect width="64" height="64" rx="12" fill="#FDFBF7" />
           <rect
             x="12"
             y="16"
             width="40"
             height="32"
             rx="4"
-            fill="#FDFBF7"
+            fill="#EFE3C8"
             stroke="#1E1E24"
             strokeWidth="2.5"
           />
