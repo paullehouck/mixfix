@@ -31,7 +31,7 @@
         },
         {
           "id": "base",
-          "name": "AC100 Base (powder)",
+          "name": "AC100 Powder Base",
           "parts": 2.5
         }
       ],
@@ -121,7 +121,7 @@
         },
         {
           "id": "base",
-          "name": "AC730 Base (powder)",
+          "name": "AC730 Powder Base",
           "parts": 5
         }
       ],
@@ -215,7 +215,7 @@
         },
         {
           "id": "base",
-          "name": "AC730 Base (powder)",
+          "name": "AC730 Powder Base",
           "parts": 5.25
         }
       ],
@@ -246,7 +246,7 @@
         },
         {
           "id": "base",
-          "name": "AC730 Base (powder)",
+          "name": "AC730 Powder Base",
           "parts": 4.5
         }
       ],

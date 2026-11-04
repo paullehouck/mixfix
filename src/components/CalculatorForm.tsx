@@ -24,7 +24,7 @@ export interface CalculatorFormProps {
 }
 
 const DEFAULT_VOLUME_HINT =
-  "Fill your mould with water and weigh it on digital scales. 1 gram of water equals 1 ml of volume.";
+  "Fill the mould with water and weigh it (1g of water equals 1 ml). Alternatively, submerge your master in water and record the volume increase.";
 
 const WASTE_EXPLANATIONS: Record<string, string> = {
   simple: "Basic open-face mould with minimal detail or waste.",
@@ -351,7 +351,7 @@ export function CalculatorForm({
               htmlFor="volume-input"
               className="font-display text-xs tracking-widest uppercase text-gray-500"
             >
-              Mould volume
+              Volume
             </label>
             <InfoPopover
               label="How to measure mould volume"

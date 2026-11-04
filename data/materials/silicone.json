@@ -84,7 +84,7 @@
     {
       "id": "tin-20to1-weight",
       "status": "live",
-      "name": "Tin-cure, 20:1 by weight (100:5)",
+      "name": "Tin-cure, 20:1 by weight",
       "sourceType": "estimate",
       "sourceNote": "Average of 4 tin-cure 20:1 products (range 1.09–1.21); Mold Max 25 at 1.18, Silastic RTV-3481 at 1.21, Silastic RTV-3483 at 1.16, Easy Composites CS25 at 1.09. Source: vendor TDS. Unweighted mean of products listed in vendor TDS, dominated by Smooth-On catalogue. See research report for full product table.",
       "sourceUrls": ["https://smooth-on.com/tb/files/Mold_Max_Series_TB.pdf"],
@@ -113,7 +113,7 @@
     {
       "id": "tin-1to1-volume-pack",
       "status": "live",
-      "name": "Tin-cure, 1:1 by volume pack (about 100:130 by weight)",
+      "name": "Tin-cure, 1:1 by volume pack",
       "sourceType": "estimate",
       "sourceNote": "Based on Smooth-On OOMOO 25 and 30 datasheets: 100A:130B by weight, specific gravity 1.34. These packs are sold as 1:1 by volume but the weight ratio differs. Check your pack states the same weight ratio.",
       "sourceUrls": ["https://www.smooth-on.com/charts/"],

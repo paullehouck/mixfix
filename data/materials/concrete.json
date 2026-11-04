@@ -8,7 +8,7 @@
     "blockIllustration": "concrete-block",
     "selectAnimation": "drip"
   },
-  "volumeHint": "Fill your mould with water and weigh it. Its grams are the volume in ml. For odd shapes, use the water-displacement method: submerge the master in a known volume of water and measure the rise.",
+  "volumeHint": "Fill the mould with water and weigh it (1g of water equals 1 ml). Alternatively, submerge your master in water and record the volume increase.",
   "variants": [
     {
       "id": "fine-craft",
@@ -86,7 +86,7 @@
       "id": "general-casting",
       "status": "live",
       "name": "General casting mix",
-      "useCase": "Planters, tiles, outdoor pieces — more aggregate look, better strength in bulk",
+      "useCase": "Planters, tiles, outdoor pieces — more aggregate look, better strength in bulk.",
       "sourceType": "estimate",
       "sourceNote": "Derived from absolute-volume method: 1:2:3 cement:sand:gravel, w/c 0.5, quartz SG 2.65, Portland cement SG 3.15, ~2% air. Density 2.36 g/ml. Source: research report. Absolute-volume method per ACI/standard mix design. Specific gravities: Portland cement 3.15, quartz sand/gravel 2.65, water 1.0. ~2% entrapped air for hand-mixed cast.",
       "sourceUrls": [
@@ -101,9 +101,9 @@
         { "id": "water", "name": "Water", "parts": null, "derivedFromWC": true }
       ],
       "wcRatioOptions": {
-        "pourable": { "label": "Pourable", "wc": 0.50, "note": "Easier to fill around aggregate. Vibrate well." },
-        "balanced": { "label": "Balanced", "wc": 0.45, "note": "Good workability and strength. Default." },
-        "stiff":    { "label": "Stiff", "wc": 0.38, "note": "Strongest option. Needs thorough vibration — aggregate traps more air." }
+        "pourable": { "label": "Pourable", "wc": 0.50, "note": "Easier to fill around aggregate." },
+        "balanced": { "label": "Balanced", "wc": 0.45, "note": "Default option with good workability and strength." },
+        "stiff":    { "label": "Stiff", "wc": 0.38, "note": "Strongest option. Needs thorough vibration as aggregates traps air." }
       },
       "wcRatioDefault": "balanced",
       "densityGPerMl": 2.36,

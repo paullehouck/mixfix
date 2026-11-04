@@ -13,7 +13,7 @@ export interface ResultCardProps {
 function getSourceBadgeText(sourceType: string): string {
   switch (sourceType) {
     case "estimate":
-      return "≈ Estimate";
+      return "Estimate";
     case "official":
       return "By the book";
     case "maker-tested":

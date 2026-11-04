@@ -27,7 +27,7 @@ describe("calculateMix", () => {
 
     expect(result.components).toEqual([
       { id: "liquid", name: "AC100 Liquid", grams: 290 },
-      { id: "base", name: "AC100 Base (powder)", grams: 725 },
+      { id: "base", name: "AC100 Powder Base", grams: 725 },
     ]);
     expect(result.totalGrams).toBe(1015);
     expect(result.mixBasis).toBe("weight");
@@ -45,7 +45,7 @@ describe("calculateMix", () => {
 
     expect(result.components).toEqual([
       { id: "liquid", name: "AC730 Liquid", grams: 179 },
-      { id: "base", name: "AC730 Base (powder)", grams: 894 },
+      { id: "base", name: "AC730 Powder Base", grams: 894 },
     ]);
     expect(result.totalGrams).toBe(1073);
   });
@@ -312,7 +312,7 @@ describe("calculateMix", () => {
       expect(result.totalGrams).toBe(50738);
       expect(result.components).toEqual([
         { id: "liquid", name: "AC100 Liquid", grams: 14496 },
-        { id: "base", name: "AC100 Base (powder)", grams: 36241 },
+        { id: "base", name: "AC100 Powder Base", grams: 36241 },
       ]);
     });
   });
