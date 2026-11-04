@@ -5,6 +5,7 @@ import type { AdditiveInput, CalculateResult } from "../utils/calculate";
 export interface ResultCardProps {
   result: CalculateResult;
   variant: MaterialVariant;
+  materialId?: string;
   onReset: () => void;
   activeAdditives?: AdditiveInput[];
   onAdditivesChange?: (additives: AdditiveInput[]) => void;
@@ -33,27 +34,85 @@ function formatPotLife(potLifeMin: [number, number] | number | null): string | n
   return `${potLifeMin} min`;
 }
 
-function formatDoseUnit(additive: Additive): string {
+function calculateAdditiveRange(
+  additive: Additive,
+  result: CalculateResult
+): { minG: number; maxG: number } {
+  const totalMass = result.totalGrams;
+  let minG = 0;
+  let maxG = 0;
+
   switch (additive.type) {
     case "percentOfTotal":
-    case "percentOfComponent":
-    case "reducesWater":
-      return "%";
+      minG = (totalMass * additive.min) / 100;
+      maxG = (totalMass * additive.max) / 100;
+      break;
+    case "percentOfComponent": {
+      const comp = result.components.find((c) => c.id === additive.componentId);
+      const componentMass = comp?.grams ?? 0;
+      minG = (componentMass * additive.min) / 100;
+      maxG = (componentMass * additive.max) / 100;
+      break;
+    }
+    case "gPerKgOfComponent": {
+      const comp = result.components.find((c) => c.id === additive.componentId);
+      const componentMass = comp?.grams ?? 0;
+      minG = (componentMass / 1000) * additive.min;
+      maxG = (componentMass / 1000) * additive.max;
+      break;
+    }
     case "gPerKg":
-    case "gPerKgOfComponent":
-      return "g/kg";
+      minG = (totalMass / 1000) * additive.min;
+      maxG = (totalMass / 1000) * additive.max;
+      break;
+    default:
+      break;
   }
+
+  return { minG, maxG };
+}
+
+function formatGramValue(val: number): string {
+  if (val < 10) {
+    const rounded = Math.round(val * 10) / 10;
+    return `${rounded} g`;
+  }
+  return `${Math.round(val)} g`;
+}
+
+function formatGramRange(minG: number, maxG: number, rawMin: number): string {
+  if (rawMin === 0 || minG === 0) {
+    return `up to ${formatGramValue(maxG)}`;
+  }
+  const minVal = minG < 10 ? Math.round(minG * 10) / 10 : Math.round(minG);
+  const maxVal = maxG < 10 ? Math.round(maxG * 10) / 10 : Math.round(maxG);
+  if (minVal === maxVal) {
+    return `${minVal} g`;
+  }
+  return `${minVal}–${maxVal} g`;
 }
 
 export function ResultCard({
   result,
   variant,
+  materialId,
   onReset,
   activeAdditives: controlledAdditives,
   onAdditivesChange,
 }: ResultCardProps) {
   const [internalAdditives, setInternalAdditives] = useState<AdditiveInput[]>([]);
   const [copied, setCopied] = useState(false);
+
+  const isJesmonite =
+    materialId === "jesmonite" ||
+    variant.id.toLowerCase().startsWith("ac") ||
+    variant.name.toLowerCase().includes("jesmonite") ||
+    variant.components.some(
+      (c) =>
+        c.name.toLowerCase().includes("ac100") ||
+        c.name.toLowerCase().includes("ac730") ||
+        c.name.toLowerCase().includes("ac300")
+    );
 
   useEffect(() => {
     if (!controlledAdditives) {
@@ -99,30 +158,6 @@ export function ResultCard({
     updateAdditives(next);
   }
 
-  function computeFallbackAdditiveGrams(additive: Additive, dose: number): number {
-    const calculated = result.additives.find((a) => a.id === additive.id);
-    if (calculated && controlledAdditives) {
-      return calculated.grams;
-    }
-    switch (additive.type) {
-      case "percentOfTotal":
-        return Math.round(result.totalGrams * (dose / 100));
-      case "percentOfComponent": {
-        const comp = result.components.find((c) => c.id === additive.componentId);
-        return Math.round((comp?.grams ?? 0) * (dose / 100));
-      }
-      case "gPerKg":
-        return Math.round((result.totalGrams / 1000) * dose);
-      case "gPerKgOfComponent": {
-        const comp = result.components.find((c) => c.id === additive.componentId);
-        const val = ((comp?.grams ?? 0) / 1000) * dose;
-        return val >= 10 ? Math.round(val) : Math.round(val * 100) / 100;
-      }
-      case "reducesWater":
-        return 0;
-    }
-  }
-
   const potLifeText = formatPotLife(variant.potLifeMin);
   const badgeText = result.exampleName
     ? "By the book"
@@ -146,22 +181,26 @@ export function ResultCard({
     lines.push("------------------------------");
     lines.push(`Total: ${result.totalGrams} g`);
 
-    if (activeAdditives.length > 0) {
+    const staticAdditives = variant.additives.filter(
+      (a) => a.type !== "reducesWater"
+    );
+    const activePlasticisers = activeAdditives.filter((active) => {
+      const def = variant.additives.find((a) => a.id === active.id);
+      return def?.type === "reducesWater";
+    });
+
+    if (staticAdditives.length > 0 || activePlasticisers.length > 0) {
       lines.push("");
       lines.push("Additives:");
-      for (const active of activeAdditives) {
+      for (const additive of staticAdditives) {
+        const { minG, maxG } = calculateAdditiveRange(additive, result);
+        const rangeText = formatGramRange(minG, maxG, additive.min);
+        lines.push(`- ${additive.name}: ${rangeText}`);
+      }
+      for (const active of activePlasticisers) {
         const def = variant.additives.find((a) => a.id === active.id);
-        if (!def) continue;
-        const unit = formatDoseUnit(def);
-        const calcAdd = result.additives.find((a) => a.id === active.id);
-        const grams =
-          calcAdd !== undefined
-            ? calcAdd.grams
-            : computeFallbackAdditiveGrams(def, active.value);
-        if (def.type === "reducesWater") {
-          lines.push(`- ${def.name}: ${active.value}${unit} water reduction`);
-        } else {
-          lines.push(`- ${def.name} (${active.value}${unit}): ${grams} g`);
+        if (def) {
+          lines.push(`- ${def.name}: −${active.value}% water`);
         }
       }
     }
@@ -371,93 +410,124 @@ export function ResultCard({
       {variant.additives.length > 0 && (
         <div className="flex flex-col gap-1 pt-1">
           {variant.additives.map((additive) => {
-            const activeEntry = activeAdditives.find(
-              (a) => a.id === additive.id
-            );
+            if (additive.type === "reducesWater") {
+              const activeEntry = activeAdditives.find(
+                (a) => a.id === additive.id
+              );
 
-            if (!activeEntry) {
+              if (!activeEntry) {
+                return (
+                  <button
+                    key={additive.id}
+                    type="button"
+                    onClick={() => handleExpandAdditive(additive)}
+                    className="brutal-border rounded-xl p-3 mb-2 bg-white flex items-center gap-2 font-display text-sm text-[#1E1E24] hover:bg-gray-50 w-full text-left transition-colors cursor-pointer"
+                  >
+                    <span className="font-display text-base leading-none">＋</span>
+                    <span>{additive.name}</span>
+                  </button>
+                );
+              }
+
+              const step = additive.max <= 5 ? 0.5 : 1;
+
               return (
-                <button
+                <div
                   key={additive.id}
-                  type="button"
-                  onClick={() => handleExpandAdditive(additive)}
-                  className="brutal-border rounded-xl p-3 mb-2 bg-white flex items-center gap-2 font-display text-sm text-[#1E1E24] hover:bg-gray-50 w-full text-left transition-colors cursor-pointer"
+                  className="brutal-border rounded-xl p-3 mb-2 bg-white flex flex-col gap-2 transition-colors"
                 >
-                  <span className="font-display text-base leading-none">＋</span>
-                  <span>{additive.name}</span>
-                </button>
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-display text-sm text-[#1E1E24]">
+                        {additive.name}
+                      </span>
+                      <span className="font-body text-xs text-gray-600">
+                        ({activeEntry.value}%)
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <span className="font-display text-base text-[#1E1E24]">
+                        −{activeEntry.value}% water
+                      </span>
+                      <button
+                        type="button"
+                        aria-label={`Remove ${additive.name}`}
+                        onClick={() => handleCollapseAdditive(additive.id)}
+                        className="inline-flex h-7 w-7 items-center justify-center rounded-lg font-display text-lg text-[#1E1E24] hover:bg-black/5"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="font-body text-xs text-gray-600 tabular-nums">
+                      {additive.min}%
+                    </span>
+                    <input
+                      type="range"
+                      aria-label={`${additive.name} dose`}
+                      min={additive.min}
+                      max={additive.max}
+                      step={step}
+                      value={activeEntry.value}
+                      onChange={(e) =>
+                        handleChangeAdditiveDose(
+                          additive.id,
+                          parseFloat(e.target.value)
+                        )
+                      }
+                      className="h-2 flex-1 cursor-pointer accent-[var(--accent)]"
+                    />
+                    <span className="font-body text-xs text-gray-600 tabular-nums">
+                      {additive.max}%
+                    </span>
+                  </div>
+
+                  {additive.note && (
+                    <p className="font-body text-xs text-gray-600">
+                      {additive.note}
+                    </p>
+                  )}
+                </div>
               );
             }
 
-            const calcAdd = result.additives.find((a) => a.id === additive.id);
-            const grams =
-              calcAdd !== undefined
-                ? calcAdd.grams
-                : computeFallbackAdditiveGrams(additive, activeEntry.value);
-            const unit = formatDoseUnit(additive);
-            const step = additive.max <= 5 ? 0.5 : 1;
+            // Static gram range additive
+            const { minG, maxG } = calculateAdditiveRange(additive, result);
+            const rangeText = formatGramRange(minG, maxG, additive.min);
+
+            const isJesmonitePigment = isJesmonite && additive.id === "pigment";
+            const showDropsGuide = isJesmonitePigment && result.totalGrams < 300;
+            const lowerDrops = Math.max(1, Math.round(result.totalGrams / 10));
+            const upperDrops = Math.max(lowerDrops, Math.round(result.totalGrams / 5));
 
             return (
               <div
                 key={additive.id}
-                className="brutal-border rounded-xl p-3 mb-2 bg-white flex flex-col gap-2 transition-colors"
+                className="brutal-border rounded-xl p-3 mb-2 bg-white flex flex-col gap-1.5 transition-colors"
               >
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-display text-sm text-[#1E1E24]">
-                      {additive.name}
-                    </span>
-                    <span className="font-body text-xs text-gray-600">
-                      ({activeEntry.value} {unit})
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <span className="font-display text-base text-[#1E1E24]">
-                      {additive.type === "reducesWater"
-                        ? `−${activeEntry.value}% water`
-                        : `${grams} g`}
-                    </span>
-                    <button
-                      type="button"
-                      aria-label={`Remove ${additive.name}`}
-                      onClick={() => handleCollapseAdditive(additive.id)}
-                      className="inline-flex h-7 w-7 items-center justify-center rounded-lg font-display text-lg text-[#1E1E24] hover:bg-black/5"
-                    >
-                      ×
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <span className="font-body text-xs text-gray-600 tabular-nums">
-                    {additive.min}
-                    {unit}
+                <div className="flex items-baseline justify-between gap-4">
+                  <span className="font-display text-sm text-[#1E1E24]">
+                    {additive.name}
                   </span>
-                  <input
-                    type="range"
-                    aria-label={`${additive.name} dose`}
-                    min={additive.min}
-                    max={additive.max}
-                    step={step}
-                    value={activeEntry.value}
-                    onChange={(e) =>
-                      handleChangeAdditiveDose(
-                        additive.id,
-                        parseFloat(e.target.value)
-                      )
-                    }
-                    className="h-2 flex-1 cursor-pointer accent-[var(--accent)]"
-                  />
-                  <span className="font-body text-xs text-gray-600 tabular-nums">
-                    {additive.max}
-                    {unit}
+                  <span className="font-display text-base text-[#1E1E24] text-right shrink-0 tabular-nums">
+                    {rangeText}
                   </span>
                 </div>
 
-                <p className="font-body text-xs text-gray-600">
-                  {additive.note}
-                </p>
+                {additive.note && (
+                  <p className="font-body text-sm text-gray-500 leading-relaxed">
+                    {additive.note}
+                  </p>
+                )}
+
+                {showDropsGuide && (
+                  <p className="font-body text-xs text-gray-400 italic leading-relaxed">
+                    {`Roughly ${lowerDrops}–${upperDrops} drops — add gradually and check colour before adding more. Drop size varies by bottle type.`}
+                  </p>
+                )}
               </div>
             );
           })}

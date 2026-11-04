@@ -267,6 +267,7 @@ export function App() {
           <ResultCard
             result={calculationResult}
             variant={selectedVariant}
+            materialId={selectedMaterialId ?? undefined}
             activeAdditives={activeAdditives}
             onAdditivesChange={setActiveAdditives}
             onReset={handleReset}
