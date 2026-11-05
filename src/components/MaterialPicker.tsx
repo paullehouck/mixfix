@@ -65,18 +65,18 @@ function renderMaterialSvg(id: string) {
             strokeWidth="2.5"
           />
           {/* Angular terrazzo chips */}
-          <polygon points="18,22 23,21 21,26" fill="#E07A5F" />
-          <polygon points="30,21 35,21 34,25 29,24" fill="#1E1E24" opacity="0.8" />
-          <polygon points="42,22 47,24 44,28" fill="#E9A84A" />
-          <polygon points="23,28 27,27 25,32" fill="#2A9D8F" />
-          <polygon points="34,28 39,27 38,33 33,32" fill="#D96B43" />
-          <polygon points="44,31 48,32 46,36 43,35" fill="#1E1E24" opacity="0.8" />
-          <polygon points="17,34 22,33 20,38" fill="#E9A84A" />
-          <polygon points="27,36 32,34 31,39 26,38" fill="#E07A5F" />
-          <polygon points="38,36 43,35 41,40" fill="#2A9D8F" />
-          <polygon points="19,41 24,40 22,44 18,43" fill="#1E1E24" opacity="0.8" />
-          <polygon points="33,41 38,40 36,44" fill="#D96B43" />
-          <polygon points="44,40 47,41 45,43" fill="#E9A84A" />
+          <polygon points="18,22 23,21 21,26" fill="#B87E34" />
+          <polygon points="30,21 35,21 34,25 29,24" fill="#B87E34" />
+          <polygon points="42,22 47,24 44,28" fill="#B87E34" />
+          <polygon points="23,28 27,27 25,32" fill="#B87E34" />
+          <polygon points="34,28 39,27 38,33 33,32" fill="#B87E34" />
+          <polygon points="44,31 48,32 46,36 43,35" fill="#B87E34" />
+          <polygon points="17,34 22,33 20,38" fill="#B87E34" />
+          <polygon points="27,36 32,34 31,39 26,38" fill="#B87E34" />
+          <polygon points="38,36 43,35 41,40" fill="#B87E34" />
+          <polygon points="19,41 24,40 22,44 18,43" fill="#B87E34" />
+          <polygon points="33,41 38,40 36,44" fill="#B87E34" />
+          <polygon points="44,40 47,41 45,43" fill="#B87E34" />
         </svg>
       );
     case "concrete":
