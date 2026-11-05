@@ -55,28 +55,28 @@ function renderMaterialSvg(id: string) {
         >
           <rect width="64" height="64" rx="12" fill="#F7F1E4" />
           <rect
-            x="12"
-            y="16"
-            width="40"
-            height="32"
-            rx="4"
-            fill="#EFE3C8"
+            x="14"
+            y="14"
+            width="36"
+            height="36"
+            rx="5"
+            fill="#D85B38"
             stroke="#1E1E24"
             strokeWidth="2.5"
           />
           {/* Angular terrazzo chips */}
-          <polygon points="18,22 23,21 21,26" fill="#B87E34" />
-          <polygon points="30,21 35,21 34,25 29,24" fill="#B87E34" />
-          <polygon points="42,22 47,24 44,28" fill="#B87E34" />
-          <polygon points="23,28 27,27 25,32" fill="#B87E34" />
-          <polygon points="34,28 39,27 38,33 33,32" fill="#B87E34" />
-          <polygon points="44,31 48,32 46,36 43,35" fill="#B87E34" />
-          <polygon points="17,34 22,33 20,38" fill="#B87E34" />
-          <polygon points="27,36 32,34 31,39 26,38" fill="#B87E34" />
-          <polygon points="38,36 43,35 41,40" fill="#B87E34" />
-          <polygon points="19,41 24,40 22,44 18,43" fill="#B87E34" />
-          <polygon points="33,41 38,40 36,44" fill="#B87E34" />
-          <polygon points="44,40 47,41 45,43" fill="#B87E34" />
+          <polygon points="20,20 25,19 23,24" fill="#F7E8C8" />
+          <polygon points="31,19 36,19 35,23 30,22" fill="#F7E8C8" />
+          <polygon points="41,20 45,22 43,26" fill="#F7E8C8" />
+          <polygon points="23,26 27,25 25,30" fill="#F7E8C8" />
+          <polygon points="33,26 38,25 37,30 32,29" fill="#F7E8C8" />
+          <polygon points="42,28 46,29 44,33 41,32" fill="#F7E8C8" />
+          <polygon points="18,32 23,31 21,36" fill="#F7E8C8" />
+          <polygon points="28,34 33,32 32,37 27,36" fill="#F7E8C8" />
+          <polygon points="38,34 43,33 41,38" fill="#F7E8C8" />
+          <polygon points="20,40 25,39 23,43 19,42" fill="#F7E8C8" />
+          <polygon points="32,41 37,40 35,44" fill="#F7E8C8" />
+          <polygon points="42,40 45,41 43,43" fill="#F7E8C8" />
         </svg>
       );
     case "concrete":
