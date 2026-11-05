@@ -211,9 +211,9 @@ export function App() {
       style={rootStyle}
       className="min-h-screen text-[#1E1E24] antialiased"
     >
-      {/* Neo-brutalist Header */}
-      <header className="sticky top-0 z-50 border-b-[2.5px] border-[#1E1E24] bg-[#F7F7F5]">
-        <div className="mx-auto flex h-16 max-w-[560px] items-center justify-between px-4">
+      {/* Neo-brutalist Header Container */}
+      <header className="mx-auto w-full max-w-[560px] px-4 pt-5 sm:pt-6">
+        <div className="w-full bg-white brutal-border brutal-shadow rounded-2xl px-5 py-3 sm:py-3.5 flex items-center justify-between">
           <a
             href="#"
             onClick={(e) => {
@@ -230,7 +230,7 @@ export function App() {
             type="button"
             aria-label="About Mixfix"
             onClick={openAbout}
-            className="brutal-border brutal-shadow rounded-full w-11 h-11 bg-white font-display font-bold flex items-center justify-center text-[#1E1E24] active:translate-x-0.5 active:translate-y-0.5 transition-transform"
+            className="brutal-border brutal-shadow rounded-full w-10 h-10 bg-white font-display font-bold flex items-center justify-center text-[#1E1E24] active:translate-x-0.5 active:translate-y-0.5 transition-transform cursor-pointer hover:bg-gray-50"
           >
             ?
           </button>
@@ -238,7 +238,7 @@ export function App() {
       </header>
 
       {/* Main Centred Column */}
-      <main className="mx-auto flex max-w-[560px] flex-col gap-5 px-4 pt-6 pb-16">
+      <main className="mx-auto flex max-w-[560px] flex-col gap-5 px-4 pt-5 pb-16">
         <MaterialPicker
           materials={materials}
           selectedId={selectedMaterialId}
