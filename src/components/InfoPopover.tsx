@@ -3,9 +3,16 @@ import { useEffect, useId, useRef, useState } from "react";
 export interface InfoPopoverProps {
   text: string;
   label?: string;
+  imageSrc?: string;
+  imageAlt?: string;
 }
 
-export function InfoPopover({ text, label = "More information" }: InfoPopoverProps) {
+export function InfoPopover({
+  text,
+  label = "More information",
+  imageSrc,
+  imageAlt = "",
+}: InfoPopoverProps) {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -73,9 +80,18 @@ export function InfoPopover({ text, label = "More information" }: InfoPopoverPro
           id={popoverId}
           role="dialog"
           aria-label={label}
-          className="absolute top-full right-0 z-30 mt-2 w-72 max-w-[calc(100vw-2rem)] bg-white brutal-border brutal-shadow rounded-xl p-4 text-sm font-body max-w-[280px] text-[#1E1E24]"
+          className={`absolute top-full right-0 z-30 mt-2 max-w-[calc(100vw-2rem)] bg-white brutal-border brutal-shadow rounded-xl p-3.5 text-sm font-body text-[#1E1E24] ${
+            imageSrc ? "w-[360px] sm:w-[400px] flex items-center gap-3.5" : "w-72 max-w-[280px]"
+          }`}
         >
-          {text}
+          {imageSrc && (
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-lg object-cover object-center"
+            />
+          )}
+          <div className="leading-snug">{text}</div>
         </div>
       )}
     </div>
