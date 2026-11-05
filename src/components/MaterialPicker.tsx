@@ -173,7 +173,7 @@ export function MaterialPicker({
           transitionDelay: hasSelection ? "0ms" : "90ms",
         }}
       >
-        <div className="overflow-hidden min-h-0">
+        <div className="overflow-hidden min-h-0 pl-[18.5px] pr-4">
           <h2 className="font-display text-2xl text-[#1E1E24]">
             What are we mixing?
           </h2>

@@ -213,7 +213,7 @@ export function App() {
     >
       {/* Neo-brutalist Header Container */}
       <header className="mx-auto w-full max-w-[560px] px-4 pt-5 sm:pt-6">
-        <div className="w-full bg-white brutal-border brutal-shadow rounded-none px-5 py-3 sm:py-3.5 flex items-center justify-between">
+        <div className="w-full bg-white brutal-border brutal-shadow rounded-none px-4 py-3 sm:py-3.5 flex items-center justify-between">
           <a
             href="#"
             onClick={(e) => {
