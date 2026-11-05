@@ -319,10 +319,10 @@ export function App() {
                   Where do the numbers come from?
                 </h3>
                 <p className="text-sm leading-relaxed text-gray-600">
-                  Ratios come from official datasheets or bench-tested workshop recipes (look for the Paul’s recipes badge).
+                  Ratios come from official datasheets or are bench-tested recipes (look for Paul’s recipes).
                 </p>
                 <p className="text-sm leading-relaxed text-gray-600">
-                  Mixfix does the math, but workshop safety is on you: check your material’s datasheet, wear gloves, and use a dust mask with dry powders.
+                  Just meake sure you check your material’s datasheet, wear gloves, and use a dust mask with dry powders.
                 </p>
               </div>
 
