@@ -80,18 +80,20 @@ export function InfoPopover({
           id={popoverId}
           role="dialog"
           aria-label={label}
-          className={`absolute top-full right-0 z-30 mt-2 max-w-[calc(100vw-2rem)] bg-white brutal-border brutal-shadow rounded-xl p-3.5 text-sm font-body text-[#1E1E24] ${
-            imageSrc ? "w-[360px] sm:w-[400px] flex items-center gap-3.5" : "w-72 max-w-[280px]"
+          className={`absolute top-full right-0 z-30 mt-2 max-w-[calc(100vw-2rem)] bg-white brutal-border brutal-shadow rounded-xl p-3.5 text-xs sm:text-sm font-body text-[#1E1E24] ${
+            imageSrc
+              ? "w-[360px] sm:w-[420px] flex items-center gap-3.5"
+              : "w-72 max-w-[280px]"
           }`}
         >
           {imageSrc && (
             <img
               src={imageSrc}
               alt={imageAlt}
-              className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-lg object-cover object-center"
+              className="w-1/2 shrink-0 aspect-[4/3] rounded-lg object-cover object-center border border-[#1E1E24]/10"
             />
           )}
-          <div className="leading-snug">{text}</div>
+          <div className="flex-1 min-w-0 leading-snug">{text}</div>
         </div>
       )}
     </div>
