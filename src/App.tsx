@@ -223,7 +223,13 @@ export function App() {
             className="font-display text-2xl tracking-tight"
           >
             <span className="text-[#1E1E24]">MIX</span>
-            <span className="text-[var(--accent)]">FIX</span>
+            <span
+              className={`transition-colors duration-200 ${
+                selectedMaterial ? "text-[var(--accent)]" : "text-[#1E1E24]"
+              }`}
+            >
+              FIX
+            </span>
           </a>
 
           <button
