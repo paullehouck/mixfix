@@ -87,11 +87,19 @@ export function InfoPopover({
           }`}
         >
           {imageSrc && (
-            <img
-              src={imageSrc}
-              alt={imageAlt}
-              className="w-1/2 shrink-0 aspect-[4/3] rounded-lg object-cover object-center border border-[#1E1E24]/10"
-            />
+            <div
+              className="w-1/2 shrink-0 aspect-[4/3] rounded-lg overflow-hidden border-2 border-[#1E1E24]"
+              style={{
+                backgroundColor:
+                  "color-mix(in srgb, var(--accent) 55%, white)",
+              }}
+            >
+              <img
+                src={imageSrc}
+                alt={imageAlt}
+                className="w-full h-full object-cover object-center mix-blend-multiply"
+              />
+            </div>
           )}
           <div className="flex-1 min-w-0 leading-snug">{text}</div>
         </div>
