@@ -181,26 +181,18 @@ export function ResultCard({
     lines.push("------------------------------");
     lines.push(`Total: ${result.totalGrams} g`);
 
-    const staticAdditives = variant.additives.filter(
-      (a) => a.type !== "reducesWater"
-    );
-    const activePlasticisers = activeAdditives.filter((active) => {
-      const def = variant.additives.find((a) => a.id === active.id);
-      return def?.type === "reducesWater";
-    });
-
-    if (staticAdditives.length > 0 || activePlasticisers.length > 0) {
+    if (activeAdditives.length > 0) {
       lines.push("");
       lines.push("Additives:");
-      for (const additive of staticAdditives) {
-        const { minG, maxG } = calculateAdditiveRange(additive, result);
-        const rangeText = formatGramRange(minG, maxG, additive.min);
-        lines.push(`- ${additive.name}: ${rangeText}`);
-      }
-      for (const active of activePlasticisers) {
+      for (const active of activeAdditives) {
         const def = variant.additives.find((a) => a.id === active.id);
-        if (def) {
+        if (!def) continue;
+        if (def.type === "reducesWater") {
           lines.push(`- ${def.name}: −${active.value}% water`);
+        } else {
+          const { minG, maxG } = calculateAdditiveRange(def, result);
+          const rangeText = formatGramRange(minG, maxG, def.min);
+          lines.push(`- ${def.name}: ${rangeText}`);
         }
       }
     }
@@ -410,25 +402,25 @@ export function ResultCard({
       {variant.additives.length > 0 && (
         <div className="flex flex-col gap-1 pt-1">
           {variant.additives.map((additive) => {
-            if (additive.type === "reducesWater") {
-              const activeEntry = activeAdditives.find(
-                (a) => a.id === additive.id
+            const activeEntry = activeAdditives.find(
+              (a) => a.id === additive.id
+            );
+
+            if (!activeEntry) {
+              return (
+                <button
+                  key={additive.id}
+                  type="button"
+                  onClick={() => handleExpandAdditive(additive)}
+                  className="brutal-border rounded-xl p-3 mb-2 bg-white flex items-center gap-2 font-display text-sm text-[#1E1E24] hover:bg-gray-50 w-full text-left transition-colors cursor-pointer"
+                >
+                  <span className="font-display text-base leading-none">＋</span>
+                  <span>{additive.name}</span>
+                </button>
               );
+            }
 
-              if (!activeEntry) {
-                return (
-                  <button
-                    key={additive.id}
-                    type="button"
-                    onClick={() => handleExpandAdditive(additive)}
-                    className="brutal-border rounded-xl p-3 mb-2 bg-white flex items-center gap-2 font-display text-sm text-[#1E1E24] hover:bg-gray-50 w-full text-left transition-colors cursor-pointer"
-                  >
-                    <span className="font-display text-base leading-none">＋</span>
-                    <span>{additive.name}</span>
-                  </button>
-                );
-              }
-
+            if (additive.type === "reducesWater") {
               const step = additive.max <= 5 ? 0.5 : 1;
 
               return (
@@ -454,7 +446,7 @@ export function ResultCard({
                         type="button"
                         aria-label={`Remove ${additive.name}`}
                         onClick={() => handleCollapseAdditive(additive.id)}
-                        className="inline-flex h-7 w-7 items-center justify-center rounded-lg font-display text-lg text-[#1E1E24] hover:bg-black/5"
+                        className="inline-flex h-7 w-7 items-center justify-center rounded-lg font-display text-lg text-[#1E1E24] hover:bg-black/5 cursor-pointer"
                       >
                         ×
                       </button>
@@ -494,7 +486,7 @@ export function ResultCard({
               );
             }
 
-            // Static gram range additive
+            // Gram range additive (when open)
             const { minG, maxG } = calculateAdditiveRange(additive, result);
             const rangeText = formatGramRange(minG, maxG, additive.min);
 
@@ -508,13 +500,23 @@ export function ResultCard({
                 key={additive.id}
                 className="brutal-border rounded-xl p-3 mb-2 bg-white flex flex-col gap-1.5 transition-colors"
               >
-                <div className="flex items-baseline justify-between gap-4">
+                <div className="flex items-center justify-between gap-4">
                   <span className="font-display text-sm text-[#1E1E24]">
                     {additive.name}
                   </span>
-                  <span className="font-display text-base text-[#1E1E24] text-right shrink-0 tabular-nums">
-                    {rangeText}
-                  </span>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className="font-display text-base text-[#1E1E24] text-right tabular-nums">
+                      {rangeText}
+                    </span>
+                    <button
+                      type="button"
+                      aria-label={`Remove ${additive.name}`}
+                      onClick={() => handleCollapseAdditive(additive.id)}
+                      className="inline-flex h-7 w-7 items-center justify-center rounded-lg font-display text-lg text-[#1E1E24] hover:bg-black/5 cursor-pointer"
+                    >
+                      ×
+                    </button>
+                  </div>
                 </div>
 
                 {additive.note && (
