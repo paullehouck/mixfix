@@ -290,9 +290,9 @@ export function App() {
           onClick={(e) => {
             if (e.target === e.currentTarget) closeAbout();
           }}
-          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 p-0 sm:p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-0 sm:p-4"
         >
-          <div className="animate-slide-up w-full max-w-[560px] max-h-[85vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl bg-white p-6 brutal-border border-t-[3px] border-[#1E1E24] flex flex-col gap-5">
+          <div className="w-full h-full sm:h-auto sm:max-w-[560px] sm:max-h-[85vh] overflow-y-auto overflow-x-hidden rounded-none sm:rounded-3xl bg-white p-5 sm:p-6 border-0 sm:brutal-border flex flex-col gap-5 min-w-0">
             <div className="flex items-center justify-between border-b-2 border-[#1E1E24] pb-3">
               <h2
                 id="about-title"
