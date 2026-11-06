@@ -26,7 +26,7 @@ const MATERIAL_CARD_BG: Record<string, string> = {
 const MATERIAL_ICON_BG: Record<string, string> = {
   silicone: "#FFFFFF",
   jesmonite: "#FFFFFF",
-  concrete: "#E9E9E8",
+  concrete: "#FFFFFF",
 };
 
 function getMaterialSubtitle(material: Material): string {
