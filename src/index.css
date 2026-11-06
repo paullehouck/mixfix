@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --font-display: 'Righteous', cursive;
+  --font-display: 'Bayon', sans-serif;
   --font-bayon: 'Bayon', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
   --accent: #FE91E8;
