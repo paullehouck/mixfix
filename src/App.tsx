@@ -53,14 +53,21 @@ export function App() {
   const selectedMaterial =
     materials.find((m) => m.id === selectedMaterialId) ?? null;
 
-  const accentColor = selectedMaterial?.theme.accent ?? DEFAULT_ACCENT;
+  const accentColor =
+    selectedMaterial?.id === "silicone"
+      ? "#FE91E8"
+      : selectedMaterial?.id === "jesmonite"
+        ? "#FFC901"
+        : selectedMaterial?.id === "concrete"
+          ? "#BCC7D4"
+          : (selectedMaterial?.theme.accent ?? DEFAULT_ACCENT);
   const accentSurfaceColor =
     selectedMaterial?.id === "silicone"
-      ? "#E8F8F7"
+      ? "#FE91E8"
       : selectedMaterial?.id === "jesmonite"
-        ? "#F7F1E4"
+        ? "#FFC901"
         : selectedMaterial?.id === "concrete"
-          ? "#E8E8E6"
+          ? "#BCC7D4"
           : (selectedMaterial?.theme.surface ?? DEFAULT_ACCENT_SURFACE);
 
   useEffect(() => {
@@ -209,34 +216,27 @@ export function App() {
   return (
     <div
       style={rootStyle}
-      className="min-h-screen text-[#1E1E24] antialiased"
+      className="min-h-screen text-[#222328] antialiased"
     >
-      {/* Neo-brutalist Header Container */}
-      <header className="mx-auto w-full max-w-[560px] px-4 pt-5 sm:pt-6">
-        <div className="w-full bg-white brutal-border brutal-shadow rounded-none px-4 py-3 sm:py-3.5 flex items-center justify-between">
+      {/* Header */}
+      <header className="w-full h-[70px] bg-[#FFFFFF] border-b-[2px] border-[#222328]">
+        <div className="mx-auto flex h-full max-w-[560px] items-center justify-between p-[16px]">
           <a
             href="#"
             onClick={(e) => {
               e.preventDefault();
               closeAbout();
             }}
-            className="font-display text-2xl tracking-tight"
+            className="font-bayon font-normal text-[36px] leading-[29px] tracking-[0px] text-[#000000]"
           >
-            <span className="text-[#1E1E24]">MIX</span>
-            <span
-              className={`transition-colors duration-200 ${
-                selectedMaterial ? "text-[var(--accent)]" : "text-[#1E1E24]"
-              }`}
-            >
-              FIX
-            </span>
+            Fix your mix
           </a>
 
           <button
             type="button"
             aria-label="About Mixfix"
             onClick={openAbout}
-            className="brutal-border brutal-shadow rounded-full w-10 h-10 bg-white font-display font-bold flex items-center justify-center text-[#1E1E24] active:translate-x-0.5 active:translate-y-0.5 transition-transform cursor-pointer hover:bg-gray-50"
+            className="w-[38px] h-[38px] rounded-full bg-[#FFFFFF] border-[2.5px] border-[#222328] shadow-[4px_5px_0px_0px_#222328] font-display font-normal text-[19px] leading-none flex items-center justify-center text-[#222328] active:translate-x-0.5 active:translate-y-0.5 transition-transform cursor-pointer"
           >
             ?
           </button>
@@ -244,7 +244,7 @@ export function App() {
       </header>
 
       {/* Main Centred Column */}
-      <main className="mx-auto flex max-w-[560px] flex-col gap-5 px-4 pt-5 pb-16">
+      <main className="mx-auto flex max-w-[560px] flex-col gap-5 px-[16px] pt-[28px] pb-[28px]">
         <MaterialPicker
           materials={materials}
           selectedId={selectedMaterialId}
