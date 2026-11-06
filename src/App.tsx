@@ -227,7 +227,7 @@ export function App() {
       className="min-h-screen text-[#222328] antialiased"
     >
       {/* Header */}
-      <header className="w-full h-[70px] bg-[#FFFFFF] border-b-[2px] border-[#222328]">
+      <header className="sticky top-0 z-20 w-full h-[70px] bg-[#FFFFFF] border-b-[2px] border-[#222328]">
         <div className="mx-auto flex h-full max-w-[560px] items-center justify-between p-[16px]">
           <a
             href="#"
