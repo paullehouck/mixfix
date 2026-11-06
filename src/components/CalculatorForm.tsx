@@ -46,6 +46,39 @@ const WC_OPTIONS: { key: WcRatioKey; label: string }[] = [
   { key: "stiff", label: "Stiff" },
 ];
 
+function renderVolumeHint(hintText: string) {
+  const target = "1 g of water = 1 ml";
+  const parts = hintText.split(target);
+  if (parts.length === 1) {
+    // If not matching exact target, try matching variations like "1g of water equals 1 ml"
+    const fallbackTarget = "1g of water equals 1 ml";
+    const fallbackParts = hintText.split(fallbackTarget);
+    if (fallbackParts.length > 1) {
+      return (
+        <>
+          {fallbackParts.map((part, i) => (
+            <span key={i}>
+              {part}
+              {i < fallbackParts.length - 1 && <strong>1 g of water = 1 ml</strong>}
+            </span>
+          ))}
+        </>
+      );
+    }
+    return hintText;
+  }
+  return (
+    <>
+      {parts.map((part, i) => (
+        <span key={i}>
+          {part}
+          {i < parts.length - 1 && <strong>{target}</strong>}
+        </span>
+      ))}
+    </>
+  );
+}
+
 export function createInitialFormState(material: Material): CalculatorFormState {
   const liveVariants = material.variants.filter((v) => v.status === "live");
   const defaultVariant = liveVariants[0] ?? material.variants[0];
@@ -355,7 +388,7 @@ export function CalculatorForm({
             </label>
             <InfoPopover
               label="How to measure mould volume"
-              text={material.volumeHint ?? DEFAULT_VOLUME_HINT}
+              text={renderVolumeHint(material.volumeHint ?? DEFAULT_VOLUME_HINT)}
               imageSrc={`/volume-hint-${material.id}.jpg`}
               imageAlt="Water pouring into a mould on a scale"
             />

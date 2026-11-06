@@ -1,7 +1,7 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 
 export interface InfoPopoverProps {
-  text: string;
+  text: ReactNode;
   label?: string;
   imageSrc?: string;
   imageAlt?: string;

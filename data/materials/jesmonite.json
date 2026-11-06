@@ -8,6 +8,7 @@
     "blockIllustration": "jesmonite-slab",
     "selectAnimation": "drip"
   },
+  "volumeHint": "Fill your mould with water and weigh it on a scale, as 1 g of water = 1 ml. Alternatively, submerge your master in water and record the volume increase.",
   "variants": [
     {
       "id": "ac100-standard",
