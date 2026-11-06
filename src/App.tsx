@@ -76,7 +76,15 @@ export function App() {
       "--accent-surface",
       accentSurfaceColor
     );
-  }, [accentColor, accentSurfaceColor]);
+    if (selectedMaterial?.id) {
+      document.documentElement.setAttribute(
+        "data-material",
+        selectedMaterial.id
+      );
+    } else {
+      document.documentElement.removeAttribute("data-material");
+    }
+  }, [accentColor, accentSurfaceColor, selectedMaterial?.id]);
 
   function openAbout() {
     window.location.hash = "about";
