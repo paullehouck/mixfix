@@ -8,7 +8,7 @@
     "blockIllustration": "concrete-block",
     "selectAnimation": "drip"
   },
-  "volumeHint": "Fill the mould with water and weigh it (1g of water equals 1 ml). Alternatively, submerge your master in water and record the volume increase.",
+  "volumeHint": "Fill your mould with water and weigh it on a scale, as 1 g of water = 1 ml. Alternatively, submerge your master in a container of water and record the volume increase.",
   "variants": [
     {
       "id": "fine-craft",

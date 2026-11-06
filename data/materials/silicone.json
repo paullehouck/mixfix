@@ -8,7 +8,7 @@
     "blockIllustration": "silicone-block",
     "selectAnimation": "drip"
   },
-  "volumeHint": "Put your master in the mould box, fill around it with water and weigh the water. Its grams are the silicone volume in ml.",
+  "volumeHint": "Place your master in the mould box, fill around it with water, and weigh the water on a scale. 1 g of water = 1 ml of volume.",
   "variants": [
     {
       "id": "platinum-1to1-weight",
