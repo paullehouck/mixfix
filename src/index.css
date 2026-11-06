@@ -11,6 +11,10 @@
   --shadow-brutal-lg: 4px 5px 0px #222328;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   font-family: var(--font-body);
   background-color: #FFFFFF;
