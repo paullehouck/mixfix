@@ -356,8 +356,8 @@ export function CalculatorForm({
             <InfoPopover
               label="How to measure mould volume"
               text={material.volumeHint ?? DEFAULT_VOLUME_HINT}
-              imageSrc="/volume-hint.jpg"
-              imageAlt="Water pouring into a mould"
+              imageSrc={`/volume-hint-${material.id}.jpg`}
+              imageAlt="Water pouring into a mould on a scale"
             />
           </div>
 

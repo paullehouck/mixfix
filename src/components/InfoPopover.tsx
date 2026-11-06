@@ -90,7 +90,7 @@ export function InfoPopover({
             <img
               src={imageSrc}
               alt={imageAlt}
-              className="w-1/2 shrink-0 aspect-[4/3] rounded-lg object-cover object-center border border-[#1E1E24]/10"
+              className="w-1/2 shrink-0 aspect-square rounded-lg object-contain object-center"
             />
           )}
           <div className="flex-1 min-w-0 leading-snug">{text}</div>
