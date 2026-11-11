@@ -69,3 +69,32 @@ body {
 .animate-puff { animation: puff 0.4s ease-out forwards; }
 .animate-thud { animation: thud 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards; }
 .animate-fade-up { animation: fadeUp 0.3s ease-out forwards; }
+
+/* Slow, liquid-like drift for the decorative background clouds */
+@keyframes liquidFlowA {
+  0%   { transform: translate(0, 0) scale(1, 1) skew(0deg, 0deg); }
+  25%  { transform: translate(16px, 20px) scale(1.05, 0.97) skew(-3deg, 1.5deg); }
+  50%  { transform: translate(-10px, 34px) scale(0.97, 1.05) skew(2.5deg, -1.5deg); }
+  75%  { transform: translate(-20px, 10px) scale(1.04, 1.03) skew(3deg, 1deg); }
+  100% { transform: translate(0, 0) scale(1, 1) skew(0deg, 0deg); }
+}
+@keyframes liquidFlowB {
+  0%   { transform: translate(0, 0) scale(1, 1) skew(0deg, 0deg); }
+  30%  { transform: translate(-20px, -16px) scale(1.07, 1.05) skew(3deg, -2deg); }
+  60%  { transform: translate(-8px, -30px) scale(0.97, 1.08) skew(-3deg, 1.5deg); }
+  100% { transform: translate(0, 0) scale(1, 1) skew(0deg, 0deg); }
+}
+.liquid-flow-a {
+  transform-origin: 150px 250px;
+  animation: liquidFlowA 16s ease-in-out infinite;
+}
+.liquid-flow-b {
+  transform-origin: 330px 600px;
+  animation: liquidFlowB 12s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .liquid-flow-a,
+  .liquid-flow-b {
+    animation: none;
+  }
+}

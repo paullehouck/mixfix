@@ -327,26 +327,30 @@ export function App() {
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full block"
         >
-          <path
-            d={topLeftPath}
-            style={{
-              fill: cloudStyle.fill,
-              transform: cloudStyle.topTransform,
-              transformOrigin: "150px 250px",
-              transition:
-                "fill 550ms cubic-bezier(0.22, 1, 0.36, 1), transform 650ms cubic-bezier(0.22, 1, 0.36, 1)",
-            }}
-          />
-          <path
-            d={bottomRightPath}
-            style={{
-              fill: cloudStyle.fill,
-              transform: cloudStyle.bottomTransform,
-              transformOrigin: "330px 600px",
-              transition:
-                "fill 550ms cubic-bezier(0.22, 1, 0.36, 1), transform 650ms cubic-bezier(0.22, 1, 0.36, 1)",
-            }}
-          />
+          <g className="liquid-flow-a">
+            <path
+              d={topLeftPath}
+              style={{
+                fill: cloudStyle.fill,
+                transform: cloudStyle.topTransform,
+                transformOrigin: "150px 250px",
+                transition:
+                  "fill 550ms cubic-bezier(0.22, 1, 0.36, 1), transform 650ms cubic-bezier(0.22, 1, 0.36, 1)",
+              }}
+            />
+          </g>
+          <g className="liquid-flow-b">
+            <path
+              d={bottomRightPath}
+              style={{
+                fill: cloudStyle.fill,
+                transform: cloudStyle.bottomTransform,
+                transformOrigin: "330px 600px",
+                transition:
+                  "fill 550ms cubic-bezier(0.22, 1, 0.36, 1), transform 650ms cubic-bezier(0.22, 1, 0.36, 1)",
+              }}
+            />
+          </g>
         </svg>
       </div>
 
