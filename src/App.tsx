@@ -19,6 +19,32 @@ import {
 const DEFAULT_ACCENT = "#1FB5A6";
 const DEFAULT_ACCENT_SURFACE = "#E8F8F7";
 
+const MATERIAL_CLOUD_STYLE: Record<
+  string,
+  { fill: string; topTransform: string; bottomTransform: string }
+> = {
+  default: {
+    fill: "#C2C6EC",
+    topTransform: "translate3d(0px, 0px, 0) scale(1, 1) rotate(0deg)",
+    bottomTransform: "translate3d(0px, 0px, 0) scale(1, 1) rotate(0deg)",
+  },
+  silicone: {
+    fill: "#FFC2F2",
+    topTransform: "translate3d(-18px, -24px, 0) scale(1.06, 0.96) rotate(-2deg)",
+    bottomTransform: "translate3d(-24px, -18px, 0) scale(1.08, 1.06) rotate(2.5deg)",
+  },
+  jesmonite: {
+    fill: "#FFE270",
+    topTransform: "translate3d(16px, -28px, 0) scale(1.04, 1.03) rotate(1.8deg)",
+    bottomTransform: "translate3d(-18px, -26px, 0) scale(1.1, 1.05) rotate(-2deg)",
+  },
+  concrete: {
+    fill: "#D5DFEA",
+    topTransform: "translate3d(-14px, 16px, 0) scale(0.98, 1.05) rotate(-1.5deg)",
+    bottomTransform: "translate3d(-28px, -14px, 0) scale(1.07, 1.08) rotate(2deg)",
+  },
+};
+
 function lerp(a: number, b: number, t: number): number {
   return Number((a + (b - a) * t).toFixed(2));
 }
@@ -34,8 +60,9 @@ function getResponsiveBackgroundPaths(aspectRatio: number) {
   const L = (m: number, d: number) => lerp(m, d, t);
 
   const topLeftPath = [
-    `M 0 0`,
+    `M -120 -120`,
     `H ${L(302, 295)}`,
+    `L ${L(302, 295)} 0`,
     `C ${L(300, 295)} ${L(20, 35)} ${L(294, 282)} ${L(32, 55)} ${L(294, 282)} ${L(50, 90)}`,
     `C ${L(294, 282)} ${L(68, 125)} ${L(303, 294)} ${L(80, 145)} ${L(302, 294)} ${L(96, 180)}`,
     `C ${L(300, 294)} ${L(114, 220)} ${L(268, 260)} ${L(120, 245)} ${L(268, 260)} ${L(142, 290)}`,
@@ -43,15 +70,18 @@ function getResponsiveBackgroundPaths(aspectRatio: number) {
     `C ${L(240, 250)} ${L(315, 460)} ${L(268, 175)} ${L(355, 475)} ${L(261, 155)} ${L(392, 520)}`,
     `C ${L(252, 135)} ${L(435, 565)} ${L(110, 142)} ${L(510, 595)} ${L(65, 110)} ${L(552, 630)}`,
     `C ${L(48, 82)} ${L(575, 660)} ${L(42, 42)} ${L(635, 678)} 0 ${L(668, 687)}`,
-    `V 0 Z`,
+    `L -120 ${L(668, 687)}`,
+    `V -120 Z`,
   ].join(" ");
 
   const bottomRightPath = [
-    `M 399 ${L(527, 440)}`,
+    `M 520 ${L(527, 440)}`,
+    `L 399 ${L(527, 440)}`,
     `C ${L(368, 360)} ${L(536, 452)} ${L(315, 316)} ${L(544, 476)} ${L(292, 302)} ${L(556, 520)}`,
     `C ${L(282, 290)} ${L(566, 558)} ${L(288, 298)} ${L(606, 588)} ${L(274, 284)} ${L(622, 622)}`,
     `C ${L(258, 272)} ${L(632, 650)} ${L(230, 254)} ${L(636, 662)} ${L(252, 254)} 687`,
-    `H 399 V ${L(527, 440)} Z`,
+    `L ${L(252, 254)} 800`,
+    `H 520 V ${L(527, 440)} Z`,
   ].join(" ");
 
   return { topLeftPath, bottomRightPath };
@@ -276,6 +306,9 @@ export function App() {
 
   const { topLeftPath, bottomRightPath } =
     getResponsiveBackgroundPaths(viewportAspect);
+  const cloudStyle =
+    MATERIAL_CLOUD_STYLE[selectedMaterial?.id ?? "default"] ??
+    MATERIAL_CLOUD_STYLE.default;
 
   return (
     <div
@@ -294,8 +327,26 @@ export function App() {
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full block"
         >
-          <path d={topLeftPath} fill="var(--bg-lavender)" />
-          <path d={bottomRightPath} fill="var(--bg-lavender)" />
+          <path
+            d={topLeftPath}
+            style={{
+              fill: cloudStyle.fill,
+              transform: cloudStyle.topTransform,
+              transformOrigin: "150px 250px",
+              transition:
+                "fill 550ms cubic-bezier(0.22, 1, 0.36, 1), transform 650ms cubic-bezier(0.22, 1, 0.36, 1)",
+            }}
+          />
+          <path
+            d={bottomRightPath}
+            style={{
+              fill: cloudStyle.fill,
+              transform: cloudStyle.bottomTransform,
+              transformOrigin: "330px 600px",
+              transition:
+                "fill 550ms cubic-bezier(0.22, 1, 0.36, 1), transform 650ms cubic-bezier(0.22, 1, 0.36, 1)",
+            }}
+          />
         </svg>
       </div>
 
