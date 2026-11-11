@@ -537,11 +537,11 @@ export function ResultCard({
       )}
 
       {/* Action Buttons */}
-      <div className="mt-1 flex flex-col">
+      <div className="mt-3 flex flex-row gap-3">
         <button
           type="button"
           onClick={handleCopyRecipe}
-          className="bg-[var(--color-primary)] text-white font-display brutal-shadow rounded-xl px-6 py-3 w-full mt-4 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
+          className="flex-1 bg-white brutal-border text-[var(--color-primary)] font-display brutal-shadow rounded-xl px-4 py-3 active:translate-x-0.5 active:translate-y-0.5 transition-all hover:bg-[#F3F5FC] cursor-pointer"
         >
           {copied ? "Copied!" : "Copy recipe"}
         </button>
@@ -549,7 +549,7 @@ export function ResultCard({
         <button
           type="button"
           onClick={onReset}
-          className="bg-white brutal-border text-[var(--color-primary)] font-display brutal-shadow rounded-xl px-6 py-3 w-full mt-2 active:translate-x-0.5 active:translate-y-0.5 transition-all hover:bg-[#F3F5FC] cursor-pointer"
+          className="flex-1 bg-white brutal-border text-[var(--color-primary)] font-display brutal-shadow rounded-xl px-4 py-3 active:translate-x-0.5 active:translate-y-0.5 transition-all hover:bg-[#F3F5FC] cursor-pointer"
         >
           Mix again
         </button>
