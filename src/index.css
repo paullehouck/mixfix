@@ -4,41 +4,21 @@
   --font-display: 'Bayon', sans-serif;
   --font-bayon: 'Bayon', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-help: 'Righteous', sans-serif;
+  --bg-cream: #FFF6ED;
+  --bg-lavender: #C2C6EC;
+  --color-primary: #0825B3;
+  --color-description: #05166B;
+  --card-silicone: #FE91E8;
+  --card-jesmonite: #FFC901;
+  --card-concrete: #BCC7D4;
+  --icon-bg-default: #FFFFFF;
+  --icon-bg-concrete: #E9E9E8;
   --accent: #FE91E8;
   --accent-surface: #FE91E8;
-  --border: #222328;
-  --shadow-brutal: 4px 5px 0px #222328;
-  --shadow-brutal-lg: 4px 5px 0px #222328;
-  --page-gradient: linear-gradient(
-    155deg,
-    rgba(255, 183, 240, 0.8) 0%,
-    rgba(255, 222, 99, 0.8) 40.7%,
-    rgba(255, 255, 255, 0.8) 100%
-  );
-}
-
-html[data-material="silicone"] {
-  --page-gradient: linear-gradient(
-    155deg,
-    rgba(255, 183, 240, 0.8) 0%,
-    rgba(255, 255, 255, 0.8) 100%
-  );
-}
-
-html[data-material="jesmonite"] {
-  --page-gradient: linear-gradient(
-    155deg,
-    rgba(255, 222, 99, 0.8) 0%,
-    rgba(255, 255, 255, 0.8) 100%
-  );
-}
-
-html[data-material="concrete"] {
-  --page-gradient: linear-gradient(
-    155deg,
-    rgba(188, 199, 212, 0.8) 0%,
-    rgba(255, 255, 255, 0.8) 100%
-  );
+  --border: #0825B3;
+  --shadow-brutal: 4px 5px 0px #0825B3;
+  --shadow-brutal-lg: 4px 5px 0px #0825B3;
 }
 
 html {
@@ -47,9 +27,8 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: #FFFFFF;
-  background-image: var(--page-gradient);
-  background-attachment: fixed;
+  background-color: var(--bg-cream);
+  color: var(--color-primary);
   min-height: 100vh;
 }
 
@@ -60,6 +39,7 @@ body {
 .font-display { font-family: var(--font-display); }
 .font-bayon { font-family: var(--font-bayon); text-transform: uppercase; }
 .font-body { font-family: var(--font-body); }
+.font-help { font-family: var(--font-help); }
 
 @keyframes drip {
   0% { transform: scaleY(0); transform-origin: top; opacity: 0; }

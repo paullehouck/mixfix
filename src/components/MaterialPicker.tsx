@@ -18,15 +18,15 @@ const MATERIAL_SUBTITLES: Record<string, string> = {
 };
 
 const MATERIAL_CARD_BG: Record<string, string> = {
-  silicone: "#FE91E8",
-  jesmonite: "#FFC901",
-  concrete: "#BCC7D4",
+  silicone: "var(--card-silicone)",
+  jesmonite: "var(--card-jesmonite)",
+  concrete: "var(--card-concrete)",
 };
 
 const MATERIAL_ICON_BG: Record<string, string> = {
-  silicone: "#FFFFFF",
-  jesmonite: "#FFFFFF",
-  concrete: "#FFFFFF",
+  silicone: "var(--icon-bg-default)",
+  jesmonite: "var(--icon-bg-default)",
+  concrete: "var(--icon-bg-concrete)",
 };
 
 function getMaterialSubtitle(material: Material): string {
@@ -48,7 +48,7 @@ function renderMaterialSvg(id: string) {
           <path
             d="M31 11C31 11 17.5 27.5 17.5 37.5C17.5 44.9558 23.5442 51 31 51C38.4558 51 44.5 44.9558 44.5 37.5C44.5 27.5 31 11 31 11Z"
             fill="#FE91E8"
-            stroke="#222328"
+            stroke="#0825B3"
             strokeWidth="2.5"
             strokeLinejoin="round"
           />
@@ -79,7 +79,7 @@ function renderMaterialSvg(id: string) {
             height="29"
             rx="3"
             fill="#FFC901"
-            stroke="#222328"
+            stroke="#0825B3"
             strokeWidth="2.2"
           />
           {/* Darker square speckles */}
@@ -159,7 +159,7 @@ function renderMaterialSvg(id: string) {
             width="40"
             height="26"
             rx="2"
-            stroke="#222328"
+            stroke="#0825B3"
             strokeWidth="2.5"
           />
         </svg>
@@ -191,7 +191,7 @@ export function MaterialPicker({
         className={`grid transition-[grid-template-rows,opacity,margin-bottom] duration-300 ease-in-out ${
           hasSelection
             ? "grid-rows-[0fr] opacity-0 mb-0 pointer-events-none"
-            : "grid-rows-[1fr] opacity-100 mb-[16px]"
+            : "grid-rows-[1fr] opacity-100 mb-[24px]"
         }`}
         style={{
           transitionDuration: "280ms",
@@ -199,9 +199,9 @@ export function MaterialPicker({
           transitionDelay: hasSelection ? "0ms" : "90ms",
         }}
       >
-        <div className="overflow-hidden min-h-0 px-[16px]">
-          <h2 className="font-bayon font-normal text-[24px] leading-[29px] tracking-[0px] text-[#222328]">
-            LETS MIX SOME...
+        <div className="overflow-hidden min-h-0">
+          <h2 className="font-bayon font-normal text-[30px] leading-[29px] tracking-[0px] text-[var(--color-primary)]">
+            LET’S MIX SOME...
           </h2>
         </div>
       </div>
@@ -240,24 +240,24 @@ export function MaterialPicker({
                     key={`selected-${material.id}`}
                     style={{
                       backgroundColor: cardBg,
-                      boxShadow: "4px 5px 0px 0px #222328",
+                      boxShadow: "var(--shadow-brutal)",
                     }}
-                    className="w-full min-h-[99px] border-[2px] border-[#222328] rounded-[16px] p-[14px] flex items-center justify-between gap-[16px]"
+                    className="w-full min-h-[99px] border-[2px] border-[var(--color-primary)] rounded-[16px] p-[14px] flex items-center justify-between gap-[16px]"
                   >
                     <div className="flex items-center gap-[16px] min-w-0 flex-1">
                       <div
                         style={{ backgroundColor: iconBg }}
-                        className={`w-[62px] h-[62px] rounded-[11px] border-[2.5px] border-[#222328] flex items-center justify-center shrink-0 overflow-hidden ${activeAnimation}`}
+                        className={`w-[62px] h-[62px] rounded-[11px] border-[2.5px] border-[var(--color-primary)] flex items-center justify-center shrink-0 overflow-hidden ${activeAnimation}`}
                         onAnimationEnd={() => setActiveAnimation("")}
                       >
                         {renderMaterialSvg(material.id)}
                       </div>
                       <div className="min-w-0 flex flex-col gap-[4px] flex-1">
-                        <span className="font-bayon font-normal text-[24px] leading-[25px] tracking-[0px] text-[#222328] block truncate">
+                        <span className="font-bayon font-normal text-[24px] leading-[25px] tracking-[0px] text-[var(--color-primary)] block break-words">
                           {material.name}
                         </span>
                         {subtitle && (
-                          <span className="font-body font-normal text-[14px] leading-[20px] tracking-[0px] text-[#343434] block truncate">
+                          <span className="font-body font-normal text-[14px] leading-[20px] tracking-[0px] text-[var(--color-description)] block break-words">
                             {subtitle}
                           </span>
                         )}
@@ -267,7 +267,7 @@ export function MaterialPicker({
                     <button
                       type="button"
                       onClick={() => onSelect(null)}
-                      className="bg-[#FFFFFF] border-[2px] border-[#222328] text-[#222328] font-display text-sm px-3 py-1 rounded-xl shadow-[4px_5px_0px_0px_#222328] shrink-0 active:translate-x-0.5 active:translate-y-0.5 transition-transform cursor-pointer"
+                      className="bg-[#FFFFFF] border-[2px] border-[var(--color-primary)] text-[var(--color-primary)] font-display text-sm px-3 py-1 rounded-xl shadow-[4px_5px_0px_0px_var(--color-primary)] shrink-0 active:translate-x-0.5 active:translate-y-0.5 transition-transform cursor-pointer"
                     >
                       Change
                     </button>
@@ -282,22 +282,22 @@ export function MaterialPicker({
                     className={`w-full min-h-[99px] rounded-[16px] p-[14px] flex items-center justify-between gap-[16px] cursor-pointer text-left active:translate-x-0.5 active:translate-y-0.5 transition-all duration-150 ${
                       isHidden
                         ? "border-[2px] border-transparent shadow-none"
-                        : "border-[2px] border-[#222328] shadow-[4px_5px_0px_0px_#222328]"
+                        : "border-[2px] border-[var(--color-primary)] shadow-[4px_5px_0px_0px_var(--color-primary)]"
                     }`}
                   >
                     <div className="flex items-center gap-[16px] min-w-0 flex-1">
                       <div
                         style={{ backgroundColor: iconBg }}
-                        className="w-[62px] h-[62px] rounded-[11px] border-[2.5px] border-[#222328] flex items-center justify-center shrink-0 overflow-hidden"
+                        className="w-[62px] h-[62px] rounded-[11px] border-[2.5px] border-[var(--color-primary)] flex items-center justify-center shrink-0 overflow-hidden"
                       >
                         {renderMaterialSvg(material.id)}
                       </div>
                       <div className="min-w-0 flex flex-col gap-[4px] flex-1">
-                        <span className="font-bayon font-normal text-[24px] leading-[25px] tracking-[0px] text-[#222328] block truncate">
+                        <span className="font-bayon font-normal text-[24px] leading-[25px] tracking-[0px] text-[var(--color-primary)] block break-words">
                           {material.name}
                         </span>
                         {subtitle && (
-                          <span className="font-body font-normal text-[14px] leading-[20px] tracking-[0px] text-[#343434] block truncate">
+                          <span className="font-body font-normal text-[14px] leading-[20px] tracking-[0px] text-[var(--color-description)] block break-words">
                             {subtitle}
                           </span>
                         )}
@@ -306,7 +306,7 @@ export function MaterialPicker({
 
                     <div
                       aria-hidden="true"
-                      className="w-[34px] h-[34px] rounded-full border-[2.5px] border-[#222328] flex items-center justify-center shrink-0 text-[#222328] bg-[#FFFFFF]"
+                      className="w-[34px] h-[34px] rounded-full border-[2.5px] border-[var(--color-primary)] flex items-center justify-center shrink-0 text-[var(--color-primary)] bg-[#FFFFFF]"
                     >
                       <svg
                         width="15"
@@ -318,7 +318,7 @@ export function MaterialPicker({
                       >
                         <path
                           d="M1 7.5H14M14 7.5L8.5 2M14 7.5L8.5 13"
-                          stroke="#222328"
+                          stroke="#0825B3"
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"

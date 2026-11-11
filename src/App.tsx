@@ -19,6 +19,44 @@ import {
 const DEFAULT_ACCENT = "#1FB5A6";
 const DEFAULT_ACCENT_SURFACE = "#E8F8F7";
 
+function lerp(a: number, b: number, t: number): number {
+  return Number((a + (b - a) * t).toFixed(2));
+}
+
+function getResponsiveBackgroundPaths(aspectRatio: number) {
+  const mobileAspect = 399 / 687;
+  const desktopAspect = 1440 / 800;
+  const t = Math.min(
+    1,
+    Math.max(0, (aspectRatio - mobileAspect) / (desktopAspect - mobileAspect))
+  );
+
+  const L = (m: number, d: number) => lerp(m, d, t);
+
+  const topLeftPath = [
+    `M 0 0`,
+    `H ${L(302, 295)}`,
+    `C ${L(300, 295)} ${L(20, 35)} ${L(294, 282)} ${L(32, 55)} ${L(294, 282)} ${L(50, 90)}`,
+    `C ${L(294, 282)} ${L(68, 125)} ${L(303, 294)} ${L(80, 145)} ${L(302, 294)} ${L(96, 180)}`,
+    `C ${L(300, 294)} ${L(114, 220)} ${L(268, 260)} ${L(120, 245)} ${L(268, 260)} ${L(142, 290)}`,
+    `C ${L(268, 260)} ${L(165, 335)} ${L(236, 272)} ${L(235, 365)} ${L(238, 262)} ${L(276, 410)}`,
+    `C ${L(240, 250)} ${L(315, 460)} ${L(268, 175)} ${L(355, 475)} ${L(261, 155)} ${L(392, 520)}`,
+    `C ${L(252, 135)} ${L(435, 565)} ${L(110, 142)} ${L(510, 595)} ${L(65, 110)} ${L(552, 630)}`,
+    `C ${L(48, 82)} ${L(575, 660)} ${L(42, 42)} ${L(635, 678)} 0 ${L(668, 687)}`,
+    `V 0 Z`,
+  ].join(" ");
+
+  const bottomRightPath = [
+    `M 399 ${L(527, 440)}`,
+    `C ${L(368, 360)} ${L(536, 452)} ${L(315, 316)} ${L(544, 476)} ${L(292, 302)} ${L(556, 520)}`,
+    `C ${L(282, 290)} ${L(566, 558)} ${L(288, 298)} ${L(606, 588)} ${L(274, 284)} ${L(622, 622)}`,
+    `C ${L(258, 272)} ${L(632, 650)} ${L(230, 254)} ${L(636, 662)} ${L(252, 254)} 687`,
+    `H 399 V ${L(527, 440)} Z`,
+  ].join(" ");
+
+  return { topLeftPath, bottomRightPath };
+}
+
 export function App() {
   const [selectedMaterialId, setSelectedMaterialId] = useState<string | null>(
     null
@@ -42,12 +80,27 @@ export function App() {
     () => typeof window !== "undefined" && window.location.hash === "#about"
   );
 
+  const [viewportAspect, setViewportAspect] = useState<number>(() =>
+    typeof window !== "undefined" && window.innerHeight > 0
+      ? window.innerWidth / window.innerHeight
+      : 399 / 687
+  );
+
   useEffect(() => {
     function handleHashChange() {
       setIsAboutOpen(window.location.hash === "#about");
     }
+    function handleResize() {
+      if (window.innerHeight > 0) {
+        setViewportAspect(window.innerWidth / window.innerHeight);
+      }
+    }
     window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const selectedMaterial =
@@ -221,21 +274,41 @@ export function App() {
     "--accent-surface": accentSurfaceColor,
   } as CSSProperties;
 
+  const { topLeftPath, bottomRightPath } =
+    getResponsiveBackgroundPaths(viewportAspect);
+
   return (
     <div
       style={rootStyle}
-      className="min-h-screen text-[#222328] antialiased"
+      className="relative min-h-screen text-[var(--color-primary)] antialiased"
     >
+      {/* Decorative Background */}
+      <div
+        aria-hidden="true"
+        className="fixed inset-0 pointer-events-none overflow-hidden z-0 bg-[var(--bg-cream)]"
+      >
+        <svg
+          viewBox="0 0 399 687"
+          preserveAspectRatio="none"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-full block"
+        >
+          <path d={topLeftPath} fill="var(--bg-lavender)" />
+          <path d={bottomRightPath} fill="var(--bg-lavender)" />
+        </svg>
+      </div>
+
       {/* Header */}
-      <header className="sticky top-0 z-20 w-full h-[70px] bg-[#FFFFFF] border-b-[2px] border-[#222328]">
-        <div className="mx-auto flex h-full max-w-[560px] items-center justify-between p-[16px]">
+      <header className="relative z-10 w-full h-[86px]">
+        <div className="mx-auto flex h-full max-w-[560px] items-center justify-between px-[16px]">
           <a
             href="#"
             onClick={(e) => {
               e.preventDefault();
               closeAbout();
             }}
-            className="font-bayon font-normal text-[36px] leading-[29px] tracking-[0px] text-[#000000]"
+            className="font-bayon font-normal text-[42px] leading-[29px] tracking-[0.02em] text-[var(--color-primary)]"
           >
             Fix your mix
           </a>
@@ -244,7 +317,7 @@ export function App() {
             type="button"
             aria-label="About Mixfix"
             onClick={openAbout}
-            className="w-[38px] h-[38px] rounded-full bg-[#FFFFFF] border-[2.5px] border-[#222328] shadow-[4px_5px_0px_0px_#222328] font-display font-normal text-[19px] leading-none flex items-center justify-center text-[#222328] active:translate-x-0.5 active:translate-y-0.5 transition-transform cursor-pointer"
+            className="w-[38px] h-[38px] rounded-full bg-[#FFFFFF] border-[2.5px] border-[var(--color-primary)] shadow-[4px_5px_0px_0px_var(--color-primary)] font-help font-normal text-[19px] leading-none flex items-center justify-center text-[var(--color-primary)] active:translate-x-0.5 active:translate-y-0.5 transition-transform cursor-pointer"
           >
             ?
           </button>
@@ -252,7 +325,7 @@ export function App() {
       </header>
 
       {/* Main Centred Column */}
-      <main className="mx-auto flex max-w-[560px] flex-col gap-5 px-[16px] pt-[28px] pb-[28px]">
+      <main className="relative z-10 mx-auto flex max-w-[560px] flex-col gap-5 px-[16px] pt-[28px] pb-[28px]">
         <MaterialPicker
           materials={materials}
           selectedId={selectedMaterialId}
