@@ -21,70 +21,254 @@ const DEFAULT_ACCENT_SURFACE = "#E8F8F7";
 
 const MATERIAL_CLOUD_STYLE: Record<
   string,
-  { fill: string; topTransform: string; bottomTransform: string }
+  {
+    fill: string;
+    topTransform: string;
+    bottomTransform: string;
+    blob1Transform: string;
+    blob2Transform: string;
+  }
 > = {
   default: {
     fill: "#C2C6EC",
-    topTransform: "translate3d(0px, 0px, 0) scale(1, 1) rotate(0deg)",
-    bottomTransform: "translate3d(0px, 0px, 0) scale(1, 1) rotate(0deg)",
+    topTransform: "translate3d(0px, 0px, 0) scale(1, 1)",
+    bottomTransform: "translate3d(0px, 0px, 0) scale(1, 1)",
+    blob1Transform: "translate3d(0px, 0px, 0) scale(1)",
+    blob2Transform: "translate3d(0px, 0px, 0) scale(1)",
   },
   silicone: {
     fill: "#FFC2F2",
-    topTransform: "translate3d(-18px, -24px, 0) scale(1.06, 0.96) rotate(-2deg)",
-    bottomTransform: "translate3d(-24px, -18px, 0) scale(1.08, 1.06) rotate(2.5deg)",
+    topTransform: "translate3d(-22px, -26px, 0) scale(1.04, 0.97)",
+    bottomTransform: "translate3d(-26px, -18px, 0) scale(1.07, 1.05)",
+    blob1Transform: "translate3d(42px, -28px, 0) scale(1.18)",
+    blob2Transform: "translate3d(-26px, 38px, 0) scale(1.12)",
   },
   jesmonite: {
     fill: "#FFE270",
-    topTransform: "translate3d(16px, -28px, 0) scale(1.04, 1.03) rotate(1.8deg)",
-    bottomTransform: "translate3d(-18px, -26px, 0) scale(1.1, 1.05) rotate(-2deg)",
+    topTransform: "translate3d(18px, -30px, 0) scale(1.03, 1.03)",
+    bottomTransform: "translate3d(-18px, -28px, 0) scale(1.09, 1.04)",
+    blob1Transform: "translate3d(-36px, -22px, 0) scale(1.1)",
+    blob2Transform: "translate3d(-18px, 54px, 0) scale(1.22)",
   },
   concrete: {
     fill: "#D5DFEA",
-    topTransform: "translate3d(-14px, 16px, 0) scale(0.98, 1.05) rotate(-1.5deg)",
-    bottomTransform: "translate3d(-28px, -14px, 0) scale(1.07, 1.08) rotate(2deg)",
+    topTransform: "translate3d(-16px, 18px, 0) scale(0.98, 1.04)",
+    bottomTransform: "translate3d(-30px, -14px, 0) scale(1.06, 1.08)",
+    blob1Transform: "translate3d(28px, -34px, 0) scale(0.92)",
+    blob2Transform: "translate3d(-34px, 24px, 0) scale(1.15)",
   },
 };
 
-function lerp(a: number, b: number, t: number): number {
-  return Number((a + (b - a) * t).toFixed(2));
+function buildNormalGelWave(
+  A: [number, number],
+  B: [number, number],
+  amps: [number, number][],
+  closeCorner: [number, number]
+): string {
+  const dx = B[0] - A[0];
+  const dy = B[1] - A[1];
+  const L = Math.hypot(dx, dy) || 1;
+  const tx = dx / L;
+  const ty = dy / L;
+  let nx = -ty;
+  let ny = tx;
+  if (nx < 0) {
+    nx = -nx;
+    ny = -ny;
+  }
+
+  const pts = amps.map(([s, a]) => ({
+    s,
+    x: A[0] + dx * s + nx * a,
+    y: A[1] + dy * s + ny * a,
+  }));
+
+  const d: string[] = [
+    `M ${closeCorner[0].toFixed(1)} ${closeCorner[1].toFixed(1)}`,
+    `L ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`,
+  ];
+
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i];
+    const p1 = pts[i + 1];
+    const segLen = (p1.s - p0.s) * L;
+    const h = segLen * 0.44;
+    const c1x = p0.x + tx * h;
+    const c1y = p0.y + ty * h;
+    const c2x = p1.x - tx * h;
+    const c2y = p1.y - ty * h;
+    d.push(
+      `C ${c1x.toFixed(1)} ${c1y.toFixed(1)} ${c2x.toFixed(1)} ${c2y.toFixed(1)} ${p1.x.toFixed(1)} ${p1.y.toFixed(1)}`
+    );
+  }
+
+  d.push(`L ${closeCorner[0].toFixed(1)} ${pts[pts.length - 1].y.toFixed(1)} Z`);
+  return d.join(" ");
 }
 
-function getResponsiveBackgroundPaths(aspectRatio: number) {
-  const mobileAspect = 399 / 687;
-  const desktopAspect = 1440 / 800;
-  const t = Math.min(
-    1,
-    Math.max(0, (aspectRatio - mobileAspect) / (desktopAspect - mobileAspect))
-  );
+function buildGelBlob(
+  cx: number,
+  cy: number,
+  rx: number,
+  ry: number,
+  rotDeg = 0
+): string {
+  const k = 0.55228475;
+  const rad = (rotDeg * Math.PI) / 180;
+  const ca = Math.cos(rad);
+  const sa = Math.sin(rad);
+  const tr = (x: number, y: number): [number, number] => [
+    cx + x * ca - y * sa,
+    cy + x * sa + y * ca,
+  ];
+  const kx = rx * k;
+  const ky = ry * k;
+  const p0 = tr(0, -ry);
+  const c0a = tr(kx, -ry);
+  const c0b = tr(rx, -ky);
+  const p1 = tr(rx, 0);
+  const c1a = tr(rx, ky);
+  const c1b = tr(kx, ry);
+  const p2 = tr(0, ry);
+  const c2a = tr(-kx, ry);
+  const c2b = tr(-rx, ky);
+  const p3 = tr(-rx, 0);
+  const c3a = tr(-rx, -ky);
+  const c3b = tr(-kx, -ry);
 
-  const L = (m: number, d: number) => lerp(m, d, t);
-
-  const topLeftPath = [
-    `M -120 -120`,
-    `H ${L(302, 295)}`,
-    `L ${L(302, 295)} 0`,
-    `C ${L(300, 295)} ${L(20, 35)} ${L(294, 282)} ${L(32, 55)} ${L(294, 282)} ${L(50, 90)}`,
-    `C ${L(294, 282)} ${L(68, 125)} ${L(303, 294)} ${L(80, 145)} ${L(302, 294)} ${L(96, 180)}`,
-    `C ${L(300, 294)} ${L(114, 220)} ${L(268, 260)} ${L(120, 245)} ${L(268, 260)} ${L(142, 290)}`,
-    `C ${L(268, 260)} ${L(165, 335)} ${L(236, 272)} ${L(235, 365)} ${L(238, 262)} ${L(276, 410)}`,
-    `C ${L(240, 250)} ${L(315, 460)} ${L(268, 175)} ${L(355, 475)} ${L(261, 155)} ${L(392, 520)}`,
-    `C ${L(252, 135)} ${L(435, 565)} ${L(110, 142)} ${L(510, 595)} ${L(65, 110)} ${L(552, 630)}`,
-    `C ${L(48, 82)} ${L(575, 660)} ${L(42, 42)} ${L(635, 678)} 0 ${L(668, 687)}`,
-    `L -120 ${L(668, 687)}`,
-    `V -120 Z`,
+  return [
+    `M ${p0[0].toFixed(1)} ${p0[1].toFixed(1)}`,
+    `C ${c0a[0].toFixed(1)} ${c0a[1].toFixed(1)} ${c0b[0].toFixed(1)} ${c0b[1].toFixed(1)} ${p1[0].toFixed(1)} ${p1[1].toFixed(1)}`,
+    `C ${c1a[0].toFixed(1)} ${c1a[1].toFixed(1)} ${c1b[0].toFixed(1)} ${c1b[1].toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`,
+    `C ${c2a[0].toFixed(1)} ${c2a[1].toFixed(1)} ${c2b[0].toFixed(1)} ${c2b[1].toFixed(1)} ${p3[0].toFixed(1)} ${p3[1].toFixed(1)}`,
+    `C ${c3a[0].toFixed(1)} ${c3a[1].toFixed(1)} ${c3b[0].toFixed(1)} ${c3b[1].toFixed(1)} ${p0[0].toFixed(1)} ${p0[1].toFixed(1)} Z`,
   ].join(" ");
+}
 
-  const bottomRightPath = [
-    `M 520 ${L(527, 440)}`,
-    `L 399 ${L(527, 440)}`,
-    `C ${L(368, 360)} ${L(536, 452)} ${L(315, 316)} ${L(544, 476)} ${L(292, 302)} ${L(556, 520)}`,
-    `C ${L(282, 290)} ${L(566, 558)} ${L(288, 298)} ${L(606, 588)} ${L(274, 284)} ${L(622, 622)}`,
-    `C ${L(258, 272)} ${L(632, 650)} ${L(230, 254)} ${L(636, 662)} ${L(252, 254)} 687`,
-    `L ${L(252, 254)} 800`,
-    `H 520 V ${L(527, 440)} Z`,
-  ].join(" ");
+function getGelBackgroundPaths(W: number, H: number) {
+  const u = Math.min(W, H);
+  const isWide = W > H;
 
-  return { topLeftPath, bottomRightPath };
+  const topStart: [number, number] = [W * (isWide ? 0.74 : 0.8), -H * 0.06];
+  const topEnd: [number, number] = [-W * 0.06, H * 0.96];
+  const topCorner: [number, number] = [-W * 0.35, -H * 0.35];
+
+  const topFrames = [
+    buildNormalGelWave(
+      topStart,
+      topEnd,
+      [
+        [0.0, 0],
+        [0.18, u * 0.085],
+        [0.39, -u * 0.07],
+        [0.61, u * 0.095],
+        [0.83, -u * 0.06],
+        [1.0, 0],
+      ],
+      topCorner
+    ),
+    buildNormalGelWave(
+      topStart,
+      topEnd,
+      [
+        [0.0, 0],
+        [0.22, -u * 0.055],
+        [0.44, u * 0.085],
+        [0.66, -u * 0.075],
+        [0.86, u * 0.07],
+        [1.0, 0],
+      ],
+      topCorner
+    ),
+    buildNormalGelWave(
+      topStart,
+      topEnd,
+      [
+        [0.0, 0],
+        [0.16, u * 0.05],
+        [0.36, u * 0.065],
+        [0.58, -u * 0.085],
+        [0.8, u * 0.08],
+        [1.0, 0],
+      ],
+      topCorner
+    ),
+  ];
+
+  const botStart: [number, number] = [
+    W * 1.06,
+    H * (isWide ? 0.56 : 0.66),
+  ];
+  const botEnd: [number, number] = [
+    W * (isWide ? 0.56 : 0.52),
+    H * 1.06,
+  ];
+  const botCorner: [number, number] = [W * 1.35, H * 1.35];
+
+  const bottomFrames = [
+    buildNormalGelWave(
+      botStart,
+      botEnd,
+      [
+        [0.0, 0],
+        [0.33, -u * 0.07],
+        [0.68, u * 0.06],
+        [1.0, 0],
+      ],
+      botCorner
+    ),
+    buildNormalGelWave(
+      botStart,
+      botEnd,
+      [
+        [0.0, 0],
+        [0.38, u * 0.055],
+        [0.72, -u * 0.075],
+        [1.0, 0],
+      ],
+      botCorner
+    ),
+    buildNormalGelWave(
+      botStart,
+      botEnd,
+      [
+        [0.0, 0],
+        [0.28, -u * 0.045],
+        [0.64, -u * 0.05],
+        [1.0, 0],
+      ],
+      botCorner
+    ),
+  ];
+
+  const b1x = W * (isWide ? 0.44 : 0.42);
+  const b1y = H * (isWide ? 0.81 : 0.84);
+  const b1r = u * 0.088;
+  const blob1Frames = [
+    buildGelBlob(b1x, b1y, b1r * 1.06, b1r * 0.94, -14),
+    buildGelBlob(b1x, b1y, b1r * 0.93, b1r * 1.07, 12),
+    buildGelBlob(b1x, b1y, b1r * 1.04, b1r * 0.96, 28),
+  ];
+
+  const b2x = W * (isWide ? 0.84 : 0.85);
+  const b2y = H * (isWide ? 0.23 : 0.17);
+  const b2r = u * 0.052;
+  const blob2Frames = [
+    buildGelBlob(b2x, b2y, b2r * 0.94, b2r * 1.06, 18),
+    buildGelBlob(b2x, b2y, b2r * 1.08, b2r * 0.92, -16),
+    buildGelBlob(b2x, b2y, b2r * 0.97, b2r * 1.04, -32),
+  ];
+
+  return {
+    topValues: [...topFrames, topFrames[0]].join(";"),
+    bottomValues: [...bottomFrames, bottomFrames[0]].join(";"),
+    blob1Values: [...blob1Frames, blob1Frames[0]].join(";"),
+    blob2Values: [...blob2Frames, blob2Frames[0]].join(";"),
+    topInitial: topFrames[0],
+    bottomInitial: bottomFrames[0],
+    blob1Initial: blob1Frames[0],
+    blob2Initial: blob2Frames[0],
+  };
 }
 
 export function App() {
@@ -110,10 +294,11 @@ export function App() {
     () => typeof window !== "undefined" && window.location.hash === "#about"
   );
 
-  const [viewportAspect, setViewportAspect] = useState<number>(() =>
-    typeof window !== "undefined" && window.innerHeight > 0
-      ? window.innerWidth / window.innerHeight
-      : 399 / 687
+  const [viewport, setViewport] = useState<{ width: number; height: number }>(
+    () => ({
+      width: typeof window !== "undefined" ? window.innerWidth : 399,
+      height: typeof window !== "undefined" ? window.innerHeight : 687,
+    })
   );
 
   useEffect(() => {
@@ -121,8 +306,8 @@ export function App() {
       setIsAboutOpen(window.location.hash === "#about");
     }
     function handleResize() {
-      if (window.innerHeight > 0) {
-        setViewportAspect(window.innerWidth / window.innerHeight);
+      if (window.innerWidth > 0 && window.innerHeight > 0) {
+        setViewport({ width: window.innerWidth, height: window.innerHeight });
       }
     }
     window.addEventListener("hashchange", handleHashChange);
@@ -304,11 +489,13 @@ export function App() {
     "--accent-surface": accentSurfaceColor,
   } as CSSProperties;
 
-  const { topLeftPath, bottomRightPath } =
-    getResponsiveBackgroundPaths(viewportAspect);
+  const gelPaths = getGelBackgroundPaths(viewport.width, viewport.height);
   const cloudStyle =
     MATERIAL_CLOUD_STYLE[selectedMaterial?.id ?? "default"] ??
     MATERIAL_CLOUD_STYLE.default;
+
+  const gelTransition =
+    "fill 550ms cubic-bezier(0.22, 1, 0.36, 1), transform 800ms cubic-bezier(0.22, 1, 0.36, 1)";
 
   return (
     <div
@@ -321,35 +508,98 @@ export function App() {
         className="fixed inset-0 pointer-events-none overflow-hidden z-0 bg-[var(--bg-cream)]"
       >
         <svg
-          viewBox="0 0 399 687"
-          preserveAspectRatio="none"
+          viewBox={`0 0 ${viewport.width} ${viewport.height}`}
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full block"
         >
           <g className="liquid-flow-a">
             <path
-              d={topLeftPath}
+              d={gelPaths.topInitial}
               style={{
                 fill: cloudStyle.fill,
                 transform: cloudStyle.topTransform,
-                transformOrigin: "150px 250px",
-                transition:
-                  "fill 550ms cubic-bezier(0.22, 1, 0.36, 1), transform 650ms cubic-bezier(0.22, 1, 0.36, 1)",
+                transformBox: "fill-box",
+                transformOrigin: "center",
+                transition: gelTransition,
               }}
-            />
+            >
+              <animate
+                attributeName="d"
+                values={gelPaths.topValues}
+                dur="15s"
+                repeatCount="indefinite"
+                calcMode="spline"
+                keyTimes="0;0.33;0.66;1"
+                keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
+              />
+            </path>
           </g>
           <g className="liquid-flow-b">
             <path
-              d={bottomRightPath}
+              d={gelPaths.bottomInitial}
               style={{
                 fill: cloudStyle.fill,
                 transform: cloudStyle.bottomTransform,
-                transformOrigin: "330px 600px",
-                transition:
-                  "fill 550ms cubic-bezier(0.22, 1, 0.36, 1), transform 650ms cubic-bezier(0.22, 1, 0.36, 1)",
+                transformBox: "fill-box",
+                transformOrigin: "center",
+                transition: gelTransition,
               }}
-            />
+            >
+              <animate
+                attributeName="d"
+                values={gelPaths.bottomValues}
+                dur="18s"
+                repeatCount="indefinite"
+                calcMode="spline"
+                keyTimes="0;0.33;0.66;1"
+                keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
+              />
+            </path>
+          </g>
+          <g className="liquid-blob-a">
+            <path
+              d={gelPaths.blob1Initial}
+              style={{
+                fill: cloudStyle.fill,
+                transform: cloudStyle.blob1Transform,
+                transformBox: "fill-box",
+                transformOrigin: "center",
+                transition: gelTransition,
+              }}
+            >
+              <animate
+                attributeName="d"
+                values={gelPaths.blob1Values}
+                dur="11s"
+                repeatCount="indefinite"
+                calcMode="spline"
+                keyTimes="0;0.33;0.66;1"
+                keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
+              />
+            </path>
+          </g>
+          <g className="liquid-blob-b">
+            <path
+              d={gelPaths.blob2Initial}
+              style={{
+                fill: cloudStyle.fill,
+                transform: cloudStyle.blob2Transform,
+                transformBox: "fill-box",
+                transformOrigin: "center",
+                transition: gelTransition,
+              }}
+            >
+              <animate
+                attributeName="d"
+                values={gelPaths.blob2Values}
+                dur="13s"
+                repeatCount="indefinite"
+                calcMode="spline"
+                keyTimes="0;0.33;0.66;1"
+                keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
+              />
+            </path>
           </g>
         </svg>
       </div>

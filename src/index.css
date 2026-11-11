@@ -70,31 +70,57 @@ body {
 .animate-thud { animation: thud 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards; }
 .animate-fade-up { animation: fadeUp 0.3s ease-out forwards; }
 
-/* Slow, liquid-like drift for the decorative background clouds */
+/* Slow, liquid/gel-like drift for the decorative background shapes and blobs */
 @keyframes liquidFlowA {
-  0%   { transform: translate(0, 0) scale(1, 1) skew(0deg, 0deg); }
-  25%  { transform: translate(16px, 20px) scale(1.05, 0.97) skew(-3deg, 1.5deg); }
-  50%  { transform: translate(-10px, 34px) scale(0.97, 1.05) skew(2.5deg, -1.5deg); }
-  75%  { transform: translate(-20px, 10px) scale(1.04, 1.03) skew(3deg, 1deg); }
-  100% { transform: translate(0, 0) scale(1, 1) skew(0deg, 0deg); }
+  0%   { transform: translate3d(0px, 0px, 0) scale(1, 1); }
+  33%  { transform: translate3d(14px, 18px, 0) scale(1.03, 0.98); }
+  66%  { transform: translate3d(-12px, 26px, 0) scale(0.98, 1.03); }
+  100% { transform: translate3d(0px, 0px, 0) scale(1, 1); }
 }
 @keyframes liquidFlowB {
-  0%   { transform: translate(0, 0) scale(1, 1) skew(0deg, 0deg); }
-  30%  { transform: translate(-20px, -16px) scale(1.07, 1.05) skew(3deg, -2deg); }
-  60%  { transform: translate(-8px, -30px) scale(0.97, 1.08) skew(-3deg, 1.5deg); }
-  100% { transform: translate(0, 0) scale(1, 1) skew(0deg, 0deg); }
+  0%   { transform: translate3d(0px, 0px, 0) scale(1, 1); }
+  35%  { transform: translate3d(-18px, -14px, 0) scale(1.04, 1.02); }
+  70%  { transform: translate3d(-6px, -26px, 0) scale(0.98, 1.05); }
+  100% { transform: translate3d(0px, 0px, 0) scale(1, 1); }
+}
+@keyframes liquidBlobFloatA {
+  0%   { transform: translate3d(0px, 0px, 0) rotate(0deg) scale(1, 1); }
+  25%  { transform: translate3d(18px, -22px, 0) rotate(12deg) scale(1.06, 0.95); }
+  50%  { transform: translate3d(-14px, -36px, 0) rotate(-8deg) scale(0.95, 1.06); }
+  75%  { transform: translate3d(-24px, -12px, 0) rotate(-16deg) scale(1.04, 0.97); }
+  100% { transform: translate3d(0px, 0px, 0) rotate(0deg) scale(1, 1); }
+}
+@keyframes liquidBlobFloatB {
+  0%   { transform: translate3d(0px, 0px, 0) rotate(0deg) scale(1, 1); }
+  33%  { transform: translate3d(-20px, 24px, 0) rotate(-15deg) scale(0.94, 1.07); }
+  66%  { transform: translate3d(14px, 32px, 0) rotate(14deg) scale(1.06, 0.95); }
+  100% { transform: translate3d(0px, 0px, 0) rotate(0deg) scale(1, 1); }
 }
 .liquid-flow-a {
-  transform-origin: 150px 250px;
-  animation: liquidFlowA 16s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: liquidFlowA 14s ease-in-out infinite;
 }
 .liquid-flow-b {
-  transform-origin: 330px 600px;
-  animation: liquidFlowB 12s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: liquidFlowB 11s ease-in-out infinite;
+}
+.liquid-blob-a {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: liquidBlobFloatA 13s ease-in-out infinite;
+}
+.liquid-blob-b {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: liquidBlobFloatB 10s ease-in-out infinite;
 }
 @media (prefers-reduced-motion: reduce) {
   .liquid-flow-a,
-  .liquid-flow-b {
+  .liquid-flow-b,
+  .liquid-blob-a,
+  .liquid-blob-b {
     animation: none;
   }
 }
