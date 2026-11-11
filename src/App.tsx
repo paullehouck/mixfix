@@ -425,10 +425,10 @@ export function App() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-0 sm:p-4"
         >
           <div className="w-full h-full sm:h-auto sm:max-w-[560px] sm:max-h-[85vh] overflow-y-auto overflow-x-hidden rounded-none sm:rounded-3xl bg-white p-5 sm:p-6 border-0 sm:brutal-border flex flex-col gap-5 min-w-0">
-            <div className="flex items-center justify-between border-b-2 border-[#1E1E24] pb-3">
+            <div className="flex items-center justify-between border-b-2 border-[var(--color-primary)] pb-3">
               <h2
                 id="about-title"
-                className="font-display text-2xl text-[#1E1E24]"
+                className="font-display text-2xl text-[var(--color-primary)]"
               >
                 What is Mixfix?
               </h2>
@@ -436,7 +436,7 @@ export function App() {
                 type="button"
                 aria-label="Close about dialog"
                 onClick={closeAbout}
-                className="brutal-border brutal-shadow rounded-full w-11 h-11 font-display text-xl text-[#1E1E24] bg-white flex items-center justify-center active:translate-x-0.5 active:translate-y-0.5 cursor-pointer"
+                className="brutal-border brutal-shadow rounded-full w-11 h-11 font-display text-xl text-[var(--color-primary)] bg-white flex items-center justify-center active:translate-x-0.5 active:translate-y-0.5 cursor-pointer"
               >
                 ×
               </button>
@@ -446,29 +446,29 @@ export function App() {
             <MakerBenchIllustration />
 
             <div className="flex flex-col gap-3 font-body">
-              <p className="text-base leading-relaxed text-gray-700">
+              <p className="text-base leading-relaxed text-[var(--color-description)]">
                 Mixfix is here to fix your mix, so bench math never gets in the way of making. Pick your material, enter your mould&apos;s volume, and get exact grams in seconds. No spreadsheets, no guesswork, and no sticky buckets of uncured regret.
               </p>
             </div>
 
-            <div className="flex flex-col gap-3 rounded-xl brutal-border bg-gray-50/70 p-4 font-body">
+            <div className="flex flex-col gap-3 rounded-xl brutal-border bg-[#F3F5FC] p-4 font-body">
               <div className="flex flex-col gap-2">
-                <h3 className="font-display text-xs uppercase tracking-wider text-gray-900">
+                <h3 className="font-display text-xs uppercase tracking-wider text-[var(--color-primary)]">
                   Where do the numbers come from?
                 </h3>
-                <p className="text-sm leading-relaxed text-gray-600">
+                <p className="text-sm leading-relaxed text-[var(--color-muted)]">
                   Ratios come from official datasheets or are bench-tested recipes (look for Paul’s recipes).
                 </p>
-                <p className="text-sm leading-relaxed text-gray-600">
+                <p className="text-sm leading-relaxed text-[var(--color-muted)]">
                   Just meake sure you check your material’s datasheet, wear gloves, and use a dust mask with dry powders.
                 </p>
               </div>
 
-              <div className="border-t border-gray-200 pt-3 text-sm leading-relaxed text-gray-600">
+              <div className="border-t border-[#C2C6EC] pt-3 text-sm leading-relaxed text-[var(--color-muted)]">
                 Got feedback or a recipe to add? Email{" "}
                 <a
                   href="mailto:suggestions@mixfix.com"
-                  className="font-semibold text-gray-900 underline decoration-[#1E1E24] underline-offset-4 hover:text-[var(--accent)]"
+                  className="font-semibold text-[var(--color-primary)] underline decoration-[var(--color-primary)] underline-offset-4 hover:text-[var(--accent)]"
                 >
                   suggestions@mixfix.com
                 </a>

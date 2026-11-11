@@ -171,7 +171,7 @@ export function CalculatorForm({
       <div className="flex flex-col">
         <label
           htmlFor="variant-select"
-          className="font-display text-xs tracking-widest uppercase text-gray-500 mb-1"
+          className="font-display text-xs tracking-widest uppercase text-[var(--color-muted)] mb-1"
         >
           Type / use
         </label>
@@ -180,7 +180,7 @@ export function CalculatorForm({
             id="variant-select"
             value={selectedVariant?.id ?? ""}
             onChange={(e) => handleVariantChange(e.target.value)}
-            className="w-full appearance-none brutal-border rounded-xl pl-4 pr-10 py-3 font-body text-base bg-white text-[#1E1E24] focus:outline-none cursor-pointer"
+            className="w-full appearance-none brutal-border rounded-xl pl-4 pr-10 py-3 font-body text-base bg-white text-[var(--color-description)] focus:outline-none cursor-pointer"
           >
             {liveVariants.map((variant) => (
               <option key={variant.id} value={variant.id}>
@@ -188,7 +188,7 @@ export function CalculatorForm({
               </option>
             ))}
           </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-[#1E1E24]">
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-[var(--color-primary)]">
             <svg
               width="14"
               height="14"
@@ -199,7 +199,7 @@ export function CalculatorForm({
             >
               <path
                 d="M3.5 6L8 10.5L12.5 6"
-                stroke="#1E1E24"
+                stroke="#0825B3"
                 strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -208,7 +208,7 @@ export function CalculatorForm({
           </div>
         </div>
         {selectedVariant?.useCase && (
-          <p className="mt-1.5 font-body text-xs text-gray-500">{selectedVariant.useCase}</p>
+          <p className="mt-1.5 font-body text-xs text-[var(--color-muted)]">{selectedVariant.useCase}</p>
         )}
       </div>
 
@@ -217,7 +217,7 @@ export function CalculatorForm({
         <div className="flex flex-col">
           <label
             htmlFor="example-select"
-            className="font-display text-xs tracking-widest uppercase text-gray-500 mb-1"
+            className="font-display text-xs tracking-widest uppercase text-[var(--color-muted)] mb-1"
           >
             Product
           </label>
@@ -230,7 +230,7 @@ export function CalculatorForm({
                   selectedExampleId: e.target.value ? e.target.value : null,
                 })
               }
-              className="w-full appearance-none brutal-border rounded-xl pl-4 pr-10 py-3 font-body text-base bg-white text-[#1E1E24] focus:outline-none cursor-pointer"
+              className="w-full appearance-none brutal-border rounded-xl pl-4 pr-10 py-3 font-body text-base bg-white text-[var(--color-description)] focus:outline-none cursor-pointer"
             >
               <option value="">
                 Generic ({selectedVariant.densityGPerMl} g/ml)
@@ -241,7 +241,7 @@ export function CalculatorForm({
                 </option>
               ))}
             </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-[#1E1E24]">
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-[var(--color-primary)]">
               <svg
                 width="14"
                 height="14"
@@ -252,7 +252,7 @@ export function CalculatorForm({
               >
                 <path
                   d="M3.5 6L8 10.5L12.5 6"
-                  stroke="#1E1E24"
+                  stroke="#0825B3"
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -265,11 +265,11 @@ export function CalculatorForm({
 
       {/* Custom datasheet inputs when sourceType === "user" */}
       {selectedVariant && isCustomDatasheet && (
-        <div className="grid grid-cols-3 gap-3 brutal-border rounded-xl bg-gray-50 p-3.5">
+        <div className="grid grid-cols-3 gap-3 brutal-border rounded-xl bg-[#F3F5FC] p-3.5">
           <div className="flex flex-col">
             <label
               htmlFor="user-part-a"
-              className="font-display text-xs tracking-widest uppercase text-gray-500 mb-1"
+              className="font-display text-xs tracking-widest uppercase text-[var(--color-muted)] mb-1"
             >
               Part A wt
             </label>
@@ -285,13 +285,13 @@ export function CalculatorForm({
                   userRatioPartA: parseFloat(e.target.value) || 0,
                 })
               }
-              className="w-full brutal-border rounded-lg px-2.5 py-2 font-body text-base bg-white text-[#1E1E24] focus:outline-none"
+              className="w-full brutal-border rounded-lg px-2.5 py-2 font-body text-base bg-white text-[var(--color-description)] focus:outline-none"
             />
           </div>
           <div className="flex flex-col">
             <label
               htmlFor="user-part-b"
-              className="font-display text-xs tracking-widest uppercase text-gray-500 mb-1"
+              className="font-display text-xs tracking-widest uppercase text-[var(--color-muted)] mb-1"
             >
               Part B wt
             </label>
@@ -307,13 +307,13 @@ export function CalculatorForm({
                   userRatioPartB: parseFloat(e.target.value) || 0,
                 })
               }
-              className="w-full brutal-border rounded-lg px-2.5 py-2 font-body text-base bg-white text-[#1E1E24] focus:outline-none"
+              className="w-full brutal-border rounded-lg px-2.5 py-2 font-body text-base bg-white text-[var(--color-description)] focus:outline-none"
             />
           </div>
           <div className="flex flex-col">
             <label
               htmlFor="user-density"
-              className="font-display text-xs tracking-widest uppercase text-gray-500 mb-1"
+              className="font-display text-xs tracking-widest uppercase text-[var(--color-muted)] mb-1"
             >
               Density
             </label>
@@ -332,7 +332,7 @@ export function CalculatorForm({
                     : undefined,
                 })
               }
-              className="w-full brutal-border rounded-lg px-2.5 py-2 font-body text-base bg-white text-[#1E1E24] focus:outline-none"
+              className="w-full brutal-border rounded-lg px-2.5 py-2 font-body text-base bg-white text-[var(--color-description)] placeholder:text-[var(--color-placeholder)] focus:outline-none"
             />
           </div>
         </div>
@@ -341,13 +341,13 @@ export function CalculatorForm({
       {/* Concrete only: W/C ratio segmented control */}
       {selectedVariant && isConcrete && (
         <div className="flex flex-col">
-          <span className="font-display text-xs tracking-widest uppercase text-gray-500 mb-1">
+          <span className="font-display text-xs tracking-widest uppercase text-[var(--color-muted)] mb-1">
             Mix consistency (water-to-cement)
           </span>
           <div
             role="group"
             aria-label="Mix consistency"
-            className="grid grid-cols-3 brutal-border rounded-xl overflow-hidden divide-x-2 divide-[#1E1E24]"
+            className="grid grid-cols-3 brutal-border rounded-xl overflow-hidden divide-x-2 divide-[var(--color-primary)]"
           >
             {WC_OPTIONS.map((opt) => {
               const active = formState.wcRatioKey === opt.key;
@@ -359,8 +359,8 @@ export function CalculatorForm({
                   onClick={() => updateState({ wcRatioKey: opt.key })}
                   className={`min-h-[44px] py-2.5 px-2 font-display text-sm transition-colors ${
                     active
-                      ? "bg-[#1E1E24] text-white"
-                      : "bg-white text-[#1E1E24] hover:bg-gray-50"
+                      ? "bg-[var(--color-primary)] text-white"
+                      : "bg-white text-[var(--color-primary)] hover:bg-[#F3F5FC]"
                   }`}
                 >
                   {opt.label}
@@ -369,7 +369,7 @@ export function CalculatorForm({
             })}
           </div>
           {selectedVariant.wcRatioOptions?.[formState.wcRatioKey]?.note && (
-            <p className="mt-1.5 font-body text-xs text-gray-500">
+            <p className="mt-1.5 font-body text-xs text-[var(--color-muted)]">
               {selectedVariant.wcRatioOptions[formState.wcRatioKey]?.note}
             </p>
           )}
@@ -382,7 +382,7 @@ export function CalculatorForm({
           <div className="flex items-center justify-between mb-1">
             <label
               htmlFor="volume-input"
-              className="font-display text-xs tracking-widest uppercase text-gray-500"
+              className="font-display text-xs tracking-widest uppercase text-[var(--color-muted)]"
             >
               Volume
             </label>
@@ -404,7 +404,7 @@ export function CalculatorForm({
               placeholder="e.g. 500"
               value={formState.volumeInput}
               onChange={(e) => updateState({ volumeInput: e.target.value })}
-              className="min-w-0 flex-1 brutal-border rounded-xl px-4 py-3 font-body text-lg text-[#1E1E24] placeholder:text-gray-400 focus:outline-none"
+              className="min-w-0 flex-1 brutal-border rounded-xl px-4 py-3 font-body text-lg text-[var(--color-description)] placeholder:text-[var(--color-placeholder)] focus:outline-none"
             />
 
             <div className="relative shrink-0">
@@ -414,7 +414,7 @@ export function CalculatorForm({
                 onChange={(e) =>
                   updateState({ volumeUnit: e.target.value as VolumeUnit })
                 }
-                className="appearance-none brutal-border rounded-xl pl-3 pr-8 py-3 font-body text-base text-[#1E1E24] bg-white focus:outline-none cursor-pointer"
+                className="appearance-none brutal-border rounded-xl pl-3 pr-8 py-3 font-body text-base text-[var(--color-description)] bg-white focus:outline-none cursor-pointer"
               >
                 {VOLUME_UNITS.map((unit) => (
                   <option key={unit.value} value={unit.value}>
@@ -422,7 +422,7 @@ export function CalculatorForm({
                   </option>
                 ))}
               </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2.5 text-[#1E1E24]">
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2.5 text-[var(--color-primary)]">
                 <svg
                   width="12"
                   height="12"
@@ -433,7 +433,7 @@ export function CalculatorForm({
                 >
                   <path
                     d="M3.5 6L8 10.5L12.5 6"
-                    stroke="#1E1E24"
+                    stroke="#0825B3"
                     strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -448,14 +448,14 @@ export function CalculatorForm({
       {/* Field 3: Waste preset (hidden for silicone, which always uses 15%) */}
       {selectedVariant && !isSilicone && (
         <div className="flex flex-col">
-          <span className="font-display text-xs tracking-widest uppercase text-gray-500 mb-1">
+          <span className="font-display text-xs tracking-widest uppercase text-[var(--color-muted)] mb-1">
             Extra for waste
           </span>
 
           <div
             role="group"
             aria-label="Waste preset"
-            className="grid grid-cols-3 brutal-border rounded-xl overflow-hidden divide-x-2 divide-[#1E1E24]"
+            className="grid grid-cols-3 brutal-border rounded-xl overflow-hidden divide-x-2 divide-[var(--color-primary)]"
           >
             {wasteButtons.map((preset) => {
               const active = formState.wastePct === preset.pct;
@@ -467,8 +467,8 @@ export function CalculatorForm({
                   onClick={() => updateState({ wastePct: preset.pct })}
                   className={`min-h-[44px] py-2.5 px-1.5 font-display text-xs sm:text-sm transition-colors ${
                     active
-                      ? "bg-[#1E1E24] text-white"
-                      : "bg-white text-[#1E1E24] hover:bg-gray-50"
+                      ? "bg-[var(--color-primary)] text-white"
+                      : "bg-white text-[var(--color-primary)] hover:bg-[#F3F5FC]"
                   }`}
                 >
                   {preset.label} ({preset.pct}%)
@@ -484,7 +484,7 @@ export function CalculatorForm({
               ? WASTE_EXPLANATIONS[selectedPreset.id]
               : undefined;
             return explanation ? (
-              <p className="mt-1.5 font-body text-xs text-gray-500">{explanation}</p>
+              <p className="mt-1.5 font-body text-xs text-[var(--color-muted)]">{explanation}</p>
             ) : null;
           })()}
         </div>

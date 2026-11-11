@@ -13,11 +13,13 @@
   --cloud-concrete: #D5DFEA;
   --color-primary: #0825B3;
   --color-description: #05166B;
+  --color-muted: #4A5BA6;
+  --color-placeholder: #8A96C9;
   --card-silicone: #FE91E8;
   --card-jesmonite: #FFC901;
   --card-concrete: #BCC7D4;
   --icon-bg-default: #FFFFFF;
-  --icon-bg-concrete: #E9E9E8;
+  --icon-bg-concrete: #FFFFFF;
   --accent: #FE91E8;
   --accent-surface: #FE91E8;
   --border: #0825B3;

@@ -234,10 +234,10 @@ export function ResultCard({
     >
       {/* Header & Source Badge */}
       <div className="flex items-center justify-between gap-2">
-        <h3 className="font-display text-lg text-[#1E1E24]">
+        <h3 className="font-display text-lg text-[var(--color-primary)]">
           Your mix
         </h3>
-        <span className="brutal-border rounded-full px-3 py-1 text-xs font-display bg-white text-[#1E1E24]">
+        <span className="brutal-border rounded-full px-3 py-1 text-xs font-display bg-white text-[var(--color-primary)]">
           {badgeText}
         </span>
       </div>
@@ -249,8 +249,8 @@ export function ResultCard({
             key={comp.id}
             className="flex items-baseline justify-between gap-4"
           >
-            <span className="font-body text-sm text-gray-700">{comp.name}</span>
-            <span className="font-display text-right text-2xl text-[#1E1E24] tabular-nums">
+            <span className="font-body text-sm text-[var(--color-description)]">{comp.name}</span>
+            <span className="font-display text-right text-2xl text-[var(--color-primary)] tabular-nums">
               {comp.grams} g
             </span>
           </div>
@@ -259,19 +259,19 @@ export function ResultCard({
         {result.water && (
           <div className="flex items-start justify-between gap-4">
             <div>
-              <span className="font-body text-sm text-gray-700">
+              <span className="font-body text-sm text-[var(--color-description)]">
                 Water
                 {result.water.adjusted && (
-                  <span className="ml-1.5 brutal-border rounded-md bg-white px-1.5 py-0.5 text-xs font-body font-semibold text-gray-700">
+                  <span className="ml-1.5 brutal-border rounded-md bg-white px-1.5 py-0.5 text-xs font-body font-semibold text-[var(--color-description)]">
                     Adjusted
                   </span>
                 )}
               </span>
-              <p className="font-body text-xs text-gray-500">
+              <p className="font-body text-xs text-[var(--color-muted)]">
                 add gradually to the dry mix
               </p>
             </div>
-            <span className="font-display text-right text-2xl text-[#1E1E24] tabular-nums">
+            <span className="font-display text-right text-2xl text-[var(--color-primary)] tabular-nums">
               {result.water.grams} g
             </span>
           </div>
@@ -279,19 +279,19 @@ export function ResultCard({
       </div>
 
       {/* Divider Line */}
-      <hr className="border-t-2 border-[#1E1E24] my-3" />
+      <hr className="border-t-2 border-[var(--color-primary)] my-3" />
 
       {/* Total Row */}
       <div className="flex items-baseline justify-between gap-4">
-        <span className="font-display text-base text-[#1E1E24]">Total mix</span>
-        <span className="font-display text-right text-3xl text-[#1E1E24] tabular-nums">
+        <span className="font-display text-base text-[var(--color-primary)]">Total mix</span>
+        <span className="font-display text-right text-3xl text-[var(--color-primary)] tabular-nums">
           {result.totalGrams} g
         </span>
       </div>
 
       {/* Pot life and Demould time */}
       {(potLifeText || variant.demouldTime) && (
-        <div className="flex flex-col gap-2 rounded-xl bg-white brutal-border p-3 font-body text-sm text-gray-700">
+        <div className="flex flex-col gap-2 rounded-xl bg-white brutal-border p-3 font-body text-sm text-[var(--color-description)]">
           {potLifeText && (
             <div className="flex items-center gap-2">
               <svg
@@ -300,13 +300,13 @@ export function ResultCard({
                 viewBox="0 0 16 16"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-4 shrink-0 text-[#1E1E24]"
+                className="w-4 h-4 shrink-0 text-[var(--color-primary)]"
                 aria-hidden="true"
               >
-                <circle cx="8" cy="9.2" r="5.2" stroke="#1E1E24" strokeWidth="1.8" />
+                <circle cx="8" cy="9.2" r="5.2" stroke="#0825B3" strokeWidth="1.8" />
                 <path
                   d="M8 6.5V9.2H10.5"
-                  stroke="#1E1E24"
+                  stroke="#0825B3"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -316,7 +316,7 @@ export function ResultCard({
                   y1="1.5"
                   x2="8"
                   y2="4"
-                  stroke="#1E1E24"
+                  stroke="#0825B3"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                 />
@@ -325,13 +325,13 @@ export function ResultCard({
                   y1="1.5"
                   x2="10"
                   y2="1.5"
-                  stroke="#1E1E24"
+                  stroke="#0825B3"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                 />
               </svg>
               <span>
-                <strong className="font-semibold text-gray-700">Pot life: </strong>
+                <strong className="font-semibold text-[var(--color-description)]">Pot life: </strong>
                 <span>{potLifeText}</span>
               </span>
             </div>
@@ -344,7 +344,7 @@ export function ResultCard({
                 viewBox="0 0 16 16"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-4 shrink-0 text-[#1E1E24]"
+                className="w-4 h-4 shrink-0 text-[var(--color-primary)]"
                 aria-hidden="true"
               >
                 <line
@@ -352,7 +352,7 @@ export function ResultCard({
                   y1="2"
                   x2="12.5"
                   y2="2"
-                  stroke="#1E1E24"
+                  stroke="#0825B3"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                 />
@@ -361,20 +361,20 @@ export function ResultCard({
                   y1="14"
                   x2="12.5"
                   y2="14"
-                  stroke="#1E1E24"
+                  stroke="#0825B3"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                 />
                 <path
                   d="M5 2V4.8L7.4 7.6C7.6 7.8 7.6 8.2 7.4 8.4L5 11.2V14"
-                  stroke="#1E1E24"
+                  stroke="#0825B3"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
                 <path
                   d="M11 2V4.8L8.6 7.6C8.4 7.8 8.4 8.2 8.6 8.4L11 11.2V14"
-                  stroke="#1E1E24"
+                  stroke="#0825B3"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -384,13 +384,13 @@ export function ResultCard({
                   y1="11.5"
                   x2="9.5"
                   y2="11.5"
-                  stroke="#1E1E24"
+                  stroke="#0825B3"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                 />
               </svg>
               <span>
-                <strong className="font-semibold text-gray-700">Demould: </strong>
+                <strong className="font-semibold text-[var(--color-description)]">Demould: </strong>
                 <span>{variant.demouldTime}</span>
               </span>
             </div>
@@ -412,7 +412,7 @@ export function ResultCard({
                   key={additive.id}
                   type="button"
                   onClick={() => handleExpandAdditive(additive)}
-                  className="brutal-border rounded-xl p-3 mb-2 bg-white flex items-center gap-2 font-display text-sm text-[#1E1E24] hover:bg-gray-50 w-full text-left transition-colors cursor-pointer"
+                  className="brutal-border rounded-xl p-3 mb-2 bg-white flex items-center gap-2 font-display text-sm text-[var(--color-primary)] hover:bg-[#F3F5FC] w-full text-left transition-colors cursor-pointer"
                 >
                   <span className="font-display text-base leading-none">＋</span>
                   <span>{additive.name}</span>
@@ -430,23 +430,23 @@ export function ResultCard({
                 >
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-baseline gap-2">
-                      <span className="font-display text-sm text-[#1E1E24]">
+                      <span className="font-display text-sm text-[var(--color-primary)]">
                         {additive.name}
                       </span>
-                      <span className="font-body text-xs text-gray-600">
+                      <span className="font-body text-xs text-[var(--color-muted)]">
                         ({activeEntry.value}%)
                       </span>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className="font-display text-base text-[#1E1E24]">
+                      <span className="font-display text-base text-[var(--color-primary)]">
                         −{activeEntry.value}% water
                       </span>
                       <button
                         type="button"
                         aria-label={`Remove ${additive.name}`}
                         onClick={() => handleCollapseAdditive(additive.id)}
-                        className="inline-flex h-7 w-7 items-center justify-center rounded-lg font-display text-lg text-[#1E1E24] hover:bg-black/5 cursor-pointer"
+                        className="inline-flex h-7 w-7 items-center justify-center rounded-lg font-display text-lg text-[var(--color-primary)] hover:bg-[#0825B3]/10 cursor-pointer"
                       >
                         ×
                       </button>
@@ -454,7 +454,7 @@ export function ResultCard({
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <span className="font-body text-xs text-gray-600 tabular-nums">
+                    <span className="font-body text-xs text-[var(--color-muted)] tabular-nums">
                       {additive.min}%
                     </span>
                     <input
@@ -470,15 +470,15 @@ export function ResultCard({
                           parseFloat(e.target.value)
                         )
                       }
-                      className="h-2 flex-1 cursor-pointer accent-[var(--accent)]"
+                      className="h-2 flex-1 cursor-pointer accent-[var(--color-primary)]"
                     />
-                    <span className="font-body text-xs text-gray-600 tabular-nums">
+                    <span className="font-body text-xs text-[var(--color-muted)] tabular-nums">
                       {additive.max}%
                     </span>
                   </div>
 
                   {additive.note && (
-                    <p className="font-body text-xs text-gray-600">
+                    <p className="font-body text-xs text-[var(--color-muted)]">
                       {additive.note}
                     </p>
                   )}
@@ -501,18 +501,18 @@ export function ResultCard({
                 className="brutal-border rounded-xl p-3 mb-2 bg-white flex flex-col gap-1.5 transition-colors"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <span className="font-display text-sm text-[#1E1E24]">
+                  <span className="font-display text-sm text-[var(--color-primary)]">
                     {additive.name}
                   </span>
                   <div className="flex items-center gap-2 shrink-0">
-                    <span className="font-display text-base text-[#1E1E24] text-right tabular-nums">
+                    <span className="font-display text-base text-[var(--color-primary)] text-right tabular-nums">
                       {rangeText}
                     </span>
                     <button
                       type="button"
                       aria-label={`Remove ${additive.name}`}
                       onClick={() => handleCollapseAdditive(additive.id)}
-                      className="inline-flex h-7 w-7 items-center justify-center rounded-lg font-display text-lg text-[#1E1E24] hover:bg-black/5 cursor-pointer"
+                      className="inline-flex h-7 w-7 items-center justify-center rounded-lg font-display text-lg text-[var(--color-primary)] hover:bg-[#0825B3]/10 cursor-pointer"
                     >
                       ×
                     </button>
@@ -520,13 +520,13 @@ export function ResultCard({
                 </div>
 
                 {additive.note && (
-                  <p className="font-body text-sm text-gray-500 leading-relaxed">
+                  <p className="font-body text-sm text-[var(--color-muted)] leading-relaxed">
                     {additive.note}
                   </p>
                 )}
 
                 {showDropsGuide && (
-                  <p className="font-body text-xs text-gray-400 italic leading-relaxed">
+                  <p className="font-body text-xs text-[var(--color-muted)] italic leading-relaxed">
                     {`Roughly ${lowerDrops}–${upperDrops} drops — add gradually and check colour before adding more. Drop size varies by bottle type.`}
                   </p>
                 )}
@@ -541,7 +541,7 @@ export function ResultCard({
         <button
           type="button"
           onClick={handleCopyRecipe}
-          className="bg-[#1E1E24] text-white font-display brutal-shadow rounded-xl px-6 py-3 w-full mt-4 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
+          className="bg-[var(--color-primary)] text-white font-display brutal-shadow rounded-xl px-6 py-3 w-full mt-4 active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
         >
           {copied ? "Copied!" : "Copy recipe"}
         </button>
@@ -549,7 +549,7 @@ export function ResultCard({
         <button
           type="button"
           onClick={onReset}
-          className="bg-white brutal-border text-[#1E1E24] font-display brutal-shadow rounded-xl px-6 py-3 w-full mt-2 active:translate-x-0.5 active:translate-y-0.5 transition-all hover:bg-gray-50 cursor-pointer"
+          className="bg-white brutal-border text-[var(--color-primary)] font-display brutal-shadow rounded-xl px-6 py-3 w-full mt-2 active:translate-x-0.5 active:translate-y-0.5 transition-all hover:bg-[#F3F5FC] cursor-pointer"
         >
           Mix again
         </button>
