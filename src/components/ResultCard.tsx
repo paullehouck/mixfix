@@ -303,10 +303,10 @@ export function ResultCard({
                 className="w-4 h-4 shrink-0 text-[var(--color-primary)]"
                 aria-hidden="true"
               >
-                <circle cx="8" cy="9.2" r="5.2" stroke="#0825B3" strokeWidth="1.8" />
+                <circle cx="8" cy="9.2" r="5.2" stroke="#0C2188" strokeWidth="1.8" />
                 <path
                   d="M8 6.5V9.2H10.5"
-                  stroke="#0825B3"
+                  stroke="#0C2188"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -316,7 +316,7 @@ export function ResultCard({
                   y1="1.5"
                   x2="8"
                   y2="4"
-                  stroke="#0825B3"
+                  stroke="#0C2188"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                 />
@@ -325,7 +325,7 @@ export function ResultCard({
                   y1="1.5"
                   x2="10"
                   y2="1.5"
-                  stroke="#0825B3"
+                  stroke="#0C2188"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                 />
@@ -352,7 +352,7 @@ export function ResultCard({
                   y1="2"
                   x2="12.5"
                   y2="2"
-                  stroke="#0825B3"
+                  stroke="#0C2188"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                 />
@@ -361,20 +361,20 @@ export function ResultCard({
                   y1="14"
                   x2="12.5"
                   y2="14"
-                  stroke="#0825B3"
+                  stroke="#0C2188"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                 />
                 <path
                   d="M5 2V4.8L7.4 7.6C7.6 7.8 7.6 8.2 7.4 8.4L5 11.2V14"
-                  stroke="#0825B3"
+                  stroke="#0C2188"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
                 <path
                   d="M11 2V4.8L8.6 7.6C8.4 7.8 8.4 8.2 8.6 8.4L11 11.2V14"
-                  stroke="#0825B3"
+                  stroke="#0C2188"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -384,7 +384,7 @@ export function ResultCard({
                   y1="11.5"
                   x2="9.5"
                   y2="11.5"
-                  stroke="#0825B3"
+                  stroke="#0C2188"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                 />
@@ -446,7 +446,7 @@ export function ResultCard({
                         type="button"
                         aria-label={`Remove ${additive.name}`}
                         onClick={() => handleCollapseAdditive(additive.id)}
-                        className="inline-flex h-7 w-7 items-center justify-center rounded-lg font-display text-lg text-[var(--color-primary)] hover:bg-[#0825B3]/10 cursor-pointer"
+                        className="inline-flex h-7 w-7 items-center justify-center rounded-lg font-display text-lg text-[var(--color-primary)] hover:bg-[#0C2188]/10 cursor-pointer"
                       >
                         ×
                       </button>
@@ -512,7 +512,7 @@ export function ResultCard({
                       type="button"
                       aria-label={`Remove ${additive.name}`}
                       onClick={() => handleCollapseAdditive(additive.id)}
-                      className="inline-flex h-7 w-7 items-center justify-center rounded-lg font-display text-lg text-[var(--color-primary)] hover:bg-[#0825B3]/10 cursor-pointer"
+                      className="inline-flex h-7 w-7 items-center justify-center rounded-lg font-display text-lg text-[var(--color-primary)] hover:bg-[#0C2188]/10 cursor-pointer"
                     >
                       ×
                     </button>

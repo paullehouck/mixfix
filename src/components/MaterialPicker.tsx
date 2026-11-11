@@ -48,7 +48,7 @@ function renderMaterialSvg(id: string) {
           <path
             d="M31 11C31 11 17.5 27.5 17.5 37.5C17.5 44.9558 23.5442 51 31 51C38.4558 51 44.5 44.9558 44.5 37.5C44.5 27.5 31 11 31 11Z"
             fill="#FE91E8"
-            stroke="#0825B3"
+            stroke="#0C2188"
             strokeWidth="2.5"
             strokeLinejoin="round"
           />
@@ -79,7 +79,7 @@ function renderMaterialSvg(id: string) {
             height="29"
             rx="3"
             fill="#FFC901"
-            stroke="#0825B3"
+            stroke="#0C2188"
             strokeWidth="2.2"
           />
           {/* Darker square speckles */}
@@ -159,7 +159,7 @@ function renderMaterialSvg(id: string) {
             width="40"
             height="26"
             rx="2"
-            stroke="#0825B3"
+            stroke="#0C2188"
             strokeWidth="2.5"
           />
         </svg>
@@ -318,7 +318,7 @@ export function MaterialPicker({
                       >
                         <path
                           d="M1 7.5H14M14 7.5L8.5 2M14 7.5L8.5 13"
-                          stroke="#0825B3"
+                          stroke="#0C2188"
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"

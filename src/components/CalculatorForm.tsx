@@ -199,7 +199,7 @@ export function CalculatorForm({
             >
               <path
                 d="M3.5 6L8 10.5L12.5 6"
-                stroke="#0825B3"
+                stroke="#0C2188"
                 strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -252,7 +252,7 @@ export function CalculatorForm({
               >
                 <path
                   d="M3.5 6L8 10.5L12.5 6"
-                  stroke="#0825B3"
+                  stroke="#0C2188"
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -433,7 +433,7 @@ export function CalculatorForm({
                 >
                   <path
                     d="M3.5 6L8 10.5L12.5 6"
-                    stroke="#0825B3"
+                    stroke="#0C2188"
                     strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
