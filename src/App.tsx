@@ -648,8 +648,8 @@ export function App() {
           }}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-0 sm:p-4"
         >
-          <div className="w-full h-full sm:h-auto sm:max-w-[560px] sm:max-h-[85vh] overflow-y-auto overflow-x-hidden rounded-none sm:rounded-3xl bg-white p-5 sm:p-6 border-0 sm:brutal-border flex flex-col gap-5 min-w-0">
-            <div className="flex items-center justify-between border-b-2 border-[var(--color-primary)] pb-3">
+          <div className="w-full h-full sm:h-auto sm:max-w-[560px] sm:max-h-[85vh] overflow-y-auto overflow-x-hidden rounded-none sm:rounded-3xl bg-white px-[16px] pb-6 pt-0 sm:p-6 border-0 sm:brutal-border flex flex-col gap-3 sm:gap-5 min-w-0">
+            <div className="h-[86px] sm:h-auto shrink-0 flex items-center justify-between">
               <h2
                 id="about-title"
                 className="font-display text-2xl text-[var(--color-primary)]"
@@ -660,7 +660,7 @@ export function App() {
                 type="button"
                 aria-label="Close about dialog"
                 onClick={closeAbout}
-                className="brutal-border brutal-shadow rounded-full w-11 h-11 font-display text-xl text-[var(--color-primary)] bg-white flex items-center justify-center active:translate-x-0.5 active:translate-y-0.5 cursor-pointer"
+                className="w-[38px] h-[38px] rounded-full bg-[#FFFFFF] border-[2.5px] border-[var(--color-primary)] shadow-[4px_5px_0px_0px_var(--color-primary)] font-help font-normal text-[22px] leading-none flex items-center justify-center text-[var(--color-primary)] active:translate-x-0.5 active:translate-y-0.5 transition-transform cursor-pointer"
               >
                 ×
               </button>
