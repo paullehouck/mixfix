@@ -687,17 +687,6 @@ export function App() {
                   Just meake sure you check your material’s datasheet, wear gloves, and use a dust mask with dry powders.
                 </p>
               </div>
-
-              <div className="border-t border-[#C2C6EC] pt-3 text-sm leading-relaxed text-[var(--color-muted)]">
-                Got feedback or a recipe to add? Email{" "}
-                <a
-                  href="mailto:suggestions@mixfix.com"
-                  className="font-semibold text-[var(--color-primary)] underline decoration-[var(--color-primary)] underline-offset-4 hover:text-[var(--accent)]"
-                >
-                  suggestions@mixfix.com
-                </a>
-                .
-              </div>
             </div>
           </div>
         </div>
