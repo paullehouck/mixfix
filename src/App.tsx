@@ -153,46 +153,26 @@ function getGelBackgroundPaths(W: number, H: number) {
   const topEnd: [number, number] = [-W * 0.06, H * 0.96];
   const topCorner: [number, number] = [-W * 0.35, -H * 0.35];
 
+  const makeAmps = (
+    m: number,
+    base: number,
+    phase: number,
+    sign: number
+  ): [number, number][] => {
+    const pts: [number, number][] = [[0, 0]];
+    for (let j = 0; j < m; j++) {
+      const s = (j + 0.5) / m;
+      const mag = base * (0.8 + 0.35 * Math.sin(j * 1.7 + phase));
+      pts.push([s, (j % 2 === 0 ? 1 : -1) * sign * mag]);
+    }
+    pts.push([1, 0]);
+    return pts;
+  };
+
   const topFrames = [
-    buildNormalGelWave(
-      topStart,
-      topEnd,
-      [
-        [0.0, 0],
-        [0.18, u * 0.085],
-        [0.39, -u * 0.07],
-        [0.61, u * 0.095],
-        [0.83, -u * 0.06],
-        [1.0, 0],
-      ],
-      topCorner
-    ),
-    buildNormalGelWave(
-      topStart,
-      topEnd,
-      [
-        [0.0, 0],
-        [0.22, -u * 0.055],
-        [0.44, u * 0.085],
-        [0.66, -u * 0.075],
-        [0.86, u * 0.07],
-        [1.0, 0],
-      ],
-      topCorner
-    ),
-    buildNormalGelWave(
-      topStart,
-      topEnd,
-      [
-        [0.0, 0],
-        [0.16, u * 0.05],
-        [0.36, u * 0.065],
-        [0.58, -u * 0.085],
-        [0.8, u * 0.08],
-        [1.0, 0],
-      ],
-      topCorner
-    ),
+    buildNormalGelWave(topStart, topEnd, makeAmps(7, u * 0.125, 0, 1), topCorner),
+    buildNormalGelWave(topStart, topEnd, makeAmps(7, u * 0.115, 2.1, -1), topCorner),
+    buildNormalGelWave(topStart, topEnd, makeAmps(7, u * 0.13, 4.2, 1), topCorner),
   ];
 
   const botStart: [number, number] = [
@@ -206,39 +186,9 @@ function getGelBackgroundPaths(W: number, H: number) {
   const botCorner: [number, number] = [W * 1.35, H * 1.35];
 
   const bottomFrames = [
-    buildNormalGelWave(
-      botStart,
-      botEnd,
-      [
-        [0.0, 0],
-        [0.33, -u * 0.07],
-        [0.68, u * 0.06],
-        [1.0, 0],
-      ],
-      botCorner
-    ),
-    buildNormalGelWave(
-      botStart,
-      botEnd,
-      [
-        [0.0, 0],
-        [0.38, u * 0.055],
-        [0.72, -u * 0.075],
-        [1.0, 0],
-      ],
-      botCorner
-    ),
-    buildNormalGelWave(
-      botStart,
-      botEnd,
-      [
-        [0.0, 0],
-        [0.28, -u * 0.045],
-        [0.64, -u * 0.05],
-        [1.0, 0],
-      ],
-      botCorner
-    ),
+    buildNormalGelWave(botStart, botEnd, makeAmps(5, u * 0.11, 0.5, -1), botCorner),
+    buildNormalGelWave(botStart, botEnd, makeAmps(5, u * 0.1, 2.6, 1), botCorner),
+    buildNormalGelWave(botStart, botEnd, makeAmps(5, u * 0.115, 4.6, -1), botCorner),
   ];
 
   const b1x = W * (isWide ? 0.44 : 0.42);
@@ -513,6 +463,25 @@ export function App() {
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full block"
         >
+          <defs>
+            <filter
+              id="gel-goo"
+              filterUnits="userSpaceOnUse"
+              x={-200}
+              y={-200}
+              width={viewport.width + 400}
+              height={viewport.height + 400}
+              colorInterpolationFilters="sRGB"
+            >
+              <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blur" />
+              <feColorMatrix
+                in="blur"
+                mode="matrix"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"
+              />
+            </filter>
+          </defs>
+          <g filter="url(#gel-goo)">
           <g className="liquid-flow-a">
             <path
               d={gelPaths.topInitial}
@@ -600,6 +569,7 @@ export function App() {
                 keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
               />
             </path>
+          </g>
           </g>
         </svg>
       </div>
